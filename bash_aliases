@@ -90,4 +90,5 @@ alias apps='cd $HOME/apps'
 alias buns='cd $HOME/bin'
 alias tmp='cd $HOME/tmp'
 alias dl='cd $HOME/downloads'
+alias conf='cd $HOME/.myconfig'
 
