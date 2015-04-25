@@ -4,22 +4,19 @@
 
 set nocompatible 
 filetype off    
-set rtp+=~/vimfiles/bundle/Vundle.vim
-let path='~/vimfiles/bundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+let path='~/.vim/bundle'
 call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'drmingdrmer/xptemplate'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/bufkill.vim'
 
@@ -75,28 +72,20 @@ nnoremap <C-h>   <C-w><Left>
 nnoremap <C-l>   <C-w><Right>
 nnoremap <C-k>   <C-w><Up>
 nnoremap <C-j>   <C-w><Down>
-nnoremap <A-S-h> <C-w><
-nnoremap <A-S-l> <C-w>>
-nnoremap <A-S-k> <C-w>+
-nnoremap <A-S-j> <C-w>-
+nnoremap <A-h> <C-w><
+nnoremap <A-l> <C-w>>
+nnoremap <A-k> <C-w>+
+nnoremap <A-j> <C-w>-
 
 " Movement
 noremap  k gk
 noremap  j gj
-noremap  H 0
-noremap  L $
-noremap  K H
-noremap  J L
-nnoremap <A-h> <C-o>
-nnoremap <A-l> <C-i>
-inoremap <C-l> <Right>
-inoremap <C-g> <Left>
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
+inoremap <A-l> <Right>
+inoremap <A-h> <Left>
+inoremap <A-k> <Up>
+inoremap <A-j> <Down>
 
 " Misc
-nnoremap <A-k> K
-nnoremap <A-j> J
 inoremap jk <Esc>
 
 " Force myself to use the right keys
