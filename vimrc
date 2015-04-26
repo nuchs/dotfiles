@@ -10,13 +10,17 @@ call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/bufkill.vim'
 
@@ -27,6 +31,7 @@ filetype plugin indent on
 " General settings
 " ---------------------------------------------------
 
+let mapleader=" "
 set hidden
 set vb
 set history=150
@@ -52,6 +57,7 @@ set backspace=indent,eol,start
 set background=dark
 set colorcolumn=+2,+3,+4
 set guioptions=
+set guifont=Inconsolata-dz
 set formatoptions-=ro
 set diffexpr=MyDiff()
 colorscheme solarized
@@ -63,19 +69,19 @@ syntax enable
 
 " Vimrc editing
 noremap <F6> :split $MYVIMRC<CR>
-noremap <F7> :wq<CR>:so $MYVIMRC<CR>
+noremap <F7> :so $MYVIMRC<CR>
 
 " Window management
-nnoremap <C-s>   :vsplit<CR>
-nnoremap <C-c>   :split<CR>
-nnoremap <C-h>   <C-w><Left>
-nnoremap <C-l>   <C-w><Right>
-nnoremap <C-k>   <C-w><Up>
-nnoremap <C-j>   <C-w><Down>
-nnoremap <A-h> <C-w><
-nnoremap <A-l> <C-w>>
-nnoremap <A-k> <C-w>+
-nnoremap <A-j> <C-w>-
+nnoremap <Leader>s :vsplit<CR>
+nnoremap <Leader>c :split<CR>
+nnoremap <C-h>     <C-w><Left>
+nnoremap <C-l>     <C-w><Right>
+nnoremap <C-k>     <C-w><Up>
+nnoremap <C-j>     <C-w><Down>
+nnoremap <A-h>     <C-w><
+nnoremap <A-l>     <C-w>>
+nnoremap <A-k>     <C-w>+
+nnoremap <A-j>     <C-w>-
 
 " Movement
 noremap  k gk
@@ -89,11 +95,11 @@ inoremap <A-j> <Down>
 inoremap jk <Esc>
 
 " Force myself to use the right keys
-inoremap <Esc> <Nop>
-inoremap <Left> <Nop>
+inoremap <Esc>   <Nop>
+inoremap <Left>  <Nop>
 inoremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
+inoremap <Up>    <Nop>
+inoremap <Down>  <Nop>
 
 " Search and the command line
 nnoremap :: q:
@@ -101,10 +107,10 @@ nnoremap // q/
 nnoremap <Leader>z :reg<CR>
 
 " Buffers
-nnoremap <Tab> :bn<CR>
-nnoremap <S-Tab> :bp<CR>
-nnoremap <Leader>Q :bd<CR>
-nnoremap <Leader>q :BD<CR>
+nnoremap <Tab>     :bn<CR>
+nnoremap <S-Tab>   :bp<CR>
+nnoremap <Leader>q :bd<CR>
+nnoremap <Leader>Q :BD<CR>
 
 " Bad Ex mode. Bad!
 nnoremap Q <Nop>
@@ -148,15 +154,20 @@ nnoremap <Leader>bg :let &background = ( &background == "dark"? "light" : "dark"
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 
-" Dispatch
-nnoremap <Leader>gc :Dispatch gradle clean<CR>
-nnoremap <Leader>gb :Dispatch gradle build<CR>
+"Git Gutter
+nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
+let g:gitgutter_highlight_lines = 1
+
+" Vundle
+nnoremap <Leader>pi :PluginInstall<CR>
+nnoremap <Leader>pu :PluginUpdate<CR>
+nnoremap <Leader>pc :PluginClean<CR>
 
 " ---------------------------------------------------
 " Random gumpf
 " ---------------------------------------------------
 
-function MyDiff()
+function! MyDiff()
   let opt = '-a --binary '
   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
