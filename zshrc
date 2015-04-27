@@ -86,6 +86,11 @@ alias -s css='vim'
 alias -s js='vim'
 alias -s hs='vim'
 
+alias pmq='pacman -Qs'
+alias pms='pacman -Ss'
+alias pmi='sudo pacman -S'
+alias pmu='sudo pacman -Syu'
+alias pmr='sudo pacman -Rns'
 
 # ----------------
 # Functions

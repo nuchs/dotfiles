@@ -12,17 +12,20 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'vim-scripts/YankRing.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/bufkill.vim'
+Plugin 'vim-scripts/LustyJuggler'
 
 call vundle#end()            
 filetype plugin indent on   
@@ -78,10 +81,10 @@ nnoremap <C-h>     <C-w><Left>
 nnoremap <C-l>     <C-w><Right>
 nnoremap <C-k>     <C-w><Up>
 nnoremap <C-j>     <C-w><Down>
-nnoremap <A-h>     <C-w><
-nnoremap <A-l>     <C-w>>
-nnoremap <A-k>     <C-w>+
-nnoremap <A-j>     <C-w>-
+nnoremap <A-Left>  <C-w><
+nnoremap <A-Right> <C-w>>
+nnoremap <A-Up>    <C-w>+
+nnoremap <A-Down>  <C-w>-
 
 " Movement
 noremap  k gk
@@ -148,20 +151,40 @@ augroup END
 " ---------------------------------------------------
 
 " Solarized
-nnoremap <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-" Airline
-set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
+nnoremap <Leader>t :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 "Git Gutter
 nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
 let g:gitgutter_highlight_lines = 1
 
 " Vundle
-nnoremap <Leader>pi :PluginInstall<CR>
-nnoremap <Leader>pu :PluginUpdate<CR>
-nnoremap <Leader>pc :PluginClean<CR>
+nnoremap <Leader>vi :PluginInstall<CR>
+nnoremap <Leader>vu :PluginUpdate<CR>
+nnoremap <Leader>vc :PluginClean<CR>
+
+" Ultisnips
+nnoremap <Leader>u :UltiSnipsEdit<CR>
+
+" Ag
+let g:ag_prg="ag --vimgrep --smart-case"
+nnoremap <Leader>a :Ag 
+
+" Yank Ring
+let g:yankring_min_element_length = 2
+let g:yankring_history_dir = '~/.vim/'
+nnoremap <silent> <Leader>y :YRShow<CR>
+
+" Ctrl-P
+let g:ctrlp_working_path_mode = 'rc'
+nnoremap <Leader>f :CtrlP<CR>
+nnoremap <Leader>m :CtrlPMRU<CR>
+
+" Lusty Juggler
+let g:LustyJugglerShowKeys = 'a' 
+let g:LustyJugglerDefaultMappings = 0
+nnoremap <Leader><Space> :LustyJugglePrevious<CR>
+nnoremap <Leader>b       :LustyJuggler<CR>
+
 
 " ---------------------------------------------------
 " Random gumpf
