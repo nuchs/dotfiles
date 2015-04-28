@@ -170,7 +170,7 @@ git_prompt_string() {
 
 # Set the right-hand prompt
 RPS1='$(git_prompt_string)'
-PROMPT='%B%T%b %{$fg[blue]%}%n@%m%{$reset_color%} : %~
+PROMPT='%B%*%b %{$fg[blue]%}%n@%m%{$reset_color%} : %~
 %B→%b '
 
 # -----------------------------

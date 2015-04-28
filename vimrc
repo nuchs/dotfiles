@@ -9,9 +9,11 @@ let path='~/.vim/bundle'
 call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
-
+Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'benmills/vimux'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'vim-scripts/YankRing.vim'
@@ -21,11 +23,11 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/bufkill.vim'
 Plugin 'vim-scripts/LustyJuggler'
+Plugin 'wellle/tmux-complete.vim'
 
 call vundle#end()            
 filetype plugin indent on   
@@ -94,6 +96,12 @@ inoremap <A-h> <Left>
 inoremap <A-k> <Up>
 inoremap <A-j> <Down>
 
+set mouse+=a
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
+
 " Misc
 inoremap jk <Esc>
 
@@ -155,7 +163,6 @@ nnoremap <Leader>t :let &background = ( &background == "dark"? "light" : "dark" 
 
 "Git Gutter
 nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
-let g:gitgutter_highlight_lines = 1
 
 " Vundle
 nnoremap <Leader>vi :PluginInstall<CR>
