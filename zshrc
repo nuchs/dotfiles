@@ -50,6 +50,7 @@ unsetopt beep nomatch
 # Aliases
 # ----------------
 
+alias ff='firefox'
 alias gg='gvim'
 alias vv='vim'
 alias gvd='gvimdiff'
@@ -86,10 +87,13 @@ alias -s css='vim'
 alias -s js='vim'
 alias -s hs='vim'
 
+alias pm='pacman'
 alias pmq='pacman -Qs'
+alias pmm='pacman -Qm'
 alias pms='pacman -Ss'
-alias pmi='sudo pacman -S'
-alias pmu='sudo pacman -Syu'
+alias pmi='sudo pacman -S --needed'
+alias pmu='sudo pacman -U'
+alias pmy='sudo pacman -Syu'
 alias pmr='sudo pacman -Rns'
 
 # ----------------

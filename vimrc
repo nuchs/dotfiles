@@ -8,25 +8,30 @@ set rtp+=~/.vim/bundle/Vundle.vim
 let path='~/.vim/bundle'
 call vundle#begin(path)
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-rooter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'vim-scripts/YankRing.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'regedarek/ZoomWin'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
+Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/argtextobj.vim'
+Plugin 'vim-scripts/AutoComplPop'
 Plugin 'vim-scripts/bufkill.vim'
 Plugin 'vim-scripts/LustyJuggler'
+Plugin 'vim-scripts/YankRing.vim'
 Plugin 'wellle/tmux-complete.vim'
 
 call vundle#end()            
@@ -40,7 +45,7 @@ let mapleader=" "
 set hidden
 set vb
 set history=150
-set scrolloff=4
+set scrolloff=3
 set nobackup
 set autoindent
 set tabstop=2
@@ -116,6 +121,8 @@ inoremap <Down>  <Nop>
 nnoremap :: q:
 nnoremap // q/
 nnoremap <Leader>z :reg<CR>
+nnoremap / /\v
+vnoremap / /\v
 
 " Buffers
 nnoremap <Tab>     :bn<CR>
@@ -192,6 +199,16 @@ let g:LustyJugglerDefaultMappings = 0
 nnoremap <Leader><Space> :LustyJugglePrevious<CR>
 nnoremap <Leader>b       :LustyJuggler<CR>
 
+" Vimux
+nnoremap <Leader>rp :VimuxPromptCommand<CR>
+nnoremap <Leader>rl :VimuxRunLastCommand<CR>
+nnoremap <Leader>ri :VimuxInspectRunner<CR>
+nnoremap <Leader>rx :VimuxCloseRunner<CR>
+nnoremap <Leader>rc :VimuxInterruptRunner<CR>
+nnoremap <Leader>rz :VimuxZoomRunner<CR>
+
+" Gundo
+nnoremap <F5> :GundoToggle<CR>
 
 " ---------------------------------------------------
 " Random gumpf
