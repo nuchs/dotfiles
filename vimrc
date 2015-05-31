@@ -9,7 +9,6 @@ let path='~/.vim/bundle'
 call vundle#begin(path)
 
 Plugin 'airblade/vim-gitgutter'
-Plugin 'airblade/vim-rooter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -65,6 +64,7 @@ set smartcase
 set encoding=UTF-8
 set backspace=indent,eol,start
 set background=dark
+set textwidth=79
 set colorcolumn=+2,+3,+4
 set guioptions=
 set guifont=Inconsolata-dz
@@ -141,9 +141,6 @@ nnoremap Q <Nop>
 augroup vimrcEx
 au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
   "Use groovy syntax highlighting for .gradle files
   au BufNewFile,BufRead *.gradle set filetype=groovy
  
@@ -192,6 +189,10 @@ nnoremap <silent> <Leader>y :YRShow<CR>
 let g:ctrlp_working_path_mode = 'rc'
 nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>m :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll|class)$',
+      \ }
 
 " Lusty Juggler
 let g:LustyJugglerShowKeys = 'a' 
@@ -209,6 +210,26 @@ nnoremap <Leader>rz :VimuxZoomRunner<CR>
 
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
+
+" Eclim
+nnoremap <Leader>jc :JavaConstructor<CR>
+vnoremap <Leader>jc :JavaConstructor<CR>
+nnoremap <Leader>jg :JavaGet<CR>
+vnoremap <Leader>jg :JavaGet<CR>
+nnoremap <Leader>js :JavaSet<CR>
+vnoremap <Leader>js :JavaSet<CR>
+nnoremap <Leader>jp :JavaGetSet<CR>
+vnoremap <Leader>jp :JavaGetSet<CR>
+nnoremap <Leader>jo :JavaImpl<CR>
+nnoremap <Leader>ji :JavaImport<CR>
+nnoremap <Leader>jt :JavaImportOrganize<CR>
+nnoremap <Leader>jd :JavaDocSearch<CR>
+nnoremap <Leader>jf :%JavaFormat<CR>
+nnoremap <Leader>je :JavaCorrect<CR>
+nnoremap <Leader>jh :JavaHierarchy<CR>
+nnoremap <Leader>jm :JavaCallHierarchy<CR>
+nnoremap <Leader>jn :JavaNew 
+nnoremap <Leader>jj :JavaSearchContext<CR> 
 
 " ---------------------------------------------------
 " Random gumpf

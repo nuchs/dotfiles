@@ -15,13 +15,14 @@ alias -g ......='../../../../..'
 alias p='popd'
 alias d='dirs -v'
 
-alias docs='cd $HOME/docs/files'
-alias work='cd $HOME/work'
 alias apps='cd $HOME/apps'
 alias buns='cd $HOME/bin'
-alias tmp='cd $HOME/tmp'
-alias dl='cd $HOME/downloads'
 alias conf='cd $HOME/etc'
+alias dl='cd $HOME/downloads'
+alias docs='cd $HOME/docs/files'
+alias etc='cd $HOME/etc'
+alias tmp='cd $HOME/tmp'
+alias work='cd $HOME/work'
 
 # ----------------
 # History options
@@ -32,6 +33,8 @@ SAVEHIST=1000
 setopt hist_ignore_dups hist_ignore_space append_history
 alias h='history'
 alias hg='history | ag'
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
 
 # ----------------
 # Completion
@@ -61,6 +64,11 @@ alias viv='vim $MYETC/vimrc'
 alias vit='vim $MYETC/tmux.conf'
 alias szsh='source $MYETC/zshrc'
 alias senv='source $MYETC/zshenv'
+
+alias gw='./gradlew --daemon'
+alias gj="gradle --daemon init 'java-library'"
+
+alias rep='w3m build/reports/tests/index.html'
 
 alias ls='ls  -p --color=always'
 alias ll='ls -l'
@@ -96,13 +104,22 @@ alias pmu='sudo pacman -U'
 alias pmy='sudo pacman -Syu'
 alias pmr='sudo pacman -Rns'
 
+alias tt='t timeline -n 8 --color=icon'
+
+alias af='ag -i -g'
+
 # ----------------
 # Functions
 # ----------------
 
 function rem()
 {
-	ag "$@" $MYETC/zsh*;
+	ag "$@" $MYETC/*;
+}
+
+function zem()
+{
+	ag "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
 }
 
 # ----------------
