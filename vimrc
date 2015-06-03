@@ -7,12 +7,12 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 let path='~/.vim/bundle'
 call vundle#begin(path)
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'gmarik/Vundle.vim'
 Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -20,18 +20,17 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'regedarek/ZoomWin'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/argtextobj.vim'
-Plugin 'vim-scripts/AutoComplPop'
 Plugin 'vim-scripts/bufkill.vim'
-Plugin 'vim-scripts/LustyJuggler'
 Plugin 'vim-scripts/YankRing.vim'
-Plugin 'wellle/tmux-complete.vim'
 
 call vundle#end()            
 filetype plugin indent on   
@@ -41,35 +40,36 @@ filetype plugin indent on
 " ---------------------------------------------------
 
 let mapleader=" "
-set hidden
-set vb
-set history=150
-set scrolloff=3
-set nobackup
 set autoindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set smarttab
-set expandtab
-set number
-set ruler
-set foldmethod=indent
-set foldlevel=99
-set diffopt=vertical
+set background=dark
+set backspace=indent,eol,start
+set colorcolumn=+1,+2,+3
+set completeopt-=preview
+set diffexpr=MyDiff()
 set diffopt+=iwhite
+set diffopt=vertical
+set encoding=UTF-8
+set expandtab
+set foldlevel=99
+set foldmethod=indent
+set formatoptions-=ro
+set guifont=Inconsolata-dz
+set guioptions=
+set hidden
+set history=150
 set hlsearch
 set incsearch
+set nobackup
+set number
+set ruler
+set scrolloff=3
+set shiftwidth=2
 set smartcase
-set encoding=UTF-8
-set backspace=indent,eol,start
-set background=dark
+set smarttab
+set softtabstop=2
+set tabstop=2
 set textwidth=79
-set colorcolumn=+2,+3,+4
-set guioptions=
-set guifont=Inconsolata-dz
-set formatoptions-=ro
-set diffexpr=MyDiff()
+set vb
 colorscheme solarized
 syntax enable
 
@@ -78,7 +78,7 @@ syntax enable
 " ---------------------------------------------------
 
 " Vimrc editing
-noremap <F6> :split $MYVIMRC<CR>
+noremap <F6> :e  $MYVIMRC<CR>
 noremap <F7> :so $MYVIMRC<CR>
 
 " Window management
@@ -162,8 +162,8 @@ augroup END
 " Plugin configuration options
 " ---------------------------------------------------
 
-" Solarized
-nnoremap <Leader>t :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+" NerdTree
+map <F4> :NERDTreeToggle<CR>
 
 "Git Gutter
 nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
@@ -175,6 +175,9 @@ nnoremap <Leader>vc :PluginClean<CR>
 
 " Ultisnips
 nnoremap <Leader>u :UltiSnipsEdit<CR>
+let g:UltiSnipsExpandTrigger ="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 " Ag
 let g:ag_prg="ag --vimgrep --smart-case"
@@ -189,27 +192,18 @@ nnoremap <silent> <Leader>y :YRShow<CR>
 let g:ctrlp_working_path_mode = 'rc'
 nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>m :CtrlPMRU<CR>
+nnoremap <Leader>m :CtrlBuffer<CR>
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\v\.(exe|so|dll|class)$',
       \ }
 
-" Lusty Juggler
-let g:LustyJugglerShowKeys = 'a' 
-let g:LustyJugglerDefaultMappings = 0
-nnoremap <Leader><Space> :LustyJugglePrevious<CR>
-nnoremap <Leader>b       :LustyJuggler<CR>
-
 " Vimux
 nnoremap <Leader>rp :VimuxPromptCommand<CR>
 nnoremap <Leader>rl :VimuxRunLastCommand<CR>
-nnoremap <Leader>ri :VimuxInspectRunner<CR>
-nnoremap <Leader>rx :VimuxCloseRunner<CR>
-nnoremap <Leader>rc :VimuxInterruptRunner<CR>
-nnoremap <Leader>rz :VimuxZoomRunner<CR>
 
 " Gundo
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F3> :GundoToggle<CR>
 
 " Eclim
 nnoremap <Leader>jc :JavaConstructor<CR>
@@ -230,6 +224,9 @@ nnoremap <Leader>jh :JavaHierarchy<CR>
 nnoremap <Leader>jm :JavaCallHierarchy<CR>
 nnoremap <Leader>jn :JavaNew 
 nnoremap <Leader>jj :JavaSearchContext<CR> 
+nnoremap <Leader>jr :JavaRename
+
+let g:EclimCompletionMethod = 'omnifunc'
 
 " ---------------------------------------------------
 " Random gumpf

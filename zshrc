@@ -23,6 +23,7 @@ alias docs='cd $HOME/docs/files'
 alias etc='cd $HOME/etc'
 alias tmp='cd $HOME/tmp'
 alias work='cd $HOME/work'
+alias vf='cd /home/sbrown/.vim/bundle/'
 
 # ----------------
 # History options
