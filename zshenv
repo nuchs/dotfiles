@@ -7,5 +7,5 @@ export EDITOR='vim'
 export PAGER='w3m'
 export JAVA_HOME='/usr/lib/jvm/java-8-openjdk/'
 export GRADLE_HOME='/home/sbrown/apps/gradle-2.3/'
-export GRADLE_USER_HOME='/home/sbrown/'
+export GRADLE_USER_HOME='/home/sbrown/.gradle'
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"

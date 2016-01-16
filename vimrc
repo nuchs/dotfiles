@@ -12,6 +12,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
+Plugin 'bruno-/vim-man'
+Plugin 'cespare/vim-toml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'kien/ctrlp.vim'
@@ -19,12 +21,12 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'regedarek/ZoomWin'
 Plugin 'rking/ag.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
@@ -96,10 +98,6 @@ nnoremap <A-Down>  <C-w>-
 " Movement
 noremap  k gk
 noremap  j gj
-inoremap <A-l> <Right>
-inoremap <A-h> <Left>
-inoremap <A-k> <Up>
-inoremap <A-j> <Down>
 
 set mouse+=a
 if &term =~ '^screen'
@@ -109,6 +107,7 @@ endif
 
 " Misc
 inoremap jk <Esc>
+inoremap JK <Esc>
 
 " Force myself to use the right keys
 inoremap <Esc>   <Nop>
@@ -129,6 +128,7 @@ nnoremap <Tab>     :bn<CR>
 nnoremap <S-Tab>   :bp<CR>
 nnoremap <Leader>q :bd<CR>
 nnoremap <Leader>Q :BD<CR>
+nnoremap <Leader><Space> :b#<CR>
 
 " Bad Ex mode. Bad!
 nnoremap Q <Nop>
@@ -192,15 +192,18 @@ nnoremap <silent> <Leader>y :YRShow<CR>
 let g:ctrlp_working_path_mode = 'rc'
 nnoremap <Leader>f :CtrlP<CR>
 nnoremap <Leader>m :CtrlPMRU<CR>
-nnoremap <Leader>m :CtrlBuffer<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\v\.(exe|so|dll|class)$',
       \ }
 
 " Vimux
+let VimuxUseNearest = 0
 nnoremap <Leader>rp :VimuxPromptCommand<CR>
 nnoremap <Leader>rl :VimuxRunLastCommand<CR>
+nnoremap <Leader>rt :VimuxPromptCommand<CR>gw test<CR>
+nnoremap <Leader>rc :VimuxPromptCommand<CR>gw clean<CR>
 
 " Gundo
 nnoremap <F3> :GundoToggle<CR>
@@ -224,7 +227,7 @@ nnoremap <Leader>jh :JavaHierarchy<CR>
 nnoremap <Leader>jm :JavaCallHierarchy<CR>
 nnoremap <Leader>jn :JavaNew 
 nnoremap <Leader>jj :JavaSearchContext<CR> 
-nnoremap <Leader>jr :JavaRename
+nnoremap <Leader>jr :JavaRename 
 
 let g:EclimCompletionMethod = 'omnifunc'
 

@@ -16,6 +16,7 @@ alias p='popd'
 alias d='dirs -v'
 
 alias apps='cd $HOME/apps'
+alias aur='cd $HOME/aur'
 alias buns='cd $HOME/bin'
 alias conf='cd $HOME/etc'
 alias dl='cd $HOME/downloads'
@@ -68,13 +69,13 @@ alias senv='source $MYETC/zshenv'
 
 alias gw='./gradlew --daemon'
 alias gj="gradle --daemon init 'java-library'"
-
+alias lisp='rlwrap -r -c -f $MYETC/scheme-bindings mit-scheme'
 alias rep='w3m build/reports/tests/index.html'
 
 alias ls='ls  -p --color=always'
 alias ll='ls -l'
 alias la='ls -la'
-alias lrt='ls -lrt'
+alias lrt='ls -lRt'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -104,10 +105,17 @@ alias pmi='sudo pacman -S --needed'
 alias pmu='sudo pacman -U'
 alias pmy='sudo pacman -Syu'
 alias pmr='sudo pacman -Rns'
+alias pma='makepkg -sri'
 
-alias tt='t timeline -n 8 --color=icon'
+alias tt='tmux'
 
 alias af='ag -i -g'
+
+alias gog='cd $HOME/apps/GoGrinder; java -jar GoGrinder.jar'
+alias gp='cd $HOME/apps/GoGrinder/problems'
+
+alias nx='jmtpfs $HOME/tmp'
+alias unx='fusermount -u $HOME/tmp'
 
 # ----------------
 # Functions
