@@ -56,10 +56,16 @@ unsetopt beep nomatch
 # ----------------
 
 alias ff='firefox'
+alias vim='vim --servername vim'
+alias vi='vim'
 alias gg='gvim'
 alias vv='vim'
 alias gvd='gvimdiff'
 alias vvd='vimdiff'
+alias vvz='callvim $MYETC/zshrc'
+alias vve='callvim $MYETC/zshenv'
+alias vvv='callvim $MYETC/vimrc'
+alias vvt='callvim $MYETC/tmux.conf'
 alias viz='vim $MYETC/zshrc'
 alias vie='vim $MYETC/zshenv'
 alias viv='vim $MYETC/vimrc'
@@ -67,13 +73,10 @@ alias vit='vim $MYETC/tmux.conf'
 alias szsh='source $MYETC/zshrc'
 alias senv='source $MYETC/zshenv'
 
-alias gw='./gradlew --daemon'
-alias gj="gradle --daemon init 'java-library'"
 alias lisp='rlwrap -r -c -f $MYETC/scheme-bindings mit-scheme'
-alias rep='w3m build/reports/tests/index.html'
 
 alias ls='ls  -p --color=always'
-alias ll='ls -l'
+alias ll='ls -lh'
 alias la='ls -la'
 alias lrt='ls -lRt'
 
@@ -106,8 +109,13 @@ alias pmu='sudo pacman -U'
 alias pmy='sudo pacman -Syu'
 alias pmr='sudo pacman -Rns'
 alias pma='makepkg -sri'
+alias lsorphans='sudo pacman -Qdt'
+alias explicit='pacman -Qei | awk '"'"'/^Name/ { name=$3 } /^Groups/ { if ( $3 != "base" && $3 != "base-devel" ) { print name } }'"'"
 
 alias tt='tmux'
+
+alias ww='w3m'
+alias wg='w3m www.google.co.uk'
 
 alias af='ag -i -g'
 
@@ -116,6 +124,7 @@ alias gp='cd $HOME/apps/GoGrinder/problems'
 
 alias nx='jmtpfs $HOME/tmp'
 alias unx='fusermount -u $HOME/tmp'
+
 
 # ----------------
 # Functions
@@ -129,6 +138,11 @@ function rem()
 function zem()
 {
 	ag "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
+}
+
+function hh ()
+{
+  hoogle "$@" | less
 }
 
 # ----------------
@@ -304,7 +318,7 @@ EOH
     files=':args! '"$files<cr>"
   fi
   cmd="$before$files$after"
-  gvim --remote-send "$cmd"
+  vim --remote-send "$cmd"
   if typeset -f postCallVim > /dev/null; then
     postCallVim
   fi

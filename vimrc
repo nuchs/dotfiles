@@ -14,6 +14,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'bruno-/vim-man'
 Plugin 'cespare/vim-toml'
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'kien/ctrlp.vim'
@@ -23,16 +24,14 @@ Plugin 'regedarek/ZoomWin'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
-Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/argtextobj.vim'
 Plugin 'vim-scripts/bufkill.vim'
-Plugin 'vim-scripts/YankRing.vim'
 
 call vundle#end()            
 filetype plugin indent on   
@@ -126,8 +125,8 @@ vnoremap / /\v
 " Buffers
 nnoremap <Tab>     :bn<CR>
 nnoremap <S-Tab>   :bp<CR>
-nnoremap <Leader>q :bd<CR>
-nnoremap <Leader>Q :BD<CR>
+nnoremap <Leader>Q :bd<CR>
+nnoremap <Leader>q :BD<CR>
 nnoremap <Leader><Space> :b#<CR>
 
 " Bad Ex mode. Bad!
@@ -141,9 +140,6 @@ nnoremap Q <Nop>
 augroup vimrcEx
 au!
 
-  "Use groovy syntax highlighting for .gradle files
-  au BufNewFile,BufRead *.gradle set filetype=groovy
- 
   " When editing a file, always jump to the last known cursor position.
   autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -162,10 +158,7 @@ augroup END
 " Plugin configuration options
 " ---------------------------------------------------
 
-" NerdTree
-map <F4> :NERDTreeToggle<CR>
-
-"Git Gutter
+" Git Gutter
 nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
 
 " Vundle
@@ -183,11 +176,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 let g:ag_prg="ag --vimgrep --smart-case"
 nnoremap <Leader>a :Ag 
 
-" Yank Ring
-let g:yankring_min_element_length = 2
-let g:yankring_history_dir = '~/.vim/'
-nnoremap <silent> <Leader>y :YRShow<CR>
-
 " Ctrl-P
 let g:ctrlp_working_path_mode = 'rc'
 nnoremap <Leader>f :CtrlP<CR>
@@ -202,34 +190,16 @@ let g:ctrlp_custom_ignore = {
 let VimuxUseNearest = 0
 nnoremap <Leader>rp :VimuxPromptCommand<CR>
 nnoremap <Leader>rl :VimuxRunLastCommand<CR>
-nnoremap <Leader>rt :VimuxPromptCommand<CR>gw test<CR>
-nnoremap <Leader>rc :VimuxPromptCommand<CR>gw clean<CR>
+nnoremap <Leader>rb :VimuxPromptCommand("cargo build")<CR><CR>
+nnoremap <Leader>rt :VimuxPromptCommand("cargo test")<CR><CR>
 
-" Gundo
-nnoremap <F3> :GundoToggle<CR>
+" YouCompleteMe
+let g:ycm_rust_src_path = '/usr/src/rust/src'
 
-" Eclim
-nnoremap <Leader>jc :JavaConstructor<CR>
-vnoremap <Leader>jc :JavaConstructor<CR>
-nnoremap <Leader>jg :JavaGet<CR>
-vnoremap <Leader>jg :JavaGet<CR>
-nnoremap <Leader>js :JavaSet<CR>
-vnoremap <Leader>js :JavaSet<CR>
-nnoremap <Leader>jp :JavaGetSet<CR>
-vnoremap <Leader>jp :JavaGetSet<CR>
-nnoremap <Leader>jo :JavaImpl<CR>
-nnoremap <Leader>ji :JavaImport<CR>
-nnoremap <Leader>jt :JavaImportOrganize<CR>
-nnoremap <Leader>jd :JavaDocSearch<CR>
-nnoremap <Leader>jf :%JavaFormat<CR>
-nnoremap <Leader>je :JavaCorrect<CR>
-nnoremap <Leader>jh :JavaHierarchy<CR>
-nnoremap <Leader>jm :JavaCallHierarchy<CR>
-nnoremap <Leader>jn :JavaNew 
-nnoremap <Leader>jj :JavaSearchContext<CR> 
-nnoremap <Leader>jr :JavaRename 
-
-let g:EclimCompletionMethod = 'omnifunc'
+" Rust auto format
+let g:formatdef_rustfmt = '"rustfmt"'
+let g:formatters_rust = ['rustfmt']
+nnoremap <Leader>t :Autoformat<CR>
 
 " ---------------------------------------------------
 " Random gumpf
