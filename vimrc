@@ -14,16 +14,21 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'bruno-/vim-man'
 Plugin 'cespare/vim-toml'
-Plugin 'Chiel92/vim-autoformat'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'godlygeek/tabular'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'mattn/webapi-vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'regedarek/ZoomWin'
 Plugin 'rking/ag.vim'
+Plugin 'rust-lang-nursery/rustfmt'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/vimproc.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tmux-plugins/vim-tmux'
@@ -187,7 +192,10 @@ let g:ctrlp_custom_ignore = {
       \ }
 
 " Vimux
-let VimuxUseNearest = 0
+let VimuxUseNearest = 1
+let g:VimuxHeight = "25"
+"let g:VimuxOrientation = "h"
+
 nnoremap <Leader>rp :VimuxPromptCommand<CR>
 nnoremap <Leader>rl :VimuxRunLastCommand<CR>
 nnoremap <Leader>rb :VimuxPromptCommand("cargo build")<CR><CR>
@@ -195,35 +203,55 @@ nnoremap <Leader>rt :VimuxPromptCommand("cargo test")<CR><CR>
 
 " YouCompleteMe
 let g:ycm_rust_src_path = '/usr/src/rust/src'
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:ycm_python_binary_path = '/usr/bin/python3'
 
-" Rust auto format
-let g:formatdef_rustfmt = '"rustfmt"'
-let g:formatters_rust = ['rustfmt']
-nnoremap <Leader>t :Autoformat<CR>
+" Rust
+nnoremap <Leader>rf :RustFmt<CR>
+vnoremap <Leader>rw :RustPlay<CR>
+
+" Syntastic
+map <Leader>s :SyntasticToggleMode<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" Tabularize
+vnoremap a= :Tabularize /=/l1<CR>
+vnoremap am :Tabularize /=>/l1<CR>
+
+" Number Toggle
+let g:NumberToggleTrigger="<F2>"
 
 " ---------------------------------------------------
 " Random gumpf
 " ---------------------------------------------------
 
 function! MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
+let opt = '-a --binary '
+if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+let arg1 = v:fname_in
+if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+let arg2 = v:fname_new
+if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+let arg3 = v:fname_out
+if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+let eq = ''
+if $VIMRUNTIME =~ ' '
+  if &sh =~ '\<cmd'
+    let cmd = '""' . $VIMRUNTIME . '\diff"'
+    let eq = '"'
   else
+    let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+  endif
+else
     let cmd = $VIMRUNTIME . '\diff'
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq

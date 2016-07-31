@@ -1,5 +1,5 @@
 typeset -U path
-path=( ~/bin ~/.cabal/bin ~/.cargo/bin ~/.gem/ruby/2.2.0/bin/ $path)
+path=( ~/bin ~/.cargo/bin ~/.cabal/bin ~/.local/bin ~/.gem/ruby/2.2.0/bin/ $path)
 export path
 
 export MYETC="$HOME/etc"

@@ -13,10 +13,10 @@ alias -g  .....='../../../..'
 alias -g ......='../../../../..'
 
 alias p='popd'
+alias pp='pushd .'
 alias d='dirs -v'
 
 alias apps='cd $HOME/apps'
-alias aur='cd $HOME/aur'
 alias buns='cd $HOME/bin'
 alias conf='cd $HOME/etc'
 alias dl='cd $HOME/downloads'
@@ -78,7 +78,7 @@ alias lisp='rlwrap -r -c -f $MYETC/scheme-bindings mit-scheme'
 alias ls='ls  -p --color=always'
 alias ll='ls -lh'
 alias la='ls -la'
-alias lrt='ls -lRt'
+alias lrt='ls -lrt'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -122,9 +122,7 @@ alias af='ag -i -g'
 alias gog='cd $HOME/apps/GoGrinder; java -jar GoGrinder.jar'
 alias gp='cd $HOME/apps/GoGrinder/problems'
 
-alias nx='jmtpfs $HOME/tmp'
-alias unx='fusermount -u $HOME/tmp'
-
+alias re='rustc --explain'
 
 # ----------------
 # Functions
@@ -138,11 +136,6 @@ function rem()
 function zem()
 {
 	ag "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
-}
-
-function hh ()
-{
-  hoogle "$@" | less
 }
 
 # ----------------
