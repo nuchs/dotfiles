@@ -12,22 +12,21 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
-Plugin 'bruno-/vim-man'
 Plugin 'cespare/vim-toml'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'godlygeek/tabular'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'jszakmeister/vim-togglecursor'
-Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'regedarek/ZoomWin'
-Plugin 'rking/ag.vim'
 Plugin 'rust-lang-nursery/rustfmt'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/neomru.vim'
+Plugin 'Shougo/neoyank.vim'
+Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
@@ -177,38 +176,23 @@ let g:UltiSnipsExpandTrigger ="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
-" Ag
-let g:ag_prg="ag --vimgrep --smart-case"
-nnoremap <Leader>a :Ag 
-
-" Ctrl-P
-let g:ctrlp_working_path_mode = 'rc'
-nnoremap <Leader>f :CtrlP<CR>
-nnoremap <Leader>m :CtrlPMRU<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll|class)$',
-      \ }
-
 " Vimux
 let VimuxUseNearest = 1
-let g:VimuxHeight = "25"
-"let g:VimuxOrientation = "h"
+let g:VimuxHeight = "30"
 
-nnoremap <Leader>rp :VimuxPromptCommand<CR>
-nnoremap <Leader>rl :VimuxRunLastCommand<CR>
-nnoremap <Leader>rb :VimuxPromptCommand("cargo build")<CR><CR>
-nnoremap <Leader>rt :VimuxPromptCommand("cargo test")<CR><CR>
+nnoremap <Leader>pp :VimuxPromptCommand<CR>
+nnoremap <Leader>ll :VimuxRunLastCommand<CR>
 
 " YouCompleteMe
-let g:ycm_rust_src_path = '/usr/src/rust/src'
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
+let g:ycm_rust_src_path      = '/usr/local/src/rust/src'
+let g:ycm_semantic_triggers  = {'haskell' : ['.']}
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " Rust
+nnoremap <Leader>rb :VimuxPromptCommand("cargo build")<CR><CR>
+nnoremap <Leader>rt :VimuxPromptCommand("cargo test")<CR><CR>
 nnoremap <Leader>rf :RustFmt<CR>
-vnoremap <Leader>rw :RustPlay<CR>
+vnoremap <Leader>rp :RustPlay<CR>
 
 " Syntastic
 map <Leader>s :SyntasticToggleMode<CR>
@@ -226,8 +210,28 @@ let g:syntastic_check_on_wq = 0
 vnoremap a= :Tabularize /=/l1<CR>
 vnoremap am :Tabularize /=>/l1<CR>
 
-" Number Toggle
-let g:NumberToggleTrigger="<F2>"
+" Unite
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+      \ '-i --vimgrep --hidden --ignore ' .
+      \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+let g:unite_source_grep_recursive_opt = ''
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+nnoremap <Leader>f :Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<CR>
+nnoremap <Leader>m :Unite -no-split -buffer-name=mru     -start-insert file_mru<CR>
+nnoremap <Leader>y :Unite -no-split -buffer-name=yank history/yank<CR>
+nnoremap <Leader>b :Unite -no-split -buffer-name=buffer  buffer<CR>
+nnoremap <Leader>/ :Unite grep:.<CR>
+
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 
 " ---------------------------------------------------
 " Random gumpf
