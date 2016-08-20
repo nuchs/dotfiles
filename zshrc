@@ -20,11 +20,9 @@ alias apps='cd $HOME/apps'
 alias buns='cd $HOME/bin'
 alias conf='cd $HOME/etc'
 alias dl='cd $HOME/downloads'
-alias docs='cd $HOME/docs/files'
+alias docs='cd $HOME/docs'
 alias etc='cd $HOME/etc'
-alias tmp='cd $HOME/tmp'
 alias work='cd $HOME/work'
-alias vf='cd /home/sbrown/.vim/bundle/'
 
 # ----------------
 # History options
@@ -55,30 +53,38 @@ unsetopt beep nomatch
 # Aliases
 # ----------------
 
-alias ff='firefox'
-alias vim='vim --servername vim'
-alias vi='vim'
-alias gg='gvim'
-alias vv='vim'
-alias gvd='gvimdiff'
-alias vvd='vimdiff'
-alias vvz='callvim $MYETC/zshrc'
-alias vve='callvim $MYETC/zshenv'
-alias vvv='callvim $MYETC/vimrc'
-alias vvt='callvim $MYETC/tmux.conf'
-alias viz='vim $MYETC/zshrc'
-alias vie='vim $MYETC/zshenv'
-alias viv='vim $MYETC/vimrc'
-alias vit='vim $MYETC/tmux.conf'
-alias szsh='source $MYETC/zshrc'
-alias senv='source $MYETC/zshenv'
+alias nvim='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
+alias vim='nvim'
+alias vi='nvim'
+alias nn='nvim'
+alias nvd='nvim -d'
+alias nr='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvr --remote'
+alias nrv='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvr -O'
+alias nrh='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvr -o'
+alias -s tex='nvim'
+alias -s html='nvim'
+alias -s css='nvim'
+alias -s js='nvim'
+alias -s hs='nvim'
 
-alias lisp='rlwrap -r -c -f $MYETC/scheme-bindings mit-scheme'
+alias nz='nvim $MYETC/zshrc'
+alias ne='nvim $MYETC/zshenv'
+alias nv='nvim $MYETC/vimrc'
+alias nx='nvim $MYETC/xinitrc'
+alias nm='nvim $MYETC/xmonad.hs'
+
+alias sz='source $MYETC/zshrc'
+alias senv='source $MYETC/zshenv'
 
 alias ls='ls  -p --color=always'
 alias ll='ls -lh'
 alias la='ls -la'
 alias lrt='ls -lrt'
+
+alias ts='tree -C'
+alias tl='tree -Cph'
+alias ta='tree -Cpha'
+alias ta='tree -Cphart'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -93,36 +99,19 @@ alias all='chmod 777'
 alias pso='ps -eo pid,cmd'
 
 alias ex='exit'
-
-alias -s tex='vim'
-alias -s html='vim'
-alias -s css='vim'
-alias -s js='vim'
-alias -s hs='vim'
+alias rb='sudo reboot'
+alias sd='sudo shutdown'
 
 alias pm='pacman'
-alias pmq='pacman -Qs'
-alias pmm='pacman -Qm'
-alias pms='pacman -Ss'
-alias pmi='sudo pacman -S --needed'
-alias pmu='sudo pacman -U'
-alias pmy='sudo pacman -Syu'
-alias pmr='sudo pacman -Rns'
-alias pma='makepkg -sri'
+alias pms='sudo pacman'
 alias lsorphans='sudo pacman -Qdt'
 alias explicit='pacman -Qei | awk '"'"'/^Name/ { name=$3 } /^Groups/ { if ( $3 != "base" && $3 != "base-devel" ) { print name } }'"'"
 
-alias tt='tmux'
-
-alias ww='w3m'
-alias wg='w3m www.google.co.uk'
-
 alias af='ag -i -g'
 
-alias gog='cd $HOME/apps/GoGrinder; java -jar GoGrinder.jar'
-alias gp='cd $HOME/apps/GoGrinder/problems'
-
 alias re='rustc --explain'
+
+alias rh='rehash'
 
 # ----------------
 # Functions
@@ -130,12 +119,12 @@ alias re='rustc --explain'
 
 function rem()
 {
-	ag "$@" $MYETC/*;
+  ag "$@" $MYETC/*;
 }
 
 function zem()
 {
-	ag "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
+  ag "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
 }
 
 # ----------------
@@ -254,74 +243,4 @@ colorize_via_pygmentize() {
         fi
     done
 }
-
-# ----------------------------------
-# Oh my zsh - vim interaction plugin
-# ----------------------------------
-
-function resolveFile
-{
-  if [ -f "$1" ]; then
-    echo $(readlink -f "$1")
-  elif [[ "${1#/}" == "$1" ]]; then
-    echo "$PWD/$1"
-  else
-    echo $1
-  fi
-}
-
-function callvim
-{
-  if [[ $# == 0 ]]; then
-    cat <<EOH
-usage: callvim [-b cmd] [-a cmd] [file ... fileN]
-  -b cmd     Run this command in GVIM before editing the first file
-  -a cmd     Run this command in GVIM after editing the first file
-  file       The file to edit
-  ... fileN  The other files to add to the argslist
-EOH
-    return 0
-  fi
-
-  local cmd=""
-  local before="<esc>"
-  local after=""
-  while getopts ":b:a:" option
-  do
-    case $option in
-      a) after="$OPTARG"
-         ;;
-      b) before="$OPTARG"
-         ;;
-    esac
-  done
-  shift $((OPTIND-1))
-  if [[ ${after#:} != $after && ${after%<cr>} == $after ]]; then
-    after="$after<cr>"
-  fi
-  if [[ ${before#:} != $before && ${before%<cr>} == $before ]]; then
-    before="$before<cr>"
-  fi
-  local files=""
-  for f in $@
-  do
-    files="$files $(resolveFile $f)"
-  done
-  if [[ -n $files ]]; then
-    files=':args! '"$files<cr>"
-  fi
-  cmd="$before$files$after"
-  vim --remote-send "$cmd"
-  if typeset -f postCallVim > /dev/null; then
-    postCallVim
-  fi
-}
-
-alias v=callvim
-alias vvs="callvim -b':vsp'"
-alias vhs="callvim -b':sp'"
-alias vk="callvim -b':wincmd k'"
-alias vj="callvim -b':wincmd j'"
-alias vl="callvim -b':wincmd l'"
-alias vh="callvim -b':wincmd h'"
 
