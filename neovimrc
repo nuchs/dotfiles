@@ -1,0 +1,214 @@
+" ---------------------------------------------------
+" Load Plugins
+" ---------------------------------------------------
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'airblade/vim-rooter' 
+Plug 'cespare/vim-toml', {'for' : 'toml'}
+Plug 'godlygeek/tabular'
+Plug 'jszakmeister/vim-togglecursor'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'mattn/webapi-vim'
+Plug 'Raimondi/delimitMate'
+Plug 'rhysd/rust-doc.vim', {'for' : 'rust'}
+Plug 'rust-lang-nursery/rustfmt', {'for' : 'rust'}
+Plug 'rust-lang/rust.vim', {'for' : 'rust'}
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'SirVer/ultisnips', { 'on': [] }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive' 
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'Valloric/YouCompleteMe', {'on':[], 'do' : './install.py --racer-completer' }
+Plug 'vim-scripts/bufkill.vim'
+
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
+                     \| autocmd! load_us_ycm
+augroup END
+
+call plug#end()
+
+" ---------------------------------------------------
+" General settings
+" ---------------------------------------------------
+
+let mapleader=" "
+set colorcolumn=+1,+2
+set completeopt-=preview
+set diffopt+=iwhite
+set diffopt=vertical
+set expandtab
+set guioptions=
+set hidden
+set history=150
+set hlsearch
+set incsearch
+set nobackup
+set number
+set noruler
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set scrolloff=3
+set shiftwidth=2
+set smartcase
+set smarttab
+set softtabstop=2
+set tabstop=2
+set textwidth=79
+set vb
+hi Search cterm=NONE ctermfg=grey ctermbg=Black
+syntax enable
+
+" ---------------------------------------------------
+" Key bindings
+" ---------------------------------------------------
+
+" Vimrc editing
+noremap <F6> :e  $MYVIMRC<CR>
+noremap <F7> :so $MYVIMRC<CR>
+
+" Window management
+nnoremap <Leader>s :vsplit<CR>
+nnoremap <Leader>c :split<CR>
+nnoremap <C-h>     <C-w><Left>
+nnoremap <C-l>     <C-w><Right>
+nnoremap <C-k>     <C-w><Up>
+nnoremap <C-j>     <C-w><Down>
+nnoremap <A-Left>  <C-w><
+nnoremap <A-Right> <C-w>>
+nnoremap <A-Up>    <C-w>+
+nnoremap <A-Down>  <C-w>-
+
+" Movement
+noremap  k gk
+noremap  j gj
+
+" Misc
+inoremap jk <Esc>
+inoremap JK <Esc>
+
+" Force myself to use the right keys
+inoremap <Esc>   <Nop>
+inoremap <Left>  <Nop>
+inoremap <Right> <Nop>
+inoremap <Up>    <Nop>
+inoremap <Down>  <Nop>
+
+" Search and the command line
+nnoremap :: q:
+nnoremap // q/
+nnoremap / /\v
+vnoremap / /\v
+
+" Buffers
+nnoremap <Tab>     :bn<CR>
+nnoremap <S-Tab>   :bp<CR>
+nnoremap <Leader>Q :bd<CR>
+nnoremap <Leader>q :BD<CR>
+nnoremap <Leader><Space> :b#<CR>
+
+" Bad Ex mode. Bad!
+nnoremap Q <Nop>
+
+" ---------------------------------------------------
+" Autocommands
+" ---------------------------------------------------
+
+" Put these in an autocmd group, so that we can delete them easily.
+augroup vimrcEx
+au!
+
+ " When editing a file, always jump to the last known cursor position.
+ autocmd BufReadPost *
+   \ if line("'\"") > 1 && line("'\"") <= line("$") |
+   \   exe "normal! g`\"" |
+   \ endif
+
+ " Turn on rainbow parentheses
+ au VimEnter * RainbowParenthesesToggle
+ au Syntax * RainbowParenthesesLoadRound
+ au Syntax * RainbowParenthesesLoadSquare
+ au Syntax * RainbowParenthesesLoadBraces
+
+augroup END
+
+" ---------------------------------------------------
+" Plugin configuration options
+" ---------------------------------------------------
+
+" vim-plug
+nnoremap <Leader>pi  :PlugInstall<CR>
+nnoremap <Leader>pu  :PlugUpdate<CR>
+nnoremap <Leader>pc  :PlugClean<CR>
+nnoremap <Leader>puu :PlugUpgrade<CR>
+nnoremap <Leader>ps  :PlugStatus<CR>
+
+" YouCompleteMe
+let g:ycm_rust_src_path      = '/usr/local/src/rust/src'
+let g:ycm_semantic_triggers  = {'haskell' : ['.']}
+let g:ycm_python_binary_path = '/usr/bin/python3'
+
+" Ultisnips
+nnoremap <Leader>u :UltiSnipsEdit<CR>
+let g:UltiSnipsExpandTrigger ="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+
+" Rustdoc
+let g:rust_doc#downloaded_rust_doc_dir = '~/apps/rust/rustdocs_1.11.0'
+
+" Rust
+nnoremap <Leader>rf :RustFmt<CR>
+vnoremap <Leader>rp :RustPlay<CR>
+
+" Syntastic
+map <Leader>s :SyntasticToggleMode<CR>
+nnoremap <Leader>e :Errors<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_mode_map = {
+      \ "mode": "passive",
+      \ "active_filetypes": ["rust", "haskell", "python"] }
+
+" Tabularize
+vnoremap a= :Tabularize /=/l1<CR>
+vnoremap am :Tabularize /=>/l1<CR>
+
+" FZF
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+nnoremap <Leader>f  :Files<CR>
+nnoremap <Leader>h  :Helptags<CR>
+nnoremap <Leader>/  :Ag<CR>
+nnoremap <Leader>gc :Commits<CR>
+nnoremap <Leader>gb :BCommits<CR>
+nnoremap <Leader>m  :Commands<CR>
+

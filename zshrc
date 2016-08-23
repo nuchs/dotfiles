@@ -3,7 +3,6 @@ bindkey -e
 # ----------------
 # Navigation
 # ----------------
-
 DIRSTACKSIZE=8
 setopt autocd autopushd pushdminus pushdsilent pushdtohome autolist
 
@@ -52,7 +51,6 @@ unsetopt beep nomatch
 # ----------------
 # Aliases
 # ----------------
-
 alias nvim='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 alias vim='nvim'
 alias vi='nvim'
@@ -67,14 +65,13 @@ alias -s css='nvim'
 alias -s js='nvim'
 alias -s hs='nvim'
 
-alias nz='nvim $MYETC/zshrc'
-alias ne='nvim $MYETC/zshenv'
-alias nv='nvim $MYETC/vimrc'
-alias nx='nvim $MYETC/xinitrc'
-alias nm='nvim $MYETC/xmonad.hs'
+alias nv='nvim $MYETC/neovimrc'
+alias nx='nvim $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
+alias nz='nvim $MYETC/zshrc $MYETC/zshenv $MYETC/zprofile'
 
 alias sz='source $MYETC/zshrc'
 alias senv='source $MYETC/zshenv'
+alias sprof='source $MYETC/zprofile'
 
 alias ls='ls  -p --color=always'
 alias ll='ls -lh'
@@ -93,9 +90,6 @@ alias rm='rm -i'
 alias rmd='rm -rf'
 alias lns='ln -s'
 
-alias x='chmod 755'
-alias all='chmod 777'
-
 alias pso='ps -eo pid,cmd'
 
 alias ex='exit'
@@ -112,6 +106,8 @@ alias af='ag -i -g'
 alias re='rustc --explain'
 
 alias rh='rehash'
+
+alias x='startx'
 
 # ----------------
 # Functions
@@ -216,31 +212,4 @@ _gitignoreio () {
 
 compdef _gitignoreio gi
 
-# ---------------------------
-# Oh my zsh - colorize plugin
-# ---------------------------
-
-alias col='colorize_via_pygmentize'
-
-colorize_via_pygmentize() {
-    if [ ! -x "$(which pygmentize)" ]; then
-        echo "package \'pygmentize\' is not installed!"
-        return -1
-    fi
-
-    if [ $# -eq 0 ]; then
-        pygmentize -g $@
-    fi
-
-    for FNAME in $@
-    do
-        filename=$(basename "$FNAME")
-        lexer=`pygmentize -N \"$filename\"`
-        if [ "Z$lexer" != "Ztext" ]; then
-            pygmentize -l $lexer "$FNAME"
-        else
-            pygmentize -g "$FNAME"
-        fi
-    done
-}
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

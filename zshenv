@@ -1,10 +1,6 @@
-typeset -U path
-path=( ~/bin ~/.cargo/bin ~/.cabal/bin $path)
-export path
-
 export MYETC="$HOME/etc"
 export EDITOR='nvim'
 export PAGER='most'
 
-export CARGO_HOME='/home/sbrown/.cargo'
-export RUST_SRC_PATH='/usr/local/src/rust/src'
+export CARGO_HOME='/home/nuchs/.cargo'
+export RUST_SRC_PATH='/home/nuchs/apps/rust/rustc-1.11.0/src'
