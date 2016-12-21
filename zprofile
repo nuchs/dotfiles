@@ -1,3 +1,3 @@
 typeset -U path
-path=( ~/bin ~/.cargo/bin ~/.cabal/bin $path)
+path=( ~/bin ~/.cargo/bin ~/.local/bin $path)
 export path

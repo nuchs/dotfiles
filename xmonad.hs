@@ -1,29 +1,65 @@
+import Data.Ratio ((%))   
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Grid   
+import XMonad.Layout.IM   
+import XMonad.Layout.PerWorkspace   
+import XMonad.Layout.Spacing   
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
  
-myManageHook = composeAll
-    [ className =? "Gimp"      --> doFloat
-    , className =? "Vncviewer" --> doFloat
-    ]
- 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/nuchs/.xmobarrc"
-    xmonad $ defaultConfig
-        { manageHook = manageDocks <+> myManageHook -- make sure to include myManageHook definition from above
-                        <+> manageHook defaultConfig
-        , layoutHook = avoidStruts  $  layoutHook defaultConfig
-        , logHook = dynamicLogWithPP xmobarPP
+    xmonad $ myConfig xmproc
+
+----------------------------------------------------------------------
+-- Create config
+----------------------------------------------------------------------
+myConfig xmproc = defaultConfig
+        { manageHook = myManageHook
+        , layoutHook = myLayoutHook
+        , logHook    = myLogHook xmproc
+        , workspaces = myWorkspaces
+        , modMask    = myModMask
+        , terminal   = "urxvt"
+        } `additionalKeys` extraKeys
+
+----------------------------------------------------------------------
+-- Set keys
+----------------------------------------------------------------------
+myModMask = mod4Mask
+extraKeys = [((myModMask, xK_o), spawn "chromium")]
+
+----------------------------------------------------------------------
+-- Set workspaces
+----------------------------------------------------------------------
+myWorkspaces = ["1:Main","2:Web","3:Chat","4:FarAway"]
+
+
+----------------------------------------------------------------------
+-- Setup manage hook
+----------------------------------------------------------------------
+myManageHook = manageDocks <+> 
+               myTriggers  <+> 
+               manageHook defaultConfig
+
+myTriggers = composeAll
+  [ className =? "chromium" --> doShift "2:Web"]
+
+----------------------------------------------------------------------
+--
+-- Setup layout hook
+----------------------------------------------------------------------
+myLayoutHook = avoidStruts  $  layoutHook defaultConfig
+
+
+----------------------------------------------------------------------
+-- Setup log hook
+----------------------------------------------------------------------
+myLogHook xmproc = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , modMask = mod4Mask     -- Rebind Mod to the Windows key
-	, terminal = "urxvt"
-        } `additionalKeys`
-        [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
-        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
-        , ((0, xK_Print), spawn "scrot")
-        ]
+

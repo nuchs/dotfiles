@@ -38,6 +38,7 @@ bindkey '^[[B' down-line-or-search
 # ----------------
 # Completion
 # ----------------
+fpath+=~/.zfunc
 autoload -U compinit
 compinit
 zstyle ':completion:*' menu select
@@ -79,9 +80,9 @@ alias la='ls -la'
 alias lrt='ls -lrt'
 
 alias ts='tree -C'
-alias tl='tree -Cph'
+alias tt='tree -Cph'
 alias ta='tree -Cpha'
-alias ta='tree -Cphart'
+alias trt='tree -Cphart'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -94,7 +95,7 @@ alias pso='ps -eo pid,cmd'
 
 alias ex='exit'
 alias rb='sudo reboot'
-alias sd='sudo shutdown'
+alias sd='sudo shutdown now'
 
 alias pm='pacman'
 alias pms='sudo pacman'

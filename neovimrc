@@ -4,23 +4,25 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'airblade/vim-rooter' 
-Plug 'cespare/vim-toml', {'for' : 'toml'}
+Plug 'airblade/vim-rooter', {'for':['rust', 'haskell']}
+Plug 'cespare/vim-toml' 
+Plug 'terryma/vim-multiple-cursors'
+Plug 'chrisbra/unicode.vim' 
+Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'godlygeek/tabular'
+Plug 'joshdick/onedark.vim' 
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'mattn/webapi-vim'
+Plug 'neomake/neomake'
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'Raimondi/delimitMate'
-Plug 'rhysd/rust-doc.vim', {'for' : 'rust'}
-Plug 'rust-lang-nursery/rustfmt', {'for' : 'rust'}
-Plug 'rust-lang/rust.vim', {'for' : 'rust'}
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
+Plug 'rhysd/rust-doc.vim' 
+Plug 'rust-lang/rust.vim' 
+Plug 'scrooloose/nerdcommenter', {'for' : ['rust', 'haskell',]}
 Plug 'SirVer/ultisnips', { 'on': [] }
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -64,6 +66,16 @@ set textwidth=79
 set vb
 hi Search cterm=NONE ctermfg=grey ctermbg=Black
 syntax enable
+colorscheme onedark
+
+" ---------------------------------------------------
+" Terminal bindings
+" ---------------------------------------------------
+tnoremap jk <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 " ---------------------------------------------------
 " Key bindings
@@ -75,15 +87,15 @@ noremap <F7> :so $MYVIMRC<CR>
 
 " Window management
 nnoremap <Leader>s :vsplit<CR>
-nnoremap <Leader>c :split<CR>
+nnoremap <Leader>d :split<CR>
 nnoremap <C-h>     <C-w><Left>
 nnoremap <C-l>     <C-w><Right>
 nnoremap <C-k>     <C-w><Up>
 nnoremap <C-j>     <C-w><Down>
-nnoremap <A-Left>  <C-w><
-nnoremap <A-Right> <C-w>>
-nnoremap <A-Up>    <C-w>+
-nnoremap <A-Down>  <C-w>-
+nnoremap <C-Left>  <C-w><
+nnoremap <C-Right> <C-w>>
+nnoremap <C-Up>    <C-w>+
+nnoremap <C-Down>  <C-w>-
 
 " Movement
 noremap  k gk
@@ -116,6 +128,9 @@ nnoremap <Leader><Space> :b#<CR>
 " Bad Ex mode. Bad!
 nnoremap Q <Nop>
 
+" Cleanup whitespace
+nnoremap <F8> :%s/\s\+$//<CR>
+
 " ---------------------------------------------------
 " Autocommands
 " ---------------------------------------------------
@@ -136,6 +151,9 @@ au!
  au Syntax * RainbowParenthesesLoadSquare
  au Syntax * RainbowParenthesesLoadBraces
 
+ autocmd! BufWritePost *.rs   NeomakeProject cargo
+ autocmd! BufWritePost *.toml NeomakeProject cargo
+
 augroup END
 
 " ---------------------------------------------------
@@ -150,9 +168,9 @@ nnoremap <Leader>puu :PlugUpgrade<CR>
 nnoremap <Leader>ps  :PlugStatus<CR>
 
 " YouCompleteMe
-let g:ycm_rust_src_path      = '/usr/local/src/rust/src'
-let g:ycm_semantic_triggers  = {'haskell' : ['.']}
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_semantic_triggers  = {'haskell' : ['re!\w\w\w']}
+let g:ycm_rust_src_path = '/home/nuchs/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+nnoremap <Leader>] :YcmCompleter GoTo<CR>
 
 " Ultisnips
 nnoremap <Leader>u :UltiSnipsEdit<CR>
@@ -162,33 +180,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
-" Rustdoc
-let g:rust_doc#downloaded_rust_doc_dir = '~/apps/rust/rustdocs_1.11.0'
-
-" Rust
-nnoremap <Leader>rf :RustFmt<CR>
-vnoremap <Leader>rp :RustPlay<CR>
-
-" Syntastic
-map <Leader>s :SyntasticToggleMode<CR>
-nnoremap <Leader>e :Errors<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = {
-      \ "mode": "passive",
-      \ "active_filetypes": ["rust", "haskell", "python"] }
-
 " Tabularize
 vnoremap a= :Tabularize /=/l1<CR>
 vnoremap am :Tabularize /=>/l1<CR>
+vnoremap ab :Tabularize /\|/l1<CR>
+vnoremap aa :Tabularize /->/l1<CR>
+vnoremap at :Tabularize /::/l1<CR>
 
 " FZF
 let g:fzf_colors =
@@ -211,4 +208,25 @@ nnoremap <Leader>/  :Ag<CR>
 nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>gb :BCommits<CR>
 nnoremap <Leader>m  :Commands<CR>
+
+" Haskell
+let g:haskellmode_completion_ghc = 0
+au FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" RustDoc
+let g:rust_doc#downloaded_rust_doc_dir = '~/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/'
+
+" Neomake
+let g:neomake_warning_sign ={
+  \ 'text': 'w',
+  \ 'texthl': 'warningmsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'e',
+  \ 'texthl': 'errormsg',
+  \ }
+
+nnoremap [c :cp<CR>
+nnoremap ]c :cn<CR>
+
 
