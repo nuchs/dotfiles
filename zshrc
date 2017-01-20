@@ -15,9 +15,6 @@ alias p='popd'
 alias pp='pushd .'
 alias d='dirs -v'
 
-alias apps='cd $HOME/apps'
-alias buns='cd $HOME/bin'
-alias conf='cd $HOME/etc'
 alias dl='cd $HOME/downloads'
 alias docs='cd $HOME/docs'
 alias etc='cd $HOME/etc'
@@ -52,14 +49,10 @@ unsetopt beep nomatch
 # ----------------
 # Aliases
 # ----------------
-alias nvim='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 alias vim='nvim'
 alias vi='nvim'
 alias nn='nvim'
 alias nvd='nvim -d'
-alias nr='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvr --remote'
-alias nrv='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvr -O'
-alias nrh='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvr -o'
 alias -s tex='nvim'
 alias -s html='nvim'
 alias -s css='nvim'
@@ -79,10 +72,7 @@ alias ll='ls -lh'
 alias la='ls -la'
 alias lrt='ls -lrt'
 
-alias ts='tree -C'
-alias tt='tree -Cph'
-alias ta='tree -Cpha'
-alias trt='tree -Cphart'
+alias tt='tree -C'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -109,6 +99,7 @@ alias re='rustc --explain'
 alias rh='rehash'
 
 alias x='startx'
+alias xx='xmonad --recompile'
 
 # ----------------
 # Functions
