@@ -1,11 +1,13 @@
 import Data.Ratio ((%))   
 import XMonad
+import XMonad.Actions.Search
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Grid   
 import XMonad.Layout.IM   
 import XMonad.Layout.PerWorkspace   
 import XMonad.Layout.Spacing   
+import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
@@ -15,7 +17,7 @@ main = do
     xmonad $ myConfig xmproc
 
 ----------------------------------------------------------------------
--- Create config
+-- Create configs
 ----------------------------------------------------------------------
 myConfig xmproc = defaultConfig
         { manageHook = myManageHook
@@ -30,7 +32,11 @@ myConfig xmproc = defaultConfig
 -- Set keys
 ----------------------------------------------------------------------
 myModMask = mod4Mask
-extraKeys = [((myModMask, xK_o), spawn "chromium")]
+extraKeys = [ ((myModMask, xK_o),  spawn "chromium")
+            , ((0,         xK_F5), selectSearchBrowser "chromium" google)
+            , ((0,         xK_F4), promptSearchBrowser defaultXPConfig "chromium" google) 
+            , ((0,         xK_F3), promptSearchBrowser defaultXPConfig "chromium" maps) 
+            ]
 
 ----------------------------------------------------------------------
 -- Set workspaces
@@ -46,13 +52,13 @@ myManageHook = manageDocks <+>
                manageHook defaultConfig
 
 myTriggers = composeAll
-  [ className =? "chromium" --> doShift "2:Web"]
+  [ className =? "Chromium" --> doShift "2:Web"]
 
 ----------------------------------------------------------------------
 --
 -- Setup layout hook
 ----------------------------------------------------------------------
-myLayoutHook = avoidStruts  $  layoutHook defaultConfig
+myLayoutHook = avoidStruts $ layoutHook defaultConfig
 
 
 ----------------------------------------------------------------------
