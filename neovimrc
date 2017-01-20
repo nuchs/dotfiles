@@ -4,30 +4,30 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'airblade/vim-rooter', {'for':['rust', 'haskell']}
-Plug 'cespare/vim-toml' 
-Plug 'terryma/vim-multiple-cursors'
+Plug 'airblade/vim-rooter', {'for':['trust']}
+Plug 'cespare/vim-toml', {'for' : 'toml'}
 Plug 'chrisbra/unicode.vim' 
-Plug 'eagletmt/neco-ghc', {'for': 'haskell'}
 Plug 'godlygeek/tabular'
-Plug 'joshdick/onedark.vim' 
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'mattn/webapi-vim'
 Plug 'neomake/neomake'
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'Raimondi/delimitMate'
 Plug 'rhysd/rust-doc.vim' 
 Plug 'rust-lang/rust.vim' 
-Plug 'scrooloose/nerdcommenter', {'for' : ['rust', 'haskell',]}
+Plug 'scrooloose/nerdcommenter', {'for' : ['rust']}
 Plug 'SirVer/ultisnips', { 'on': [] }
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/YouCompleteMe', {'on':[], 'do' : './install.py --racer-completer' }
 Plug 'vim-scripts/bufkill.vim'
+
+Plug 'altercation/vim-colors-solarized' 
+Plug 'joshdick/onedark.vim' 
 
 augroup load_us_ycm
   autocmd!
@@ -53,20 +53,22 @@ set history=150
 set hlsearch
 set incsearch
 set nobackup
-set number
 set noruler
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set number
+set relativenumber
 set scrolloff=3
 set shiftwidth=2
 set smartcase
 set smarttab
 set softtabstop=2
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set tabstop=2
 set textwidth=79
 set vb
 hi Search cterm=NONE ctermfg=grey ctermbg=Black
 syntax enable
-colorscheme onedark
+colorscheme solarized
+set background=dark
 
 " ---------------------------------------------------
 " Terminal bindings
@@ -86,6 +88,9 @@ noremap <F6> :e  $MYVIMRC<CR>
 noremap <F7> :so $MYVIMRC<CR>
 
 " Window management
+nnoremap <Leader>t  :terminal<CR>
+nnoremap <Leader>ts :belowright vsplit<CR>:terminal<CR>
+nnoremap <Leader>td :belowright split<CR>:terminal<CR>
 nnoremap <Leader>s :vsplit<CR>
 nnoremap <Leader>d :split<CR>
 nnoremap <C-h>     <C-w><Left>
@@ -151,6 +156,7 @@ au!
  au Syntax * RainbowParenthesesLoadSquare
  au Syntax * RainbowParenthesesLoadBraces
 
+ " Lint rust code on write
  autocmd! BufWritePost *.rs   NeomakeProject cargo
  autocmd! BufWritePost *.toml NeomakeProject cargo
 
@@ -168,7 +174,6 @@ nnoremap <Leader>puu :PlugUpgrade<CR>
 nnoremap <Leader>ps  :PlugStatus<CR>
 
 " YouCompleteMe
-let g:ycm_semantic_triggers  = {'haskell' : ['re!\w\w\w']}
 let g:ycm_rust_src_path = '/home/nuchs/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 nnoremap <Leader>] :YcmCompleter GoTo<CR>
 
@@ -209,12 +214,12 @@ nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>gb :BCommits<CR>
 nnoremap <Leader>m  :Commands<CR>
 
-" Haskell
-let g:haskellmode_completion_ghc = 0
-au FileType haskell setlocal omnifunc=necoghc#omnifunc
-
 " RustDoc
 let g:rust_doc#downloaded_rust_doc_dir = '~/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/'
+
+" Rust
+nnoremap <Leader>rf :RustFmt<CR>
+vnoremap <Leader>rp :RustPlay<CR>
 
 " Neomake
 let g:neomake_warning_sign ={
@@ -229,4 +234,8 @@ let g:neomake_error_sign = {
 nnoremap [c :cp<CR>
 nnoremap ]c :cn<CR>
 
+" Unicode
+nnoremap <Leader>ut :UnicodeTable<CR>
+nnoremap <Leader>un :UnicodeName<CR>
+nnoremap <Leader>us :SearchUnicode<CR>
 
