@@ -28,7 +28,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt hist_ignore_dups hist_ignore_space append_history
 alias h='history'
-alias hg='history | ag'
+alias hg='history | rg'
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
@@ -40,6 +40,11 @@ autoload -U compinit
 compinit
 zstyle ':completion:*' menu select
 setopt extended_glob
+
+# ----------------
+# FZF config
+# ----------------
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 # ----------------
 # Turn off annoyances
@@ -62,6 +67,7 @@ alias -s hs='nvim'
 alias nv='nvim $MYETC/neovimrc'
 alias nx='nvim $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
 alias nz='nvim $MYETC/zshrc $MYETC/zshenv $MYETC/zprofile'
+alias ne='nvim $MYETC/init.el'
 
 alias sz='source $MYETC/zshrc'
 alias senv='source $MYETC/zshenv'
@@ -87,12 +93,10 @@ alias ex='exit'
 alias rb='sudo reboot'
 alias sd='sudo shutdown now'
 
-alias pm='pacman'
-alias pms='sudo pacman'
+alias pm='aura'
+alias pms='sudo aura'
 alias lsorphans='sudo pacman -Qdt'
 alias explicit='pacman -Qei | awk '"'"'/^Name/ { name=$3 } /^Groups/ { if ( $3 != "base" && $3 != "base-devel" ) { print name } }'"'"
-
-alias af='ag -i -g'
 
 alias re='rustc --explain'
 
@@ -107,12 +111,12 @@ alias xx='xmonad --recompile'
 
 function rem()
 {
-  ag "$@" $MYETC/*;
+  rg "$@" $MYETC/*;
 }
 
 function zem()
 {
-  ag "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
+  rg "$@" $MYETC/zsh* /etc/zsh/* /etc/profile;
 }
 
 # ----------------

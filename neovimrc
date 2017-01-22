@@ -193,6 +193,8 @@ vnoremap aa :Tabularize /->/l1<CR>
 vnoremap at :Tabularize /::/l1<CR>
 
 " FZF
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -209,7 +211,7 @@ let g:fzf_colors =
 
 nnoremap <Leader>f  :Files<CR>
 nnoremap <Leader>h  :Helptags<CR>
-nnoremap <Leader>/  :Ag<CR>
+nnoremap <Leader>/  :Find<CR>
 nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>gb :BCommits<CR>
 nnoremap <Leader>m  :Commands<CR>
