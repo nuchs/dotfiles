@@ -4,7 +4,7 @@ feh --bg-scale /home/nuchs/docs/wallpaper/tardis.jpg
 
 urxvtd -f -o -q
 urxvt&
-urxvt&
+ee&
 chromium&
 
 exec xmonad

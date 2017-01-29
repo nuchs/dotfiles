@@ -57,17 +57,18 @@ unsetopt beep nomatch
 alias vim='nvim'
 alias vi='nvim'
 alias nn='nvim'
-alias nvd='nvim -d'
-alias -s tex='nvim'
-alias -s html='nvim'
-alias -s css='nvim'
-alias -s js='nvim'
-alias -s hs='nvim'
+alias -s tex='ee'
+alias -s html='ee'
+alias -s css='ee'
+alias -s js='ee'
+alias -s hs='ee'
 
 alias nv='nvim $MYETC/neovimrc'
-alias nx='nvim $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
-alias nz='nvim $MYETC/zshrc $MYETC/zshenv $MYETC/zprofile'
-alias ne='nvim $MYETC/init.el'
+alias ex='ee $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
+alias ez='ee $MYETC/zshrc $MYETC/zshenv $MYETC/zprofile'
+alias em='ee $MYETC/emacs.d/init.el' $MYETC/emacs.d/config/*
+
+alias bounce='systemctl restart --user emacs'
 
 alias sz='source $MYETC/zshrc'
 alias senv='source $MYETC/zshenv'
