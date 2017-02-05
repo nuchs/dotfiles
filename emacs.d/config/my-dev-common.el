@@ -12,13 +12,22 @@
     :config
     ; Default commit editor opening in insert mode
     (add-hook 'with-editor-mode-hook 'evil-insert-state)
-    (evil-define-key 'normal with-editor-mode-map
+    (general-define-key
+     :states '(normal)
+     :keymaps 'with-editor-mode-map
       (kbd "RET") 'with-editor-finish
       [escape] 'with-editor-cancel
       )
-    (evil-define-key 'normal git-rebase-mode-map
+    (general-define-key
+     :states '(normal)
+     :keymaps 'git-rebase-mode-map
       "l" 'git-rebase-show-commit
       )
+    (general-define-key
+     :prefix my-global-leader
+     :states '(normal visual)
+     "z" '(magit-status :which-key "git status")
+    )
     )
   )
 
@@ -36,7 +45,6 @@
 (use-package yasnippet
   :ensure t
   :defer t
-  :diminish yas-mode
   :init
   (add-hook 'prog-mode-hook #'yas-minor-mode)
     (general-define-key
@@ -49,5 +57,26 @@
   (yas-reload-all)
 )
 
+(use-package company
+  :ensure t
+  :defer t
+  :config
+  (setq company-tooltip-align-annotations t)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  )
+
 ; autocomplete paired brackets
 (electric-pair-mode 1)
+
+(use-package flycheck
+  :ensure t
+  :defer t
+  :init
+  (global-flycheck-mode))
+
+(use-package smex
+  :ensure t
+  :init
+  (smex-initialize))
+

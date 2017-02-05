@@ -17,7 +17,6 @@
 
 (use-package ivy
   :ensure t
-  :diminish (ivy-mode . "") ; does not display ivy in the modeline
   :init (ivy-mode 1)        ; enable ivy globally at startup
   :config
   (setq ivy-use-virtual-buffers t)   ; extend searching to bookmarks and …
@@ -35,10 +34,10 @@
 ; I'm EVIL
 ;----------------------------------------------------------------------------
 (setq my-global-leader "SPC")
+(setq my-major-leader "\\")
 
 (use-package evil
   :ensure t
-  :diminish undo-tree-mode
   :config
   (evil-mode 1)
   
@@ -49,6 +48,7 @@
 
   (use-package evil-matchit
     :ensure t
+    :defer t
     :config
     (global-evil-matchit-mode 1))
 
@@ -66,7 +66,6 @@
     :config
 
     (use-package which-key :ensure t
-      :diminish which-key-mode
       :init
       (which-key-mode)
       :config
@@ -87,6 +86,12 @@
         (switch-to-buffer (other-buffer buf))
         (switch-to-buffer-other-window buf)))
 
+    (defun my-replace ()
+      "Open writable grep buffer from ivy rg search"
+      (interactive)
+      (ivy-occur)
+      (ivy-wgrep-change-to-wgrep-mode))
+
     ; Leader keys
     (general-define-key
      :prefix my-global-leader
@@ -97,16 +102,18 @@
      "s" 'evil-window-split
      "d" 'evil-window-vsplit
      "SPC" 'switch-to-previous-buffer
-     "td" '(shell-other-window :which-key "open shell in new split")
+     "t" '(shell-other-window :which-key "open shell in new split")
      "f" '(counsel-git :which-key "find file in project")
      "F" '(counsel-find-file :which-key "find file")
+     "r" '(counsel-recentf :which-key "find recent file")
      "l" '(counsel-locate :which-key "locate file")
      "g" '(counsel-rg :which-key "search across files")
      "b" '(ivy-switch-buffer :which-key "open buffer")
      "B" '(ivy-switch-buffer-other-window :which-key "open buffer elsewhere")
      "/" '(swiper :which-key "search current buffer")
-     "t" '(counsel-load-theme :which-key "load theme")
+     "`" '(counsel-load-theme :which-key "load theme")
      "a" '(align-regexp :which-key "align on regexp")
+     "1" '(delete-other-windows :which-key "maximise current window")
      )
 
     ; Insert mode keybinds
@@ -132,12 +139,14 @@
      "<f1>" '(counsel-describe-function :which-key "describe lisp function")
      "<f2>" '(counsel-describe-variable :which-key "describe lisp variable")
      "<f3>" '(counsel-unicode-char :which-key "search unicode characters")
-     "M-y" '(counsel-yank-pop :which-key "search unicode characters")
+     "<f4>" '(whitespace-mode :which-key "display whitespace characters")
+     "M-y" '(counsel-yank-pop :which-key "search kill ring")
      )
 
     ; keybinds for ivy windows
     (general-define-key
      :map ivy-minibuffer-map
+     "C-#" '(my-replace)
      "M-y" '(ivy-next-line :which-key "next line"))
     )
   )

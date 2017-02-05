@@ -1,9 +1,46 @@
 (provide 'my-cosmetic)
 
 ; Themes
-(load-theme 'solarized-dark t)
-(load-theme 'solarized-light t)
-(load-theme 'zenburn t)
+(require 'spaceline-config)
+(setq powerline-default-separator 'contour)
+(spaceline-spacemacs-theme)
+(spaceline-toggle-buffer-id-on)
+(spaceline-toggle-buffer-modified-on)
+(spaceline-toggle-buffer-size-on)
+(spaceline-toggle-erc-track-on)
+(spaceline-toggle-evil-state-on)
+(spaceline-toggle-flycheck-error-on)
+(spaceline-toggle-flycheck-info-on)
+(spaceline-toggle-flycheck-warning-on)
+(spaceline-toggle-line-column-on)
+(spaceline-toggle-major-mode-on)
+(spaceline-toggle-org-clock-on)
+(spaceline-toggle-remote-host-on)
+(spaceline-toggle-version-control-on)
+(spaceline-toggle-which-function-on)
+
+(spaceline-toggle-anzu-off)
+(spaceline-toggle-auto-compile-off)
+(spaceline-toggle-battery-off)
+(spaceline-toggle-buffer-encoding-abbrev-off)
+(spaceline-toggle-buffer-position-off)
+(spaceline-toggle-global-off)
+(spaceline-toggle-hud-off)
+(spaceline-toggle-input-method-off)
+(spaceline-toggle-minor-modes-off)
+(spaceline-toggle-nyan-cat-off)
+(spaceline-toggle-org-pomodoro-off)
+(spaceline-toggle-paradox-menu-off)
+(spaceline-toggle-persp-name-off)
+(spaceline-toggle-point-position-off)
+(spaceline-toggle-process-off)
+(spaceline-toggle-python-pyenv-off)
+(spaceline-toggle-python-pyvenv-off)
+(spaceline-toggle-remote-host-off)
+(spaceline-toggle-selection-info-off)
+(spaceline-toggle-window-number-off)
+(spaceline-toggle-workspace-number-off)
+(load-theme 'material t)
 
 ; Hid the bits of gui fluff that I'm not interested in
 (tool-bar-mode -1)
@@ -15,16 +52,14 @@
 ; Highlight column 80
 (use-package column-enforce-mode
   :ensure t
-  :diminish column-enforce-mode
   :init
   (add-hook 'prog-mode-hook 'column-enforce-mode))
 
 ; I like line numbers
 (use-package linum-relative
   :ensure t
-  :diminish linum-relative-mode
-  :config
-  (global-linum-mode 1)
+  :init
+  (add-hook 'prog-mode-hook 'linum-mode)
   (linum-relative-mode)
   )
 

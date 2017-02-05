@@ -64,9 +64,9 @@ alias -s js='ee'
 alias -s hs='ee'
 
 alias nv='nvim $MYETC/neovimrc'
-alias ex='ee $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
-alias ez='ee $MYETC/zshrc $MYETC/zshenv $MYETC/zprofile'
-alias em='ee $MYETC/emacs.d/init.el' $MYETC/emacs.d/config/*
+alias eex='ee $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
+alias eez='ee $MYETC/zshrc $MYETC/zshenv $MYETC/zprofile'
+alias eem='ee $MYETC/emacs.d/init.el' $MYETC/emacs.d/config/*
 
 alias bounce='systemctl restart --user emacs'
 

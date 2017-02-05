@@ -34,8 +34,8 @@ myConfig xmproc = defaultConfig
 myModMask = mod4Mask
 extraKeys = [ ((myModMask, xK_o),  spawn "chromium")
             , ((0,         xK_F5), selectSearchBrowser "chromium" google)
-            , ((0,         xK_F4), promptSearchBrowser defaultXPConfig "chromium" google) 
-            , ((0,         xK_F3), promptSearchBrowser defaultXPConfig "chromium" maps) 
+            , ((0,         xK_F6), promptSearchBrowser defaultXPConfig "chromium" google) 
+            , ((0,         xK_F7), promptSearchBrowser defaultXPConfig "chromium" maps) 
             ]
 
 ----------------------------------------------------------------------

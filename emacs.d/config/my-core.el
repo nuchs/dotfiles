@@ -18,3 +18,7 @@
 
 ; Wait longer for garbage collection (for flx)
 (setq gc-cons-threshold 20000000)
+
+(use-package wgrep
+  :ensure
+  :commands (ivy-wgrep-change-to-wgrep-mode))
