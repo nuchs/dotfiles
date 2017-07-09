@@ -11,6 +11,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 bindkey -v
 bindkey '^w' backward-kill-word
 bindkey -M vicmd '/' fzf-history-widget
+bindkey -M viins 'jk' vi-cmd-mode  
  
 
 # -------------------
@@ -33,6 +34,15 @@ alias pso='ps -eo pid,cmd | fzf'
 alias ex='exit'
 alias rb='reboot'
 alias sd='shutdown now'
+
+#
+# -------------------
+# Lastpass
+# -------------------
+alias lpi='lpass login'
+alias lpo='lpass logout'
+alias lpls='lpass ls'
+alias lps='lpass show --password -c'
 
 
 # -------------------
