@@ -1,10 +1,10 @@
+xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
 setxkbmap -layout gb
-feh --bg-scale /home/nuchs/docs/wallpaper/tardis.jpg
 
+xautolock -secure \
+          -time     10 -locker   "slock" \
+          -killtime 10 -killer   "systemctl suspend" &
 urxvtd -f -o -q
-urxvt&
-ee&
-chromium&
-
+/home/nuchs/.dynamic-colors/bin/dynamic-colors switch solarized-dark
 exec xmonad

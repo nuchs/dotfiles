@@ -1,25 +1,20 @@
-import Data.Ratio ((%))   
 import XMonad
 import XMonad.Actions.Search
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Grid   
-import XMonad.Layout.IM   
-import XMonad.Layout.PerWorkspace   
-import XMonad.Layout.Spacing   
 import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
  
 main = do
-    xmproc <- spawnPipe "/usr/bin/xmobar /home/nuchs/.xmobarrc"
+    xmproc <- spawnPipe "xmobar"
     xmonad $ myConfig xmproc
 
 ----------------------------------------------------------------------
 -- Create configs
 ----------------------------------------------------------------------
-myConfig xmproc = defaultConfig
+myConfig xmproc = docks defaultConfig
         { manageHook = myManageHook
         , layoutHook = myLayoutHook
         , logHook    = myLogHook xmproc
@@ -32,27 +27,24 @@ myConfig xmproc = defaultConfig
 -- Set keys
 ----------------------------------------------------------------------
 myModMask = mod4Mask
-extraKeys = [ ((myModMask, xK_o),  spawn "chromium")
-            , ((0,         xK_F5), selectSearchBrowser "chromium" google)
-            , ((0,         xK_F6), promptSearchBrowser defaultXPConfig "chromium" google) 
-            , ((0,         xK_F7), promptSearchBrowser defaultXPConfig "chromium" maps) 
+extraKeys = [ ((myModMask, xK_o),  spawn "qutebrowser")
+            , ((0,         xK_F5), promptSearchBrowser defaultXPConfig "qutebrowser" google) 
+            , ((0,         xK_F6), selectSearchBrowser "qutebrowser" google)
+            , ((myModMask.|.shiftMask, xK_l), spawn "xautolock")
             ]
 
 ----------------------------------------------------------------------
 -- Set workspaces
 ----------------------------------------------------------------------
-myWorkspaces = ["1:Main","2:Web","3:Chat","4:FarAway"]
+myWorkspaces = ["One","Two","Three","Four"]
 
 
 ----------------------------------------------------------------------
 -- Setup manage hook
 ----------------------------------------------------------------------
 myManageHook = manageDocks <+> 
-               myTriggers  <+> 
                manageHook defaultConfig
 
-myTriggers = composeAll
-  [ className =? "Chromium" --> doShift "2:Web"]
 
 ----------------------------------------------------------------------
 --

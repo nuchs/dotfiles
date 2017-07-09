@@ -1,0 +1,42 @@
+Xft.dpi: 192
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+*dpi: 192
+
+! URxvt settings
+
+URxvt.depth:                32
+URxvt.loginShell:           true
+URxvt.saveLines:            5000
+URxvt.lineSpace:            0
+
+! Fonts
+urxvt.font:  xft:DejaVuSansMono:size=8
+URxvt.allow_bold:           true
+URxvt*font: xft:DejaVuSansMono:size=8
+URxvt*boldFont: xft:DejaVuSansMono:size=8
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Scrollbar
+URxvt.scrollBar:            false
+
+! Perl extensions
+URxvt.perl-ext-common:      default,matcher
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          qutebrowser
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
+
