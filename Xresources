@@ -16,10 +16,10 @@ URxvt.saveLines:            5000
 URxvt.lineSpace:            0
 
 ! Fonts
-urxvt.font:  xft:DejaVuSansMono:size=8
+urxvt.font:  xft:Inconsolata:size=12
 URxvt.allow_bold:           true
-URxvt*font: xft:DejaVuSansMono:size=8
-URxvt*boldFont: xft:DejaVuSansMono:size=8
+URxvt*font: xft:Inconsolata:size=12
+URxvt*boldFont: xft:Inconsolata:size=12
 
 ! Fix font space
 URxvt*letterSpace: -1

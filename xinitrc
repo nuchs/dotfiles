@@ -1,4 +1,6 @@
 xrdb -merge ~/.Xresources
+xmodmap ~/.Xmodmap
+
 xsetroot -cursor_name left_ptr
 setxkbmap -layout gb
 

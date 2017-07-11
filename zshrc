@@ -95,6 +95,10 @@ source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 # -------------------
 unsetopt beep nomatch
 
+# -------------------
+# Systemd
+# -------------------
+alias sc='systemctl'
 
 # -------------------
 # Editors
@@ -107,7 +111,7 @@ alias bounce='systemctl restart --user emacs'
 # Manage Config Files
 # -------------------
 alias nv='nvim $MYETC/neovimrc'
-alias nx='nvim $MYETC/xinitrc $MYETC/Xdefaults $MYETC/xmonad.hs $MYETC/xmobarrc'
+alias nx='nvim $MYETC/xinitrc $MYETC/Xresources $MYETC/xmonad.hs $MYETC/xmobarrc'
 alias nz='nvim $MYETC/zshrc $MYETC/zprofile'
 alias eem='ee $MYETC/emacs.d/init.el'
 
@@ -148,6 +152,16 @@ dark
 
 
 # -------------------
+# X Windows stuff
+# -------------------
+alias gs='git status'
+alias ga='git add'
+alias gd='git diff'
+alias gc='git commit'
+alias gpom='git push origin master'
+
+
+# -------------------
 # Prompt
 # -------------------
 setopt prompt_subst prompt_percent
@@ -169,6 +183,6 @@ function zle-line-finish {
 zle -N zle-line-finish
 
 PROMPT='%{$fg[green]%}${vim_mode}%{$reset_color%} %* %{$fg[blue]%}%n@%m%{$reset_color%}:%~
-→ '
+-> '
 
 

@@ -30,7 +30,7 @@ myModMask = mod4Mask
 extraKeys = [ ((myModMask, xK_o),  spawn "qutebrowser")
             , ((0,         xK_F5), promptSearchBrowser defaultXPConfig "qutebrowser" google) 
             , ((0,         xK_F6), selectSearchBrowser "qutebrowser" google)
-            , ((myModMask.|.shiftMask, xK_l), spawn "xautolock")
+            , ((myModMask.|.shiftMask, xK_l), spawn "slock")
             ]
 
 ----------------------------------------------------------------------

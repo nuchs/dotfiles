@@ -40,7 +40,12 @@
 (spaceline-toggle-selection-info-off)
 (spaceline-toggle-window-number-off)
 (spaceline-toggle-workspace-number-off)
-(load-theme 'material t)
+
+(use-package material-theme
+  :ensure t
+  :config
+    (load-theme 'material t)
+  )
 
 ; Hid the bits of gui fluff that I'm not interested in
 (tool-bar-mode -1)
@@ -85,4 +90,10 @@
 ; Syntax highlighting hints
 (add-to-list 'auto-mode-alist '("zshrc" . sh-mode))
 (add-to-list 'auto-mode-alist '("zprofile" . sh-mode))
-(add-to-list 'auto-mode-alist '("zshenv" . sh-mode))
+
+; Set font
+(add-to-list 'default-frame-alist '(font . "Inconsolata" ))
+(set-face-attribute 'default nil :font  "Inconsolata-12" )
+
+
+
