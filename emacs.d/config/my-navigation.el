@@ -95,26 +95,29 @@
     ; Leader keys
     (general-define-key
      :prefix my-global-leader
-     :states '(normal)
-     "k" 'general-describe-keybindings
-     "q" 'evil-quit
-     "w" 'bury-buffer
-     "s" 'evil-window-vsplit
-     "d" 'evil-window-split
-     "SPC" 'switch-to-previous-buffer
-     "t" '(shell-other-window :which-key "open shell in new split")
-     "x" '(counsel-M-x :which-key "select command to run")
-     "f" '(counsel-git :which-key "find file in project")
-     "F" '(counsel-find-file :which-key "find file")
-     "r" '(counsel-recentf :which-key "find recent file")
-     "l" '(counsel-locate :which-key "locate file")
-     "g" '(counsel-rg :which-key "search across files")
-     "b" '(ivy-switch-buffer :which-key "open buffer")
-     "B" '(ivy-switch-buffer-other-window :which-key "open buffer elsewhere")
-     "/" '(swiper :which-key "search current buffer")
+     :states '(normal motion)
      "`" '(counsel-load-theme :which-key "load theme")
-     "a" '(align-regexp :which-key "align on regexp")
+     "SPC" 'switch-to-previous-buffer
      "1" '(delete-other-windows :which-key "maximise current window")
+     "a" '(align-regexp :which-key "align on regexp")
+     "B" '(ivy-switch-buffer-other-window :which-key "open buffer elsewhere")
+     "b" '(ivy-switch-buffer :which-key "open buffer")
+     "d" '(evil-window-split :which-key "horizontal split")
+     "F" '(counsel-find-file :which-key "find file")
+     "f" '(counsel-git :which-key "find file in project")
+     "g" '(counsel-rg :which-key "search across files")
+     "h" '(help :which-key "emacs help")
+     "k" 'general-describe-keybindings
+     "l" '(counsel-locate :which-key "locate file")
+     "q" 'evil-quit
+     "r" '(counsel-recentf :which-key "find recent file")
+     "s" '(evil-window-vsplit :which-key "vertical split")
+     "/" '(swiper :which-key "search current buffer")
+     "t" '(shell-other-window :which-key "open shell in new split")
+     "w" 'bury-buffer
+     "x" '(counsel-M-x :which-key "select command to run")
+     "v" '(ivy-push-view :which-key "save windows")
+     "V" '(ivy-pop-view :which-key "delete saved windows")
      )
 
     ; Insert mode keybinds
@@ -126,7 +129,7 @@
     
     ; Standard keybinds
     (general-define-key
-     :states '(normal)
+     :states '(normal motion)
      "C-h" '(evil-window-left  :which-key "Switch focus left")
      "C-j" '(evil-window-down  :which-key "Switch focus down")
      "C-k" '(evil-window-up    :which-key "Switch focus up")

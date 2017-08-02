@@ -35,13 +35,14 @@ alias ex='exit'
 alias rb='reboot'
 alias sd='shutdown now'
 
-#
+alias pad='xinput set-prop 11 "Device Enabled" '
+
 # -------------------
 # Lastpass
 # -------------------
-alias lpi='lpass login'
+alias lpi='lpass login `cat ~/.myemail`'
 alias lpo='lpass logout'
-alias lpls='lpass ls'
+alias lpz='lpass ls | fzf'
 alias lps='lpass show --password -c'
 
 
@@ -60,10 +61,12 @@ alias p='popd'
 alias pp='pushd .'
 alias d='dirs -v'
 
-alias dl='cd $XDG_DOWNLOAD_DIR'
-alias docs='cd $XDG_DOCUMENTS_DIR'
+alias dl='cd $MYDOWNLOADS'
+alias docs='cd $MYDOCS'
 alias etc='cd $MYETC'
 alias work='cd $MYWORK'
+alias bin='cd $MYBIN'
+alias org='cd $MYORG'
 
 
 # -------------------
@@ -99,13 +102,13 @@ unsetopt beep nomatch
 # Systemd
 # -------------------
 alias sc='systemctl'
+alias scu='systemctl --user'
 
 # -------------------
 # Editors
 # -------------------
 alias nn='nvim'
 alias bounce='systemctl restart --user emacs'
-
 
 # -------------------
 # Manage Config Files
@@ -134,7 +137,7 @@ function zem()
 # -------------------
 alias pm='aura'
 alias pms='sudo aura'
-alias lsorphans='sudo pacman -Qdt'
+alias lsorphans='pacman -Qdt'
 alias explicit='pacman -Qei | awk '"'"'/^Name/ { name=$3 } /^Groups/ { if ( $3 != "base" && $3 != "base-devel" ) { print name } }'"'"
 alias rh='rehash'
 
@@ -152,7 +155,13 @@ dark
 
 
 # -------------------
-# X Windows stuff
+# Sound
+# -------------------
+alias bt='bluetoothctl'
+
+
+# -------------------
+# Git
 # -------------------
 alias gs='git status'
 alias ga='git add'
@@ -183,6 +192,6 @@ function zle-line-finish {
 zle -N zle-line-finish
 
 PROMPT='%{$fg[green]%}${vim_mode}%{$reset_color%} %* %{$fg[blue]%}%n@%m%{$reset_color%}:%~
--> '
+$ '
 
 

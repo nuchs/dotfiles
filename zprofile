@@ -1,7 +1,9 @@
 export MYETC="$HOME/etc"
 export MYWORK="$HOME/work"
 export MYBIN="$HOME/bin"
-export MYORG="$HOME/org"
+export MYDOCS="$HOME/docs"
+export MYDOWNLOADS="$HOME/downloads"
+export MYORG="$HOME/Dropbox/org"
 
 typeset -U path
 path=( $MYBIN ~/.cargo/bin ~/.local/bin $path)

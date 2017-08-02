@@ -68,6 +68,7 @@
   (linum-relative-mode)
   )
 
+; Make it easy to match up parenthesis
 (use-package rainbow-delimiters
   :ensure t
   :mode (("\\.rs\\'" . rust-mode)
@@ -93,7 +94,5 @@
 
 ; Set font
 (add-to-list 'default-frame-alist '(font . "Inconsolata" ))
-(set-face-attribute 'default nil :font  "Inconsolata-12" )
-
-
+(set-face-attribute 'default nil :font  "Inconsolata-14" )
 

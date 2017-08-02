@@ -1,12 +1,14 @@
+import System.IO
 import XMonad
 import XMonad.Actions.Search
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Prompt
-import XMonad.Util.Run(spawnPipe)
+import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig(additionalKeys)
-import System.IO
- 
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Scratchpad
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ myConfig xmproc
@@ -20,8 +22,10 @@ myConfig xmproc = docks defaultConfig
         , logHook    = myLogHook xmproc
         , workspaces = myWorkspaces
         , modMask    = myModMask
-        , terminal   = "urxvt"
+        , terminal   = myTerminal
         } `additionalKeys` extraKeys
+
+myTerminal = "urxvt"
 
 ----------------------------------------------------------------------
 -- Set keys
@@ -31,6 +35,7 @@ extraKeys = [ ((myModMask, xK_o),  spawn "qutebrowser")
             , ((0,         xK_F5), promptSearchBrowser defaultXPConfig "qutebrowser" google) 
             , ((0,         xK_F6), selectSearchBrowser "qutebrowser" google)
             , ((myModMask.|.shiftMask, xK_l), spawn "slock")
+            , ((myModMask, xK_Escape), scratchpadSpawnActionTerminal myTerminal)
             ]
 
 ----------------------------------------------------------------------
@@ -43,8 +48,16 @@ myWorkspaces = ["One","Two","Three","Four"]
 -- Setup manage hook
 ----------------------------------------------------------------------
 myManageHook = manageDocks <+> 
-               manageHook defaultConfig
+               manageScratchPad <+>
+               manageHook defaultConfig 
 
+manageScratchPad :: ManageHook
+manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
+  where
+    h = 0.9
+    w = 0.9
+    t = 0  
+    l = 0.05
 
 ----------------------------------------------------------------------
 --

@@ -64,6 +64,9 @@
   (setq company-tooltip-align-annotations t)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
+  (use-package company-flx
+    :config
+    (company-flx-mode +1))
   )
 
 ; autocomplete paired brackets

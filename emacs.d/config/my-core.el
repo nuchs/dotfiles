@@ -1,5 +1,10 @@
 (provide 'my-core)
 
+; Package management
+(use-package paradox--backups
+  :config
+  (paradox-enable))
+
 ; Set backup handling
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (setq delete-old-versions 10)
@@ -22,3 +27,13 @@
 (use-package wgrep
   :ensure
   :commands (ivy-wgrep-change-to-wgrep-mode))
+
+; Set qutebrowser as the default browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "qutebrowser")
+
+                                        ; Turn off the mouse
+(use-package disable-mouse
+  :ensure
+  :config
+  (global-disable-mouse-mode))
