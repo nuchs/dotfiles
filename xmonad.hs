@@ -1,9 +1,7 @@
 import System.IO
 import XMonad
-import XMonad.Actions.Search
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Prompt
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Run(spawnPipe)
@@ -31,18 +29,15 @@ myTerminal = "urxvt"
 -- Set keys
 ----------------------------------------------------------------------
 myModMask = mod4Mask
-extraKeys = [ ((myModMask, xK_o),  spawn "qutebrowser")
-            , ((0,         xK_F5), promptSearchBrowser defaultXPConfig "qutebrowser" google) 
-            , ((0,         xK_F6), selectSearchBrowser "qutebrowser" google)
-            , ((myModMask.|.shiftMask, xK_l), spawn "slock")
+extraKeys = [ ((myModMask, xK_l), spawn "slock")
             , ((myModMask, xK_Escape), scratchpadSpawnActionTerminal myTerminal)
+            , ((myModMask, xK_Tab), spawn "toggleTouchPad.sh")
             ]
 
 ----------------------------------------------------------------------
 -- Set workspaces
 ----------------------------------------------------------------------
-myWorkspaces = ["One","Two","Three","Four"]
-
+myWorkspaces = ["One","Two","Three"]
 
 ----------------------------------------------------------------------
 -- Setup manage hook
@@ -60,11 +55,9 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
     l = 0.05
 
 ----------------------------------------------------------------------
---
 -- Setup layout hook
 ----------------------------------------------------------------------
 myLayoutHook = avoidStruts $ layoutHook defaultConfig
-
 
 ----------------------------------------------------------------------
 -- Setup log hook

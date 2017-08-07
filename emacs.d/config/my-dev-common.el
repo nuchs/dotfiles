@@ -31,6 +31,12 @@
     )
   )
 
+(use-package git-gutter-fringe+
+    :ensure t
+    :defer t
+    :config
+    (setq git-gutter-fr+-side 'right-fringe))
+
 (use-package evil-nerd-commenter
   :ensure t
   :commands (evilnc-comment-or-uncomment-lines)

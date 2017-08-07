@@ -35,7 +35,6 @@ alias ex='exit'
 alias rb='reboot'
 alias sd='shutdown now'
 
-alias pad='xinput set-prop 11 "Device Enabled" '
 
 # -------------------
 # Lastpass

@@ -118,6 +118,7 @@
      "x" '(counsel-M-x :which-key "select command to run")
      "v" '(ivy-push-view :which-key "save windows")
      "V" '(ivy-pop-view :which-key "delete saved windows")
+     "y" '(counsel-yank-pop :which-key "search kill ring")
      )
 
     ; Insert mode keybinds
@@ -144,7 +145,6 @@
      "<f2>" '(counsel-describe-variable :which-key "describe lisp variable")
      "<f3>" '(counsel-unicode-char :which-key "search unicode characters")
      "<f4>" '(whitespace-mode :which-key "display whitespace characters")
-     "M-y" '(counsel-yank-pop :which-key "search kill ring")
      )
 
     ; keybinds for ivy windows

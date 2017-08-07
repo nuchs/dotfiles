@@ -72,6 +72,7 @@
                             ("@HASKELL")
                             ("@LISP")
                             ("@CSHARP")
+                            ("@EMACS")
                         (:endgrouptag)
                         (:startgrouptag) ("@COMMS") (:grouptags)
                             ("@PHONE")
