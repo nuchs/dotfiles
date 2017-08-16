@@ -67,6 +67,7 @@
   :init
   (add-hook 'prog-mode-hook 'linum-mode)
   (linum-relative-mode)
+  (setq linum-relative-current-symbol "")
   )
 
 ; Make it easy to match up parenthesis

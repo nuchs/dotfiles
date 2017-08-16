@@ -2,7 +2,6 @@
 
 (use-package magit
   :ensure t
-  :defer t
   :init
   (setq magit-diff-options (quote ("--word-diff")))
   (setq magit-diff-refine-hunk 'all)
@@ -30,12 +29,6 @@
     )
     )
   )
-
-(use-package git-gutter-fringe+
-    :ensure t
-    :defer t
-    :config
-    (setq git-gutter-fr+-side 'right-fringe))
 
 (use-package evil-nerd-commenter
   :ensure t

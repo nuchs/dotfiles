@@ -93,6 +93,7 @@
   (setq org-agenda-files '("~/Dropbox/org/projects.org"
                            "~/Dropbox/org/autoevents.txt"
                            "~/Dropbox/org/finance.org"
+                           "~/Dropbox/org/someday.org"
                            "~/Dropbox/org/todo.org"))
 
   ;----------------------------------------------------------------------
@@ -100,8 +101,7 @@
   ;----------------------------------------------------------------------
   (setq org-refile-targets '((nil :maxlevel . 9)
                              (org-agenda-files :maxlevel . 9)
-                             ("reference.org" :maxlevel . 9)
-                             ("someday.org" :maxlevel . 9)))
+                             ("reference.org" :maxlevel . 9)))
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-use-outline-path t)        
 
