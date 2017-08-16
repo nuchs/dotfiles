@@ -14,7 +14,7 @@ main = do
 ----------------------------------------------------------------------
 -- Create configs
 ----------------------------------------------------------------------
-myConfig xmproc = docks defaultConfig
+myConfig xmproc = docks def
         { manageHook = myManageHook
         , layoutHook = myLayoutHook
         , logHook    = myLogHook xmproc
@@ -44,7 +44,8 @@ myWorkspaces = ["One","Two","Three"]
 ----------------------------------------------------------------------
 myManageHook = manageDocks <+> 
                manageScratchPad <+>
-               manageHook defaultConfig 
+               myTriggers  <+> 
+               manageHook def
 
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
@@ -54,10 +55,14 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
     t = 0  
     l = 0.05
 
+myTriggers = composeAll
+  [ className =? "qutebrowser" --> doShift "One"
+  ]
+
 ----------------------------------------------------------------------
 -- Setup layout hook
 ----------------------------------------------------------------------
-myLayoutHook = avoidStruts $ layoutHook defaultConfig
+myLayoutHook = avoidStruts $ layoutHook def
 
 ----------------------------------------------------------------------
 -- Setup log hook
