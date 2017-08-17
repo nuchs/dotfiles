@@ -94,7 +94,7 @@
                            "~/Dropbox/org/autoevents.txt"
                            "~/Dropbox/org/finance.org"
                            "~/Dropbox/org/someday.org"
-                           "~/Dropbox/org/todo.org"))
+                           "~/Dropbox/org/tasks.org"))
 
   ;----------------------------------------------------------------------
   ; Refile

@@ -12,11 +12,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
-Plug 'SirVer/ultisnips', { 'on': [] }
+Plug 'SirVer/ultisnips',
 Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe', {'on':[], 'do' : './install.py --racer-completer' }
+Plug 'Valloric/YouCompleteMe', {'do' : './install.py' }
 Plug 'vim-scripts/bufkill.vim'
 Plug 'altercation/vim-colors-solarized' 
 

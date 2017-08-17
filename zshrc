@@ -67,6 +67,12 @@ alias work='cd $MYWORK'
 alias bin='cd $MYBIN'
 alias org='cd $MYORG'
 
+function tardis()
+{
+  ssh tardis;
+  dark
+}
+
 
 # -------------------
 # History options
