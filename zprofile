@@ -4,6 +4,8 @@ export MYBIN="$HOME/bin"
 export MYDOCS="$HOME/docs"
 export MYDOWNLOADS="$HOME/downloads"
 export MYORG="$HOME/Dropbox/org"
+export MYMAIL="$HOME/mail"
+export MYMAILACCOUNTS="$HOME/.mailaccounts"
 
 typeset -U path
 path=( $MYBIN ~/.cargo/bin ~/.local/bin $path)

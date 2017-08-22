@@ -1,0 +1,35 @@
+[general]
+accounts = Hotmail, Gmail
+maxsyncaccounts = 2
+pythonfile = ~/etc/offlineimap.py
+
+[Account Gmail]
+localrepository = LocalGmail
+remoterepository = RemoteGmail
+
+[Repository LocalGmail]
+type = Maildir
+localfolders = ~/mail/gmail
+
+[Repository RemoteGmail]
+type = Gmail
+remoteusereval = get_user("gmail")
+remotepasseval = get_pass("gmail")
+folderfilter = lambda folder: folder.startswith('[Gmail]/All Mail')
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account Hotmail]
+localrepository = LocalHotmail
+remoterepository = RemoteHotmail
+
+[Repository LocalHotmail]
+type = Maildir
+localfolders = ~/mail/hotmail
+
+[Repository RemoteHotmail]
+type = IMAP
+remotehost = imap-mail.outlook.com
+remoteusereval = get_user("hotmail")
+remotepasseval = get_pass("hotmail")
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+folderfilter = lambda foldername: foldername in ["Inbox", "Junk Email", "Sent Items"]

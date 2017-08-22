@@ -39,7 +39,7 @@ alias sd='shutdown now'
 # -------------------
 # Lastpass
 # -------------------
-alias lpi='lpass login `cat ~/.myemail`'
+alias lpi='lpass login `cat $MYMAILACCOUNTS/mygmail`'
 alias lpo='lpass logout'
 alias lpz='lpass ls | fzf'
 alias lps='lpass show --password -c'
