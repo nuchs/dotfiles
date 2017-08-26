@@ -1,5 +1,5 @@
 # -------------------
-# FZF config
+# FZF configtes before removing from the heat. Finely grate and stir through most of the Parmesan, th
 # -------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -27,6 +27,7 @@ alias rd='rmdir'
 
 alias rm='rm -i'
 alias rmd='rm -rf'
+
 alias lns='ln -s'
 
 alias pso='ps -eo pid,cmd | fzf'
@@ -35,6 +36,7 @@ alias ex='exit'
 alias rb='reboot'
 alias sd='shutdown now'
 
+alias mm='offlineimap -o'
 
 # -------------------
 # Lastpass

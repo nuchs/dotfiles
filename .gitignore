@@ -1,7 +1,3 @@
 *.swp
 *.swo
 *.pyc
-/emacs.d/*
-!/emacs/init.el
-!/emacs/config
-!/emacs/snippets
