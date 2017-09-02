@@ -40,7 +40,9 @@
   :ensure t
   :config
   (evil-mode 1)
-  
+  (setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
+  (setq evil-emacs-state-modes (list 'org-agenda-mode)) 
+
   (use-package evil-surround
     :ensure t
     :config

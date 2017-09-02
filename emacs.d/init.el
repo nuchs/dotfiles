@@ -79,11 +79,12 @@
  '(org-agenda-files (quote ("~/org/projects.org" "/projects.org" "/todo.org")))
  '(package-selected-packages
    (quote
-    (notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
+    (org-notmuch notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
+ '(send-mail-function (quote smtpmail-send-it))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
