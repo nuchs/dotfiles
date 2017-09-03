@@ -33,6 +33,6 @@
   :ensure
   :commands (ivy-wgrep-change-to-wgrep-mode))
 
-; Set qutebrowser as the default browser
+; Set firefox as the default browser
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "qutebrowser")
+      browse-url-generic-program "firefox")

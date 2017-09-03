@@ -56,7 +56,7 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
     l = 0.05
 
 myTriggers = composeAll
-  [ className =? "qutebrowser" --> doShift "One"
+  [ className =? "firefox" --> doShift "One"
   ]
 
 ----------------------------------------------------------------------

@@ -4,15 +4,14 @@
     :config
 
     (setq mail-user-agent 'message-user-agent)
-    (setq user-mail-address "quadturtle@gmail.com"
-          user-full-name "Simon Brown")
+    (setq user-full-name "Simon Brown")
     (setq smtpmail-stream-type 'ssl
           smtpmail-smtp-server "smtp.gmail.com"
           smtpmail-smtp-service 465)
-    (setq message-auto-save-directory "~/mail/drafts")
+    (setq message-auto-save-directory "~/mail/draft")
     (setq message-kill-buffer-on-exit t)
 
-    (defun my-toggle-show-tag (tag)
+ user-mail-address "quadturtle@gmail.com"   (defun my-toggle-show-tag (tag)
     "Toggle tag for show mode"
     (if (member tag (notmuch-show-get-tags))
 	(notmuch-show-tag (list "+inbox" (concat "-" tag)))
