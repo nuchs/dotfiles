@@ -40,8 +40,11 @@
   :ensure t
   :config
   (evil-mode 1)
-  (setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
-  (setq evil-emacs-state-modes (list 'org-agenda-mode)) 
+
+  (add-to-list 'evil-motion-state-modes 'notmuch-search-mode)
+  (add-to-list 'evil-motion-state-modes 'notmuch-show-mode)
+  (add-to-list 'evil-motion-state-modes 'notmuch-hello-mode)
+  (add-to-list 'evil-motion-state-modes 'notmuch-message-mode)
 
   (use-package evil-surround
     :ensure t

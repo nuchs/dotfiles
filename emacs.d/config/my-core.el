@@ -12,11 +12,6 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
-; Desktop save mode
-(desktop-save-mode 1)
-(setq desktop-auto-save-timeout 300)
-(add-to-list 'desktop-globals-to-save 'ivy-views)
-
 ; Tabs
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
@@ -35,4 +30,4 @@
 
 ; Set firefox as the default browser
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "firefox")
+      browse-url-generic-program "firefox-nightly")

@@ -1,5 +1,8 @@
 (provide 'my-dev-common)
 
+(use-package lorem-ipsom)
+(use-package yaml-mode)
+
 (use-package magit
   :ensure t
   :init

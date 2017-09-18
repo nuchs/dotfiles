@@ -56,17 +56,11 @@
  "C-SPC" '(scheme-complete-or-indent :which-key "invoke autocomplete")
  "K" '(mit-scheme-doc-lookup "Scheme documentation lookup"))
 
-(defun my-scheme-hook ()
-  (require 'flash-paren)
-  (flash-paren-mode 1)
-  (setq flash-paren-delay 0.4))
-
 (setq x-select-enable-clipboard 't)
 (setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
 ;; activate auto-fill-mode for various other modes
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'scheme-mode-hook 'turn-on-auto-fill)
-(add-hook 'scheme-mode-hook 'my-scheme-hook)
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (cl-flet ((process-list ())) ad-do-it))

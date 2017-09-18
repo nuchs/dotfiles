@@ -43,9 +43,18 @@ alias mm='offlineimap -o'
 # -------------------
 alias lpi='lpass login `cat $MYMAILACCOUNTS/mygmail`'
 alias lpo='lpass logout'
-alias lpz='lpass ls | fzf'
-alias lps='lpass show --password -c'
+alias lps='lastPassShow'
+alias lpc='lastPassCopy'
 
+function lastPassShow
+{
+   lpass show --password $(lpass ls  | fzf | awk '{print $(NF)}' | sed 's/\]//g') 
+}
+
+function lastPassCopy
+{
+   lpass show -c --password $(lpass ls  | fzf | awk '{print $(NF)}' | sed 's/\]//g') 
+}
 
 # -------------------
 # Navigation

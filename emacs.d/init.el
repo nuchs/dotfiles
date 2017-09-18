@@ -31,6 +31,7 @@
 (require 'my-doc)
 (require 'my-org)
 (require 'my-mail)
+(require 'my-views)
 
 ;----------------------------------------------------------------------------
 ; Custom variables
@@ -79,7 +80,7 @@
  '(org-agenda-files (quote ("~/org/projects.org" "/projects.org" "/todo.org")))
  '(package-selected-packages
    (quote
-    (org-notmuch notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
+    (yaml-mode lorem-ipsum org-notmuch notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
