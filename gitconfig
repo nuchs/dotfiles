@@ -1,3 +1,5 @@
 [user]
 	email = sjbrown@live.co.uk
 	name = nuchs
+[magit]
+	hideCampaign = true

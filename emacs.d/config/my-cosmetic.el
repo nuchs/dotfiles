@@ -45,7 +45,7 @@
 (use-package material-theme
   :ensure t
   :config
-    (load-theme 'material t)
+    (load-theme 'dracula t)
   )
 
 ; Hid the bits of gui fluff that I'm not interested in

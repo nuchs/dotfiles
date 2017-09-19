@@ -121,8 +121,10 @@
      "t" '(shell-other-window :which-key "open shell in new split")
      "w" 'bury-buffer
      "x" '(counsel-M-x :which-key "select command to run")
-     "v" '(ivy-push-view :which-key "save windows")
-     "V" '(ivy-pop-view :which-key "delete saved windows")
+     "v" '(my-save-ivy-view :which-key "persist window layout")
+     "V" '(my-delete-ivy-view :which-key "delete persistant window layout")
+     "p" '(ivy-push-view :which-key "save current window layout for session")
+     "P" '(ivy-pop-view :which-key "delete saved window layout")
      "y" '(counsel-yank-pop :which-key "search kill ring")
      )
 

@@ -102,8 +102,9 @@ bindkey '^[[B' down-line-or-search
 # Completion
 # -------------------
 fpath+=~/.zfunc
-autoload -U compinit
-compinit
+autoload -U compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+eval "$(stack --bash-completion-script stack)"
 zstyle ':completion:*' menu select
 setopt extended_glob
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
