@@ -32,9 +32,21 @@ alias lns='ln -s'
 
 alias pso='ps -eo pid,cmd | fzf'
 
+function cleanReboot
+{
+    systemctl stop --user emacs
+    reboot
+}
+
+function cleanShutdown
+{
+    systemctl stop --user emacs
+    shutdown now
+}
+
+alias rb='cleanReboot'
+alias sd='cleanShutdown'
 alias ex='exit'
-alias rb='reboot'
-alias sd='shutdown now'
 
 alias mm='offlineimap -o'
 

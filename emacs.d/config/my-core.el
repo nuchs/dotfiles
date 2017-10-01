@@ -1,7 +1,7 @@
 (provide 'my-core)
 
 ; Package management
-(use-package paradox--backups
+(use-package paradox
   :config
   (paradox-enable))
 
@@ -31,3 +31,10 @@
 ; Set firefox as the default browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox-nightly")
+
+(defun my-disconnect-hook ()
+  (interactive)
+  (message "Running disconnect tasks")
+  (recentf-save-list))
+
+(add-hook 'server-done-hook 'my-disconnect-hook)

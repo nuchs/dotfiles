@@ -2,6 +2,7 @@
 
 (use-package org
   :ensure t
+  :demand
   :mode (("\\.\\(org\\|org_archive\\|txt\\)\\'" . org-mode))
   :config
   (setq org-directory "~/Dropbox/org")

@@ -88,6 +88,7 @@
      "-"     '(notmuch-show-remove-tag)
      "'"     '(notmuch-jump-search)
      "e"     '(notmuch-show-resume-message)
+     "a"     '(notmuch-show-save-attachments)
      )
 
     (general-define-key

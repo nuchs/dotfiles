@@ -14,3 +14,5 @@
              :config
              (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
              (setq nov-text-width 80))
+
+(setq doc-view-cache-directory "/home/nuchs/.cache/docview") 
