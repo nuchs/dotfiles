@@ -1,1 +1,1 @@
-((#("{} zsh" 0 1 (idx 1)) (horz (file "/home/nuchs/etc/zshrc" 274) (file "/home/nuchs/etc/zprofile" 1))))
+((#("{} HaskellBook" 0 1 (idx 0)) (horz (vert (file "/home/nuchs/work/blog/_drafts/scratch.md" 361) (file "/home/nuchs/work/HaskellFirstPrinciples/src/Lib.hs" 245)) (file "/home/nuchs/docs/papers/HaskellBook.pdf" 1))) (#("{} zsh" 0 1 (idx 2)) (horz (file "/home/nuchs/etc/zshrc" 274) (file "/home/nuchs/etc/zprofile" 1))))

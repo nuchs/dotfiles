@@ -47,11 +47,11 @@
   :ensure t
   :defer t
   :init
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (yas-global-mode 1)
     (general-define-key
      :prefix my-global-leader
      :states '(normal)
-     "y" 'yas-new-snippet
+     "n" 'yas-new-snippet
      "u" 'yas-describe-tables
     )
     :config

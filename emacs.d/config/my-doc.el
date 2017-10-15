@@ -11,8 +11,11 @@
 (use-package nov
              :ensure t
              :defer t
+             :mode (("\\.epub\\'" . nov-mode))
              :config
-             (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
              (setq nov-text-width 80))
 
-(setq doc-view-cache-directory "/home/nuchs/.cache/docview") 
+(use-package pdf-tools
+             :ensure t
+             :config
+             (pdf-tools-install))
