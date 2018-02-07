@@ -37,4 +37,6 @@
   (message "Running disconnect tasks")
   (recentf-save-list))
 
+(run-at-time (current-time) 300 'recentf-save-list)
+
 (add-hook 'server-done-hook 'my-disconnect-hook)

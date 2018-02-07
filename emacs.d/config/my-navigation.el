@@ -36,6 +36,7 @@
 (setq my-global-leader "SPC")
 (setq my-major-leader "\\")
 
+
 (use-package evil
   :ensure t
   :config
@@ -79,11 +80,6 @@
             which-key-side-window-max-width 0.33
             which-key-idle-delay 0.5))
 
-    (defun switch-to-previous-buffer ()
-      "Switch to previously open buffer."
-      (interactive)
-      (switch-to-buffer (other-buffer (current-buffer) 1)))
-
     (defun shell-other-window ()
       "Open a `shell' in a new window."
       (interactive)
@@ -99,10 +95,10 @@
 
     ; Leader keys
     (general-define-key
-     :prefix my-global-leader
+     :prefix "SPC"
      :states '(normal motion)
      "`" '(counsel-load-theme :which-key "load theme")
-     "SPC" 'switch-to-previous-buffer
+     "SPC" '(mode-line-other-buffer :which-key "Flip to previous buffer")
      "1" '(delete-other-windows :which-key "maximise current window")
      "a" '(align-regexp :which-key "align on regexp")
      "B" '(ivy-switch-buffer-other-window :which-key "open buffer elsewhere")
@@ -117,7 +113,6 @@
      "q" 'evil-quit
      "r" '(counsel-recentf :which-key "find recent file")
      "s" '(evil-window-vsplit :which-key "vertical split")
-     "/" '(swiper :which-key "search current buffer")
      "t" '(shell-other-window :which-key "open shell in new split")
      "w" 'bury-buffer
      "x" '(counsel-M-x :which-key "select command to run")
@@ -138,6 +133,7 @@
     ; Standard keybinds
     (general-define-key
      :states '(normal motion)
+     "/" '(swiper :which-key "search current buffer")
      "C-h" '(evil-window-left  :which-key "Switch focus left")
      "C-j" '(evil-window-down  :which-key "Switch focus down")
      "C-k" '(evil-window-up    :which-key "Switch focus up")

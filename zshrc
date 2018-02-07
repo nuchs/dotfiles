@@ -1,5 +1,5 @@
 # -------------------
-# FZF configtes before removing from the heat. Finely grate and stir through most of the Parmesan, th
+# FZF 
 # -------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -44,6 +44,7 @@ function cleanShutdown
     shutdown now
 }
 
+alias up='ping -c 2 www.google.com'
 alias rb='cleanReboot'
 alias sd='cleanShutdown'
 alias ex='exit'
@@ -179,6 +180,9 @@ alias xx='xmonad --recompile'
 
 alias dark='/home/nuchs/.dynamic-colors/bin/dynamic-colors switch solarized-dark'
 alias light='/home/nuchs/.dynamic-colors/bin/dynamic-colors switch solarized-light'
+
+alias bright='sudo brightness.sh 100'
+alias dull='sudo brightness.sh 20'
 
 dark
 

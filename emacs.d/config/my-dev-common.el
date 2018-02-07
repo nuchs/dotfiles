@@ -60,7 +60,6 @@
 
 (use-package company
   :ensure t
-  :defer t
   :config
   (setq company-tooltip-align-annotations t)
   (setq company-idle-delay 0)
@@ -68,6 +67,9 @@
   (use-package company-flx
     :config
     (company-flx-mode +1))
+ (add-to-list 'company-backends 'company-dabbrev-code)
+  (add-to-list 'company-backends 'company-yasnippet)
+  (add-to-list 'company-backends 'company-files)
   )
 
 ; autocomplete paired brackets

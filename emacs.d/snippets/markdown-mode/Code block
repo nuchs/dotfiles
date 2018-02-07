@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Code block
+# key: cb
+# --
+\`\`\`${1:haskell}
+$0
+\`\`\`

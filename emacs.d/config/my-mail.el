@@ -53,7 +53,7 @@
 
     (general-define-key
      :prefix my-global-leader
-     :states '(normal motion)
+     :states '(normal)
      "m" '(notmuch :which-key "Start mail mode")
      )
 
@@ -63,14 +63,14 @@
      "d"  '(my-toggle-search-deleted :which-key "mark mail as deleted")
      "s"  '(my-toggle-search-spam :which-key "mark mail as spam")
      "a"  '(my-toggle-search-archive :which-key "mark mail as archived")
-     "j"  '(notmuch-search-next-thread)
-     "k"  '(notmuch-search-previous-thread)
-     "q"  '(notmuch-bury-or-kill-this-buffer)
-     "'"  '(notmuch-jump-search)
-     "+"  '(notmuch-search-add-tag)
-     "-"  '(notmuch-search-remove-tag)
-     "="  '(notmuch-refresh-this-buffer)
-     "RET"  '(notmuch-search-show-thread)
+     "j"  'notmuch-search-next-thread
+     "k"  'notmuch-search-previous-thread
+     "q"  'notmuch-bury-or-kill-this-buffer
+     "'"  'notmuch-jump-search
+     "+"  'notmuch-search-add-tag
+     "-"  'notmuch-search-remove-tag
+     "="  'notmuch-refresh-this-buffer
+     "RET"  'notmuch-search-show-thread
      )
     
     (general-define-key
@@ -79,34 +79,34 @@
      "d"     '(my-toggle-show-deleted :which-key "mark mail as deleted")
      "s"     '(my-toggle-show-spam :which-key "mark mail as spam")
      "a"     '(my-toggle-show-archive :which-key "mark mail as archived")
-     "n"     '(notmuch-show-next-thread)
-     "p"     '(notmuch-show-previous-thread)
-     "["     '(notmuch-show-next-open-message)
-     "]"     '(notmuch-show-previous-open-message)
-     "q"     '(notmuch-bury-or-kill-this-buffer)
-     "+"     '(notmuch-show-add-tag)
-     "-"     '(notmuch-show-remove-tag)
-     "'"     '(notmuch-jump-search)
-     "e"     '(notmuch-show-resume-message)
-     "a"     '(notmuch-show-save-attachments)
+     "n"     'notmuch-show-next-thread
+     "p"     'notmuch-show-previous-thread
+     "["     'notmuch-show-next-open-message
+     "]"     'notmuch-show-previous-open-message
+     "q"     'notmuch-bury-or-kill-this-buffer
+     "+"     'notmuch-show-add-tag
+     "-"     'notmuch-show-remove-tag
+     "'"     'notmuch-jump-search
+     "e"     'notmuch-show-resume-message
+     "a"     'notmuch-show-save-attachments
      )
 
     (general-define-key
      :states '(normal motion)
      :keymaps 'notmuch-hello-mode-map
-     "'"     '(notmuch-jump-search)
-     "TAB"   '(widget-forward)
-     "S-TAB" '(widget-backward)
-     "RET"   '(widget-button-press)
+     "'"     'notmuch-jump-search
+     "TAB"   'widget-forward
+     "S-TAB" 'widget-backward
+     "RET"   'widget-button-press
      )
 
     (general-define-key
      :states '(normal motion insert visual)
      :keymaps 'notmuch-message-mode-map
-     "C-c C-c" '(notmuch-mua-send-and-exit)
-     "C-c C-s" '(notmuch-draft-save)
-     "C-c C-a" '(mml-attach-file)
-     "C-c C-k" '(message-kill-buffer)
+     "C-c C-c" 'notmuch-mua-send-and-exit
+     "C-c C-s" 'notmuch-draft-save
+     "C-c C-a" 'mml-attach-file
+     "C-c C-k" 'message-kill-buffer
      )
 
     (setq notmuch-search-oldest-first nil)

@@ -3,3 +3,5 @@
 	name = nuchs
 [magit]
 	hideCampaign = true
+[core]
+	editor = ee

@@ -31,6 +31,16 @@
                       "C-s" 'org-schedule)
 
   ;----------------------------------------------------------------------
+  ; Company completion
+  ;----------------------------------------------------------------------
+  (defun my-org-mode-hook ()
+    "Hook for `emacs-org-mode'"
+    (set (make-local-variable 'company-backends)
+         '((company-capf company-dabbrev company-yasnippet company-files)))
+    (company-mode))
+    (add-hook 'org-mode-hook 'my-org-mode-hook)
+
+  ;----------------------------------------------------------------------
   ; TODO Options
   ;----------------------------------------------------------------------
   (setq org-enforce-todo-dependencies t)

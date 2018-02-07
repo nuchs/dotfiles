@@ -19,3 +19,7 @@
              :ensure t
              :config
              (pdf-tools-install))
+
+(use-package pocket-reader
+             :ensure t)
+
