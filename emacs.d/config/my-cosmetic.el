@@ -6,7 +6,6 @@
 (spaceline-spacemacs-theme)
 (spaceline-toggle-buffer-id-on)
 (spaceline-toggle-buffer-modified-on)
-(spaceline-toggle-buffer-size-on)
 (spaceline-toggle-evil-state-on)
 (spaceline-toggle-flycheck-error-on)
 (spaceline-toggle-flycheck-info-on)
@@ -22,6 +21,7 @@
 (spaceline-toggle-auto-compile-off)
 (spaceline-toggle-battery-off)
 (spaceline-toggle-buffer-encoding-abbrev-off)
+(spaceline-toggle-buffer-size-off)
 (spaceline-toggle-erc-track-off)
 (spaceline-toggle-global-off)
 (spaceline-toggle-hud-off)
@@ -42,11 +42,7 @@
 (spaceline-toggle-window-number-off)
 (spaceline-toggle-workspace-number-off)
 
-(use-package material-theme
-  :ensure t
-  :config
-    (load-theme 'dracula t)
-  )
+(load-theme 'material t)
 
 ; Hid the bits of gui fluff that I'm not interested in
 (tool-bar-mode -1)

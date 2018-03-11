@@ -21,6 +21,7 @@ alias ls='ls  -p --color=always'
 alias ll='ls -lh'
 alias la='ls -la'
 alias lrt='ls -lrt'
+alias tt='tree'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -32,21 +33,7 @@ alias lns='ln -s'
 
 alias pso='ps -eo pid,cmd | fzf'
 
-function cleanReboot
-{
-    systemctl stop --user emacs
-    reboot
-}
-
-function cleanShutdown
-{
-    systemctl stop --user emacs
-    shutdown now
-}
-
 alias up='ping -c 2 www.google.com'
-alias rb='cleanReboot'
-alias sd='cleanShutdown'
 alias ex='exit'
 
 alias mm='offlineimap -o'
@@ -87,9 +74,13 @@ alias d='dirs -v'
 alias dl='cd $MYDOWNLOADS'
 alias docs='cd $MYDOCS'
 alias etc='cd $MYETC'
-alias work='cd $MYWORK'
 alias bin='cd $MYBIN'
 alias org='cd $MYORG'
+
+alias work='cd $MYWORK'
+alias so='cd $MYWORK/so'
+alias toy='cd $MYWORK/toys'
+alias bb='cd $MYWORK/blog'
 
 function tardis()
 {
@@ -117,7 +108,7 @@ bindkey '^[[B' down-line-or-search
 fpath+=~/.zfunc
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
-eval "$(stack --bash-completion-script stack)"
+eval "$(/home/nuchs/.local/bin/stack --bash-completion-script stack)"
 zstyle ':completion:*' menu select
 setopt extended_glob
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
@@ -129,16 +120,35 @@ source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 unsetopt beep nomatch
 
 # -------------------
-# Systemd
+# System controls
 # -------------------
 alias sc='systemctl'
 alias scu='systemctl --user'
+
+alias bt='bluetoothctl'
+alias home='sudo netctl start wlp2s0-PLUSNET-P68MQQ'
+
+function cleanReboot
+{
+    systemctl stop --user emacs
+    reboot
+}
+
+function cleanShutdown
+{
+    systemctl stop --user emacs
+    shutdown now
+}
+
+alias rb='cleanReboot'
+alias sd='cleanShutdown'
 
 # -------------------
 # Editors
 # -------------------
 alias nn='nvim'
 alias bounce='systemctl restart --user emacs'
+
 
 # -------------------
 # Manage Config Files
@@ -185,12 +195,6 @@ alias bright='sudo brightness.sh 100'
 alias dull='sudo brightness.sh 20'
 
 dark
-
-
-# -------------------
-# Sound
-# -------------------
-alias bt='bluetoothctl'
 
 
 # -------------------

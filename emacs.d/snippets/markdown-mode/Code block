@@ -2,6 +2,6 @@
 # name: Code block
 # key: cb
 # --
-\`\`\`${1:haskell}
+\`\`\`${1:rust}
 $0
 \`\`\`

@@ -28,7 +28,7 @@
 (require 'my-dev-common)
 (require 'my-dev-lisp)
 (require 'my-dev-haskell)
-;(require 'my-dev-rust)
+(require 'my-dev-rust)
 (require 'my-doc)
 (require 'my-org)
 (require 'my-mail)
@@ -80,7 +80,7 @@
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (pocket-reader pocket-lib pdf-tools wiki-summary dracula-theme intero nov yaml-mode org-notmuch notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
+    (moe-theme pdf-tools dracula-theme intero nov org-notmuch notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
