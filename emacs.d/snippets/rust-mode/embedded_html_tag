@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: embedded_html_tag
+# key: tt
+# --
+<${1:tag}${2: }>
+    `yas-selected-text`$0
+</$1>

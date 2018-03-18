@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: io::Result
+# key: ior
+# --
+io::Result<`yas-selected-text`>$0

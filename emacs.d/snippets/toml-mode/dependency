@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dependency
+# key: dp
+# --
+${1:crate} = "${2:0}.${3:1}.${4:0}"
+$0

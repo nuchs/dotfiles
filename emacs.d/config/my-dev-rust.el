@@ -64,7 +64,7 @@
   (defun my-rust-mode-hook ()
     "Hook for `emacs-haskell-mode'"
     (set (make-local-variable 'company-backends)
-         '((company-capf company-dabbrev-code)))
+         '((company-yasnippet company-capf company-dabbrev-code)))
     (company-mode))
   
     (add-hook 'rust-mode-hook 'my-rust-mode-hook)
