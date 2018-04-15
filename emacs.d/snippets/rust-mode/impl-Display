@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: impl-Display
+# key: impd
+# --
+impl fmt::Display for ${1:MyType} {
+    fn fmt(&self, f: &mut fmt::Formatter) ->  result::Result<(), fmt::Error> {
+       $0
+    }
+}

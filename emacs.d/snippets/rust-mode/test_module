@@ -1,0 +1,12 @@
+# key: tmod
+# name: test_module
+# --
+#[cfg(test)]
+mod test {
+    use super::*;
+    
+    #[test]
+    fn ${1:my_test} () {
+        $0
+    }
+}
