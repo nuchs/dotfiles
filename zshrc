@@ -111,7 +111,6 @@ autoload -U +X bashcompinit && bashcompinit
 eval "$(/home/nuchs/.local/bin/stack --bash-completion-script stack)"
 zstyle ':completion:*' menu select
 setopt extended_glob
-source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
 
 # -------------------
@@ -154,7 +153,7 @@ alias bounce='systemctl restart --user emacs'
 # Manage Config Files
 # -------------------
 alias nv='nvim $MYETC/neovimrc'
-alias nx='nvim $MYETC/xinitrc $MYETC/Xresources $MYETC/xmonad.hs $MYETC/xmobarrc'
+alias nx='nvim $MYETC/xinitrc $MYETC/Xresources'
 alias nz='nvim $MYETC/zshrc $MYETC/zprofile'
 alias eem='ee $MYETC/emacs.d/init.el'
 
@@ -186,15 +185,9 @@ alias rh='rehash'
 # X Windows stuff
 # -------------------
 alias x='startx'
-alias xx='xmonad --recompile'
-
-alias dark='/home/nuchs/.dynamic-colors/bin/dynamic-colors switch solarized-dark'
-alias light='/home/nuchs/.dynamic-colors/bin/dynamic-colors switch solarized-light'
 
 alias bright='sudo brightness.sh 100'
 alias dull='sudo brightness.sh 20'
-
-dark
 
 
 # -------------------
