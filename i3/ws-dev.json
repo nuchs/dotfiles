@@ -1,22 +1,18 @@
-// vim:ts=4:sw=4:et
 {
     "border": "pixel",
     "current_border_width": 0,
     "floating": "auto_off",
     "geometry": {
-       "height": 988,
-       "width": 1444,
+       "height": 1260,
+       "width": 1312,
        "x": 0,
        "y": 0
     },
-    "name": "urxvt",
-    "percent": 0.5,
+    "name": "emacs@OxBEEFED",
+    "percent": 0.7,
     "swallows": [
        {
-       // "class": "^URxvt$",
-       // "instance": "^urxvt$",
-       // "title": "^urxvt$",
-       // "transient_for": "^$"
+          "class": "^Emacs$"
        }
     ],
     "type": "con"
@@ -33,13 +29,10 @@
        "y": 0
     },
     "name": "urxvt",
-    "percent": 0.5,
+    "percent": 0.3,
     "swallows": [
        {
-       // "class": "^URxvt$",
-       // "instance": "^urxvt$",
-       // "title": "^urxvt$",
-       // "transient_for": "^$"
+          "class": "^URxvt$"
        }
     ],
     "type": "con"
