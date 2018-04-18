@@ -1,9 +1,8 @@
 (provide 'my-dev-common)
 
-(use-package yaml-mode)
-
 (use-package magit
   :ensure t
+  :defer t
   :init
   (setq magit-diff-options (quote ("--word-diff")))
   (setq magit-diff-refine-hunk 'all)
@@ -34,6 +33,7 @@
 
 (use-package evil-nerd-commenter
   :ensure t
+  :defer t
   :commands (evilnc-comment-or-uncomment-lines)
   :init
     (general-define-key
@@ -60,6 +60,7 @@
 
 (use-package company
   :ensure t
+  :defer t
   :config
   (setq company-tooltip-align-annotations t)
   (setq company-idle-delay 0)
@@ -83,6 +84,7 @@
 
 (use-package smex
   :ensure t
+  :defer t
   :init
   (smex-initialize))
 

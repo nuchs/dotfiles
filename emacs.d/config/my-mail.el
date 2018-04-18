@@ -1,6 +1,7 @@
 (provide 'my-mail)
 
 (use-package notmuch
+    :defer t
     :config
 
     (setq mail-user-agent 'message-user-agent)

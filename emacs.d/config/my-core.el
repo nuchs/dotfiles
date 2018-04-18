@@ -2,6 +2,7 @@
 
 ; Package management
 (use-package paradox
+  :defer t
   :config
   (paradox-enable))
 
@@ -26,6 +27,7 @@
 
 (use-package wgrep
   :ensure
+  :defer t
   :commands (ivy-wgrep-change-to-wgrep-mode))
 
 ; Set firefox as the default browser

@@ -36,7 +36,6 @@
 (setq my-global-leader "SPC")
 (setq my-major-leader "\\")
 
-
 (use-package evil
   :ensure t
   :config
@@ -157,80 +156,4 @@
      "M-y" '(ivy-next-line :which-key "next line"))
     )
   )
-
-;----------------------------------------------------------------------------
-; Dired
-;----------------------------------------------------------------------------
-(use-package dired
-  :defer t
-  :init
-  (evil-set-initial-state 'dired-mode 'normal)
-  (global-set-key (kbd "C-x C-d") 'dired)
-  
-  (use-package dired-x
-    :init
-    (put 'dired-find-alternate-file 'disabled nil))
-  
-  (defun my-dired-up-directory ()
-    "Take dired up one directory, but behave like dired-find-alternate-file"
-    (interactive)
-    (let ((old (current-buffer)))
-      (dired-up-directory)
-      (kill-buffer old)
-      ))
-
-  (defun my-dired-next-line (count)
-    "Move to next line, always staying on the dired filename."
-    (interactive "p")
-    (dired-next-line count)
-    (dired-move-to-filename))
-
-  (defun my-dired-previous-line (count)
-    "Move to previous line, always staying on the dired filename."
-    (interactive "p")
-    (dired-previous-line count)
-    (dired-move-to-filename))
-
-  (defun my-dired-hook ()
-    "Set up evil mode keybinds for dired mode"
-    (general-define-key
-     :states '(normal)
-     :keymaps 'dired-mode-map
-     "f" 'dired-do-find-marked-files
-     "h" 'my-dired-up-directory
-     "l" 'dired-find-alternate-file
-     "j" 'my-dired-next-line
-     "k" 'my-dired-previous-line
-     "K" 'dired-prev-marked-file
-     "J" 'dired-next-marked-file
-     "n" 'evil-search-next
-     "N" 'evil-search-previous
-     "q" 'kill-this-buffer
-     "/" 'evil-search-forward
-     "H" 'evil-window-top
-     "M" 'evil-window-middle
-     "L" 'evil-window-bottom
-
-     "c" 'dired-create-directory
-     "C" 'dired-do-copy
-     "D" 'dired-do-delete
-     "R" 'dired-do-rename
-     "%u" 'dired-upcase
-     "%l" 'dired-downcase
-
-     "=" 'dired-diff
-     "r" 'dired-do-find-regexp
-     "Q" 'dired-do-find-regexp-and-replace
-
-     "*/" 'dired-mark-directories
-     "*%" 'dired-mark-files-regexp
-     "m" 'dired-mark
-     "u" 'dired-unmark
-     "U" 'dired-unmark-backward
-     "**" 'dired-unmark-all-marks
-     "t" 'dired-toggle-marks
-     ))
-
-  (add-hook 'dired-mode-hook 'my-dired-hook))
-
 
