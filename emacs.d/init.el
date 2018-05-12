@@ -85,7 +85,7 @@
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (ranger flycheck-status-emoji moe-theme pdf-tools dracula-theme org-notmuch notmuch evil-goggles org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
+    (ranger flycheck-status-emoji moe-theme pdf-tools dracula-theme org-notmuch notmuch evil-goggles org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")

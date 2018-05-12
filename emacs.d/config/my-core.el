@@ -34,7 +34,10 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox-nightly")
 
+(recentf-mode 1)
+
 (defun my-disconnect-hook ()
+  "Save the recentf list when a client disconnects."
   (interactive)
   (message "Running disconnect tasks")
   (recentf-save-list))
