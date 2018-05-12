@@ -7,6 +7,7 @@
 (use-package elisp-slime-nav
   :ensure t
   :mode (("\\.el\\'" . emacs-lisp-mode))
+  :diminish elisp-slime-nav-mode
   :init
   
   (defun my-lisp-hook ()
@@ -17,6 +18,7 @@
       (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point))
 
   (add-hook 'emacs-lisp-mode-hook 'my-lisp-hook))
+
 
 (use-package slime
   :ensure t

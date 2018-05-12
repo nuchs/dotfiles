@@ -13,20 +13,11 @@
   :config
   (setq path-to-rusty-tags "/usr/bin/rusty-tags")
 
-  (defun create-rtags (dir-name)
-    "Create tags file."
-    (interactive "DDirectory: ")
-    (save-buffer)
-    (shell-command
-     (format "%s -s %s emacs" path-to-rusty-tags (directory-file-name dir-name)))
-  )
-
   (general-define-key
    :prefix my-major-leader
    :states '(normal)
    "f" '(rust-format-buffer :which-key "rust format buffer")
    "m" '(rust-promote-module-into-dir :which-key "make module into dir")
-   "t" '(create-rtags :which-key "create ctags for project")
    "d" '(racer-find-definition :which-key "find definition of symbol")
    "h" '(racer-describe :which-key "open help for symbol")
    )
@@ -39,6 +30,8 @@
 
   (use-package cargo
     :ensure t
+    :defer t
+    :diminish cargo-mode
     :commands (cargo-process-build
                cargo-process-clean
                cargo-process-test
@@ -53,6 +46,8 @@
 
   (use-package racer
     :ensure t
+    :defer t
+    :diminish racer-mode
     :init
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'racer-mode-hook #'eldoc-mode)

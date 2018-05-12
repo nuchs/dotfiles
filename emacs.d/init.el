@@ -42,6 +42,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -50,6 +54,7 @@
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(fci-rule-color "#ECEFF1")
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
@@ -73,13 +78,14 @@
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(hl-sexp-background-color "#efebe9")
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (moe-theme pdf-tools dracula-theme intero org-notmuch notmuch evil-goggles org-journal org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
+    (ranger flycheck-status-emoji moe-theme pdf-tools dracula-theme org-notmuch notmuch evil-goggles org paradox company-flx spaceline-config golden-ratio toml-mode flycheck-rust flycheck racer company cargo rust-mode spaceline material-theme evil-search-highlight-persist highlight evil-org auto-org-md swiper-helm counsel ivy evil-nerd-commenter rainbow-delimiters evil-matchit evil-surround General linum-relative evil-magit magit use-package general slime evil elisp-slime-nav)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
@@ -88,7 +94,29 @@
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
+ '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#B71C1C")
+     (40 . "#FF5722")
+     (60 . "#FFA000")
+     (80 . "#558b2f")
+     (100 . "#00796b")
+     (120 . "#2196f3")
+     (140 . "#4527A0")
+     (160 . "#B71C1C")
+     (180 . "#FF5722")
+     (200 . "#FFA000")
+     (220 . "#558b2f")
+     (240 . "#00796b")
+     (260 . "#2196f3")
+     (280 . "#4527A0")
+     (300 . "#B71C1C")
+     (320 . "#FF5722")
+     (340 . "#FFA000")
+     (360 . "#558b2f"))))
+ '(vc-annotate-very-old-color nil)
  '(weechat-color-list
    (quote
     (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))

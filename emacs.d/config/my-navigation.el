@@ -1,13 +1,13 @@
-(provide 'my-navigation)
+-(provide 'my-navigation)
 
+;------------------------------------------------
+; Ranger
 ;----------------------------------------------------------------------------
-; General setting
-;----------------------------------------------------------------------------
-
-; Turn on tracking mru files
-(require 'recentf)
-(recentf-mode t)
-(setq recentf-max-saved-items 50)
+(use-package ranger
+  :ensure t
+  :defer t
+  :init
+  (ranger-override-dired-mode t))
 
 ;----------------------------------------------------------------------------
 ; Ivy
@@ -18,13 +18,14 @@
 (use-package ivy
   :ensure t
   :init (ivy-mode 1)        ; enable ivy globally at startup
+  :diminish ivy-mode
   :config
   (setq ivy-use-virtual-buffers t)   ; extend searching to bookmarks and …
   (setq ivy-height 20)               ; set height of the ivy window
   (setq ivy-count-format "(%d/%d) ") ; count format, from the ivy help page
   (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
-  )
+        '((swiper . ivy--regex-plus)
+          (t      . ivy--regex-fuzzy))))
 
 (use-package counsel
   :ensure t
@@ -71,6 +72,8 @@
     :config
 
     (use-package which-key :ensure t
+      :defer t
+      :diminish which-key-mode
       :init
       (which-key-mode)
       :config
@@ -86,11 +89,12 @@
         (switch-to-buffer (other-buffer buf))
         (switch-to-buffer-other-window buf)))
 
-    (defun my-replace ()
-      "Open writable grep buffer from ivy rg search"
+    (defun kill-buffer-and-leave-window ()
+      "Kills the current buffer but leaves the window open"
       (interactive)
-      (ivy-occur)
-      (ivy-wgrep-change-to-wgrep-mode))
+      (let (buffer (current-buffer))
+        (bury-buffer buffer)
+        (kill-buffer buffer)))
 
     ; Leader keys
     (general-define-key
@@ -103,17 +107,18 @@
      "B" '(ivy-switch-buffer-other-window :which-key "open buffer elsewhere")
      "b" '(ivy-switch-buffer :which-key "open buffer")
      "d" '(evil-window-split :which-key "horizontal split")
-     "F" '(counsel-find-file :which-key "find file")
+     "F" '(ranger :which-key "ranger mode")
      "f" '(counsel-git :which-key "find file in project")
      "g" '(counsel-rg :which-key "search across files")
      "h" '(help :which-key "emacs help")
      "k" 'general-describe-keybindings
      "l" '(counsel-locate :which-key "locate file")
-     "q" 'evil-quit
+     "q" '(evil-quit :which-key "close window")
+     "Q" '(evil-delete-buffer :which-key "delete buffer")
      "r" '(counsel-recentf :which-key "find recent file")
      "s" '(evil-window-vsplit :which-key "vertical split")
      "t" '(shell-other-window :which-key "open shell in new split")
-     "w" 'bury-buffer
+     "w" '(kill-buffer-and-leave-window :which-key "Delete current buffer but leave window open")
      "x" '(counsel-M-x :which-key "select command to run")
      "v" '(my-save-ivy-view :which-key "persist window layout")
      "V" '(my-delete-ivy-view :which-key "delete persistant window layout")
@@ -152,7 +157,6 @@
     ; keybinds for ivy windows
     (general-define-key
      :map ivy-minibuffer-map
-     "C-#" '(my-replace)
      "M-y" '(ivy-next-line :which-key "next line"))
     )
   )
