@@ -1,0 +1,6 @@
+# key: fny
+# name: function-yank
+# --
+fn $1($2) ${3:-> $4 }{
+    `(current-kill 1)`$0
+}

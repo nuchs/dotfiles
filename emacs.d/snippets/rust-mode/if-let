@@ -3,5 +3,5 @@
 # key: ifl
 # --
 if let $1 = $2 {
-    $0
+    `yas-selected-text`$0
 }

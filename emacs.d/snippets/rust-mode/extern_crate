@@ -2,5 +2,5 @@
 # name: extern_crate
 # key: ec
 # --
-${1:macro_use }extern crate ${2:crate_name};
+${1:#[macro_use] }extern crate ${2:crate_name};
 $0
