@@ -2,5 +2,5 @@
 # name: function-yank
 # --
 fn $1($2) ${3:-> $4 }{
-    `(current-kill 1)`$0
+    `(evil-paste-after 0)`$0
 }

@@ -54,7 +54,7 @@
   (defun my-extract-method ()
     "Extract selection into new method"
     (interactive)
-    (kill-region (region-beginning) (region-end))
+    (evil-delete (region-beginning) (region-end))
     (evil-exit-visual-state)
     (evil-forward-section-end)
     (yas-expand-snippet (yas-lookup-snippet "function-yank"))

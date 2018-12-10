@@ -77,7 +77,7 @@ alias etc='cd $MYETC'
 alias bin='cd $MYBIN'
 alias org='cd $MYORG'
 
-alias work='cd $MYWORK'
+alias ww='cd $MYWORK'
 alias so='cd $MYWORK/so'
 alias toy='cd $MYWORK/toys'
 alias bb='cd $MYWORK/blog'
