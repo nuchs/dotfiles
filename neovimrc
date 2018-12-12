@@ -12,13 +12,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
-Plug 'SirVer/ultisnips',
-Plug 'tpope/vim-fugitive' 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe', {'do' : './install.py' }
 Plug 'vim-scripts/bufkill.vim'
-Plug 'altercation/vim-colors-solarized' 
 
 augroup load_us_ycm
   autocmd!
@@ -58,7 +54,6 @@ set textwidth=79
 set vb
 hi Search cterm=NONE ctermfg=grey ctermbg=Black
 syntax enable
-colorscheme solarized
 set background=dark
 
 " ---------------------------------------------------
@@ -159,17 +154,6 @@ nnoremap <Leader>pu  :PlugUpdate<CR>
 nnoremap <Leader>pc  :PlugClean<CR>
 nnoremap <Leader>puu :PlugUpgrade<CR>
 nnoremap <Leader>ps  :PlugStatus<CR>
-
-" YouCompleteMe
-nnoremap <Leader>] :YcmCompleter GoTo<CR>
-
-" Ultisnips
-nnoremap <Leader>u :UltiSnipsEdit<CR>
-let g:UltiSnipsExpandTrigger ="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " Tabularize
 vnoremap a= :Tabularize /=/l1<CR>

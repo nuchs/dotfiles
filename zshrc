@@ -75,19 +75,11 @@ alias dl='cd $MYDOWNLOADS'
 alias docs='cd $MYDOCS'
 alias etc='cd $MYETC'
 alias bin='cd $MYBIN'
-alias org='cd $MYORG'
 
 alias ww='cd $MYWORK'
 alias so='cd $MYWORK/so'
 alias toy='cd $MYWORK/toys'
 alias bb='cd $MYWORK/blog'
-
-function tardis()
-{
-  ssh tardis;
-  dark
-}
-
 
 # -------------------
 # History options
@@ -124,30 +116,15 @@ unsetopt beep nomatch
 alias sc='systemctl'
 alias scu='systemctl --user'
 
-alias bt='bluetoothctl'
 alias home='sudo netctl start wlp2s0-PLUSNET-P68MQQ'
 
-function cleanReboot
-{
-    systemctl stop --user emacs
-    reboot
-}
-
-function cleanShutdown
-{
-    systemctl stop --user emacs
-    shutdown now
-}
-
-alias rb='cleanReboot'
-alias sd='cleanShutdown'
+alias rb='reboot'
+alias sd='shutdown'
 
 # -------------------
 # Editors
 # -------------------
 alias nn='nvim'
-alias bounce='systemctl restart --user emacs'
-
 
 # -------------------
 # Manage Config Files
@@ -155,7 +132,6 @@ alias bounce='systemctl restart --user emacs'
 alias nv='nvim $MYETC/neovimrc'
 alias nx='nvim $MYETC/xinitrc $MYETC/Xresources'
 alias nz='nvim $MYETC/zshrc $MYETC/zprofile'
-alias eem='ee $MYETC/emacs.d/init.el'
 
 alias sz='source $MYETC/zshrc'
 alias sp='source $MYETC/zprofile'

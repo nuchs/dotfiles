@@ -3,9 +3,6 @@ export MYWORK="$HOME/work"
 export MYBIN="$HOME/bin"
 export MYDOCS="$HOME/docs"
 export MYDOWNLOADS="$HOME/downloads"
-export MYORG="$HOME/Dropbox/org"
-export MYMAIL="$HOME/mail"
-export MYMAILACCOUNTS="$HOME/.mailaccounts"
 
 typeset -U path
 path=( $MYBIN ~/.local/bin ~/.gem/ruby/2.4.0/bin ~/.cargo/bin ~/.local/bin $path)
