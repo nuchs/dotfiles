@@ -57,15 +57,6 @@ syntax enable
 set background=dark
 
 " ---------------------------------------------------
-" Terminal bindings
-" ---------------------------------------------------
-tnoremap jk <C-\><C-n>
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
-
-" ---------------------------------------------------
 " Key bindings
 " ---------------------------------------------------
 
@@ -74,9 +65,6 @@ noremap <F6> :e  $MYVIMRC<CR>
 noremap <F7> :so $MYVIMRC<CR>
 
 " Window management
-nnoremap <Leader>t  :terminal<CR>
-nnoremap <Leader>ts :belowright vsplit<CR>:terminal<CR>
-nnoremap <Leader>td :belowright split<CR>:terminal<CR>
 nnoremap <Leader>s :vsplit<CR>
 nnoremap <Leader>d :split<CR>
 nnoremap <C-h>     <C-w><Left>

@@ -1,7 +1,12 @@
 [user]
 	email = sjbrown@live.co.uk
 	name = nuchs
+	signingkey = C4BD552FFB43C9AE9E1B4D85B956BAEE057B2090
 [magit]
 	hideCampaign = true
 [core]
-	editor = ee
+	editor = vim
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
