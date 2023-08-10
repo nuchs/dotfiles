@@ -6,7 +6,10 @@
 	hideCampaign = true
 [core]
 	editor = vim
+	autocrlf = false
 [commit]
 	gpgsign = true
 [gpg]
 	program = gpg
+[init]
+	defaultBranch = main

@@ -5,7 +5,7 @@
 bindkey -v
 bindkey '^w' backward-kill-word
 bindkey -M vicmd '/' fzf-history-widget
-bindkey -M viins 'jk' vi-cmd-mode  
+bindkey -M viins 'jk' vi-cmd-mode
 
 eval `dircolors ~/.dircolors`
 
@@ -20,6 +20,7 @@ autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*' menu select
 setopt extended_glob
+source ~/.kube/zsh_completion
 
 # History options
 HISTFILE=~/.histfile
@@ -65,8 +66,8 @@ alias dl='cd $MYDOWNLOADS'
 alias docs='cd $MYDOCS'
 alias etc='cd $MYETC'
 alias bin='cd $MYBIN'
-
-alias ww='cd $MYWORK'
+alias ww='cd $MYWINWORK'
+alias wl='cd $MYWORK'
 alias rr='cd "$(git rev-parse --show-toplevel)"'
 
 # -------------------
@@ -74,41 +75,44 @@ alias rr='cd "$(git rev-parse --show-toplevel)"'
 # -------------------
 
 alias ex='explorer.exe .'
-alias pc=powercall
-alias wp=winpath
 alias vv='vim'
 alias mit='rlwrap -r -c -f /mnt/d/Work/SICP/scheme.txt scheme'
 alias dn='dotnet.exe'
+alias tx='tmux'
+alias vsc='code -r'
 
 # GPG
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
-# FZF 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 # Kubernetes
-alias kb='kubectl.exe'
+alias kc='kubectl'
 
 # Docker
-alias dk='docker.exe'
-alias dki='docker.exe image'
-alias dkc='docker.exe container'
-alias dkv='docker.exe volume'
-alias dkn='docker.exe network'
+alias dk='docker'
+alias dki='docker image'
+alias dkc='docker container'
+alias dkcls='docker container ls --format  "table {{.ID}}\t{{.Names}}\t{{.Status}}"'
+alias dkv='docker volume'
+alias dkn='docker network'
+alias dkp='docker compose'
+alias dkm="sudo mount -t drvfs '\\\\wsl$\\docker-desktop-data\\version-pack-data\\community\\docker' /mnt/wsl/docker-desktop-data/data/docker -o ro,umask=022"
 
 # Git
 alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
 alias gc='git commit'
+alias gpl='git pull'
 alias gp='git push'
 alias gup='git push --set-upstream origin HEAD'
-alias gl='git log '
-alias glg='git log --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n          %s%n          %C(dim white)- %an <%ae> %C(auto)%G?"'
+alias gl='git log --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n          %s%n          %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gb='git branch'
-alias go='git checkout'
+alias got='git checkout'
 alias gom='git checkout master'
 alias gob='git checkout -b'
 alias glo="find .git/objects -not -name 'pack*' -type f | awk 'BEGIN { FS=\"/\" } ; {print $3$4}'"
@@ -117,7 +121,8 @@ alias glo="find .git/objects -not -name 'pack*' -type f | awk 'BEGIN { FS=\"/\" 
 # Manage Config Files
 # -------------------
 alias vr='vim $HOME/.vimrc'
-alias vz='vim $MYETC/zshrc $MYETC/zprofile'
+alias vb='vim $MYETC/zshrc $MYETC/zprofile'
+alias vt='vim $HOME/.tmux.conf'
 
 alias sz='source $MYETC/zshrc'
 alias sp='source $MYETC/zprofile'

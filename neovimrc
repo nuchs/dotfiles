@@ -5,8 +5,6 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-rooter'
-Plug 'godlygeek/tabular'
-Plug 'jszakmeister/vim-togglecursor'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
 Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim'
@@ -14,13 +12,12 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/bufkill.vim'
-
-augroup load_us_ycm
-  autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
-                     \| autocmd! load_us_ycm
-augroup END
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'robbles/logstash.vim'
 
 call plug#end()
 
@@ -40,8 +37,8 @@ set history=150
 set hlsearch
 set incsearch
 set nobackup
+set nowritebackup
 set noruler
-set number
 set relativenumber
 set scrolloff=3
 set shiftwidth=2
@@ -52,9 +49,15 @@ set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set tabstop=2
 set textwidth=79
 set vb
+set background=dark
+set encoding=utf-8
+set hidden
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+colorscheme gruvbox
 hi Search cterm=NONE ctermfg=grey ctermbg=Black
 syntax enable
-set background=dark
 
 " ---------------------------------------------------
 " Key bindings
@@ -100,7 +103,7 @@ vnoremap / /\v
 " Buffers
 nnoremap <Tab>     :bn<CR>
 nnoremap <S-Tab>   :bp<CR>
-nnoremap <Leader>Q :bd<CR>
+nnoremap <Leader>Q :q<CR>
 nnoremap <Leader>q :BD<CR>
 nnoremap <Leader><Space> :b#<CR>
 
@@ -143,13 +146,6 @@ nnoremap <Leader>pc  :PlugClean<CR>
 nnoremap <Leader>puu :PlugUpgrade<CR>
 nnoremap <Leader>ps  :PlugStatus<CR>
 
-" Tabularize
-vnoremap a= :Tabularize /=/l1<CR>
-vnoremap am :Tabularize /=>/l1<CR>
-vnoremap ab :Tabularize /\|/l1<CR>
-vnoremap aa :Tabularize /->/l1<CR>
-vnoremap at :Tabularize /::/l1<CR>
-
 " FZF
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
@@ -173,4 +169,3 @@ nnoremap <Leader>/  :Find<CR>
 nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>gb :BCommits<CR>
 nnoremap <Leader>m  :Commands<CR>
-
