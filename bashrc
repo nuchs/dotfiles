@@ -21,9 +21,11 @@ function rem() {
 # Basic Commands
 # ----------------------------------------------------------------------
 
-alias l='ls --color=auto'
-alias ll='ls --color=auto -la'
-alias lrt='ls --color=auto -lart'
+alias l='exa'
+alias ll='exa -l'
+alias lla='exa -la'
+alias la='exa -lad .?*'
+alias lrt='exa -lus accessed'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -37,6 +39,13 @@ alias lns='ln -s'
 
 alias up="ping -c 2 www.google.com"
 alias x='exit'
+
+alias tt='tmux'
+alias ps='procs'
+alias ddg='ddgr -n 6'
+alias df='duf -only local'
+alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
+alias n='nnn'
 
 # ----------------------------------------------------------------------
 # History
@@ -87,11 +96,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
 # ----------------------------------------------------------------------
 # Dev
 # ----------------------------------------------------------------------
 
-alias vv='vim'
+alias v='vim'
 
 # git
 alias ga='git add'
@@ -136,6 +146,11 @@ YELLOW="\e[33m"
 RED="\e[91m"
 
 function print_battery {
+  if [ ! -f /sys/class/power_supply/BAT1/capacity ]
+  then
+    return 0
+  fi
+
   LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
   CHARGING=$(cat /sys/class/power_supply/BAT1/status)
   BCOL=""
@@ -145,7 +160,7 @@ function print_battery {
   elif [[ $LEVEL -lt 30 ]];           then BCOL="$BOLD${YELLOW}"
   fi
 
-  printf "$BCOL$LEVEL%%${RESET}"
+  printf "$BCOL$LEVEL%%${RESET} "
 }
 
 function git_prompt_read {
@@ -221,13 +236,17 @@ function print_git_status {
   if [[ ! -z $CHANGES ]]; then printf "$RESET$PURPLE [$CHANGES$PURPLE]"; fi
 }
 
-PS_INFO="$DIM\t $(print_battery) ${BOLD}|${RESET} $TURQ\w"
+PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
 PS_USERLINE="$RESET\n↳ "
 export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
 
 # ----------------------------------------------------------------------
-# FZF
+# Load 3rd Party configs
 # ----------------------------------------------------------------------
 
+# FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 
-export FZF_DEFAULT_COMMAND='rg --files --noignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+# Zoxide
+eval "$(zoxide init bash)"
