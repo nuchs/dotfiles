@@ -18,10 +18,11 @@ function rem() {
 }
 
 # ----------------------------------------------------------------------
-# Basic Commands
+# Commands
 # ----------------------------------------------------------------------
 
 alias l='exa'
+alias ls='exa'
 alias ll='exa -l'
 alias lla='exa -la'
 alias la='exa -lad .?*'
@@ -33,7 +34,7 @@ alias rm='rm -i'
 alias rmd='rm -rf'
 
 alias h='history'
-alias hg='history | rg'
+alias hg='history | fzf'
 
 alias lns='ln -s'
 
@@ -41,11 +42,11 @@ alias up="ping -c 2 www.google.com"
 alias x='exit'
 
 alias tt='tmux'
+alias j='joplin'
 alias ps='procs'
 alias ddg='ddgr -n 6'
 alias df='duf -only local'
 alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
-alias n='nnn'
 
 # ----------------------------------------------------------------------
 # History
@@ -96,6 +97,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# FZF options for Zoxide
+export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
+
+# nnn
+alias n='nnn'
+export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_PLUG='z:autojump;p:preview-tui;r:renamer;d:diffs;i:imgview'
 
 # ----------------------------------------------------------------------
 # Dev
@@ -250,3 +258,6 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 # Zoxide
 eval "$(zoxide init bash)"
+
+# Cargo
+. "$HOME/.cargo/env"

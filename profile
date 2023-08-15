@@ -7,7 +7,7 @@ export MYWORK="$HOME/work"
 export MYBIN="$HOME/bin"
 export NPM_PACKAGES="${HOME}/.npm-packages"
 
-export PATH="$NPM_PACKAGES/bin:$HOME/bin:$PATH"
+export PATH="$NPM_PACKAGES/bin:$HOME/bin:$PATH:$PATH"
 export MANPATH="$NPM_PACKAGES/shareman:$MANPATH"
 
 . "$HOME/.bashrc"
