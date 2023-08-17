@@ -1,87 +1,12 @@
-# If not running interactively, don't do anything
+# === Terminal Config {{{1
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# ----------------------------------------------------------------------
-# Configuration
-# ----------------------------------------------------------------------
-alias viv='vim ~/.vimrc'
-alias vb='vim ~/.bashrc'
-alias vp='vim ~/.profile'
-alias sb='source ~/.bashrc'
-alias sp='source ~/.profile'
-
-function rem() {
-  grep $@ ~/.bashrc ~/.profile
-}
-
-# ----------------------------------------------------------------------
-# Commands
-# ----------------------------------------------------------------------
-
-alias l='exa'
-alias ls='exa'
-alias ll='exa -l'
-alias lla='exa -la'
-alias la='exa -lad .?*'
-alias lrt='exa -lus accessed'
-
-alias md='mkdir -p'
-alias rd='rmdir'
-alias rm='rm -i'
-alias rmd='rm -rf'
-
-alias h='history'
-alias hg='history | fzf'
-
-alias lns='ln -s'
-
-alias up="ping -c 2 www.google.com"
-alias x='exit'
-
-alias tt='tmux'
-alias j='joplin'
-alias ps='procs'
-alias ddg='ddgr -n 6'
-alias df='duf -only local'
-alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
-
-# ----------------------------------------------------------------------
-# History
-# ----------------------------------------------------------------------
-
-# don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
-HISTSIZE=3000
-HISTFILESIZE=3000
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# ----------------------------------------------------------------------
-# Display
-# ----------------------------------------------------------------------
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# ----------------------------------------------------------------------
-# Navigation
-# ----------------------------------------------------------------------
-
-alias ww='cd $MYWORK'
-alias ee='cd $MYETC'
-alias bun='cd $MYBIN'
-alias rr='cd "$(git rev-parse --show-toplevel)"'
-
-alias p='pushd .'
-alias pp='popd'
-alias d='dirs -v'
-
-alias ex='explorer.exe .'
 
 # ** matches all directories
 shopt -s globstar
@@ -97,6 +22,65 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# === Configuration {{{1
+alias viv='vim ~/.vimrc'
+alias vb='vim ~/.bashrc'
+alias vp='vim ~/.profile'
+alias sb='source ~/.bashrc'
+alias sp='source ~/.profile'
+
+function rem() {
+  grep $@ ~/.bashrc ~/.profile
+}
+
+# === Commands {{{1
+
+alias l='exa'
+alias ls='exa'
+alias ll='exa -l'
+alias lla='exa -la'
+alias la='exa -lad .?*'
+alias lrt='exa -lus accessed'
+
+alias md='mkdir -p'
+alias rd='rmdir'
+alias rm='rm -i'
+alias rmd='rm -rf'
+
+alias lns='ln -s'
+
+alias up="ping -c 2 www.google.com"
+alias x='exit'
+
+alias tt='tmux'
+alias j='joplin'
+alias ps='procs'
+alias ddg='ddgr -n 6'
+alias df='duf -only local'
+alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
+alias mm='most'
+
+# === History {{{1
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+HISTSIZE=3000
+HISTFILESIZE=3000
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+alias h='history'
+alias hg='history | fzf'
+
+# === Navigation {{{1
+
+alias rr='cd "$(git rev-parse --show-toplevel)"'
+alias p='pushd .'
+alias pp='popd'
+alias d='dirs -v'
+alias ex='explorer.exe .'
+
 # FZF options for Zoxide
 export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
 
@@ -105,13 +89,11 @@ alias n='nnn'
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_PLUG='z:autojump;p:preview-tui;r:renamer;d:diffs;i:imgview'
 
-# ----------------------------------------------------------------------
-# Dev
-# ----------------------------------------------------------------------
+# === Dev {{{1
 
 alias v='vim'
 
-# git
+# --- git {{{2
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
@@ -128,7 +110,7 @@ alias gff='git merge --ff-only origin/master'
 alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 
-# docker
+# --- docker {{{2
 alias dk='docker'
 alias dkc='docker container'
 alias dki='docker image'
@@ -136,12 +118,10 @@ alias dkn='docker network'
 alias dkv='docker volume'
 alias dkp='docker-compose'
 
-# k8s
+# --- k8s {{{2
 alias kc='kubectl'
 
-# ----------------------------------------------------------------------
-# Prompt
-# ----------------------------------------------------------------------
+# === Prompt {{{1
 
 RESET="\e[0m"
 BOLD="\e[1m"
@@ -248,9 +228,7 @@ PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
 PS_USERLINE="$RESET\n↳ "
 export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
 
-# ----------------------------------------------------------------------
-# Load 3rd Party configs
-# ----------------------------------------------------------------------
+# === Load  {{{1
 
 # FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 

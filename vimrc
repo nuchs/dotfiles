@@ -1,6 +1,4 @@
-" ----------------------------------------------------------------------
-" Settings
-" ----------------------------------------------------------------------
+" === Settings === {{{1
 set nocompatible
 
 set autoindent
@@ -10,6 +8,7 @@ set diffopt+=iwhite
 set diffopt=vertical
 set encoding=utf-8
 set expandtab
+set foldmethod=marker
 set hidden
 set history=3000
 set hlsearch
@@ -29,24 +28,26 @@ set smartcase
 set smartindent
 set smarttab
 set tabstop=2
-set textwidth=80
 set termwinsize=15x0
+set textwidth=80
 set vb
 
 filetype plugin indent on
 syntax on
 colorscheme onedark
    
+" Change cursor shape based on mode
 let &t_SI .= "\<Esc>[6 q"
 let &t_EI .= "\<Esc>[0 q"
 
+" === Commands & Functions === {{{1
 if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
-" ----------------------------------------------------------------------
-" Mappings
-" ----------------------------------------------------------------------
+:source $MYETC/vimbreviations
+
+" === Mappings === {{{1
 let mapleader=" "
 
 nnoremap <Leader><Space> :b#<CR>
@@ -65,14 +66,13 @@ inoremap jk <ESC>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :wqa<CR>
 nnoremap <Leader>t :bo :terminal<CR>
-nnoremap <Leader>v :e ~/.vimrc<CR>
+nnoremap <Leader>v :e $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " Bad Ex mode. Bad!
 nnoremap Q <Nop>
 
-" ----------------------------------------------------------------------
-" Plugins
-" ----------------------------------------------------------------------
+" === Plugins === {{{1
 call plug#begin()
 
 Plug 'AndrewRadev/tagalong.vim'
@@ -88,29 +88,26 @@ Plug 'mcchrish/nnn.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'shime/vim-livedown'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/ZoomWin'
 
 call plug#end()
 
-" ----------------------------------------------------------------------
-" Plugin Configuration
-" ----------------------------------------------------------------------
-
-" Vim Plug
-" -----------------------------------
+" === Plugin Configuration === {{{1
+" Vim Plug {{{2
 nnoremap <Leader>pi  :PlugInstall<CR>
 nnoremap <Leader>pu  :PlugUpdate<CR>
 nnoremap <Leader>pc  :PlugClean<CR>
 nnoremap <Leader>puu :PlugUpgrade<CR>
 nnoremap <Leader>ps  :PlugStatus<CR>
 
-" Vim Commentary
+" Vim Commentary {{{2
 " -----------------------------------
 vnoremap <Leader>c :Commentary<CR>
 nnoremap <Leader>c :Commentary<CR>
 
-" FZF
+" FZF {{{2
 " -----------------------------------
 nnoremap <Leader>/ :BLines<CR>
 nnoremap <Leader>ff :Lines<CR>
@@ -123,23 +120,22 @@ nnoremap <Leader>: :History:<CR>
 nnoremap <Leader>// :History/<CR>
 nnoremap <Leader>k :Helptags<CR>
 
-" Light Line
+" Light Line {{{2
 " -----------------------------------
 set noshowmode
 set laststatus=2
 
-" Livedown
+" Livedown {{{2
 " -----------------------------------
 let g:livedown_open=1
 let g:livedown_port=3000
 let g:livedown_browser="chrome"
 
-" NNN
+" NNN {{{2
 " -----------------------------------
 let g:nnn#layout = { 'window': { 'width': 0.3, 'height': 0.6, 'xoffset':0.8, 'highlight': 'Comment' } }
 
-" CoC (Fuck knows what all this does)
-" -----------------------------------
+" CoC (Fuck knows what all this does) {{{2
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ CheckBackspace() ? "\<TAB>" :
@@ -192,3 +188,4 @@ let g:lightline = {
       \   'currentfunction': 'CocCurrentFunction'
       \ },
       \ }
+
