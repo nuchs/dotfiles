@@ -216,9 +216,10 @@ link_binary "$HOME/.vim/plugged/fzf/bin/fzf" "fzf"
 
 # Setup TMUX plugins {{{3
 clone "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
+run ~/.tmux/plugins/tpm/bin/install_plugins
 
 # Build from source {{{3
-if which rustc &> /dev/null; then
+if command -v rustc &> /dev/null; then
   debug "Rust $(rustc -V | awk '{print $2}') already installed, skipping"
 else
   debug "Installing rust"

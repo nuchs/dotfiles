@@ -53,6 +53,8 @@ alias up="ping -c 2 www.google.com"
 alias x='exit'
 
 alias tt='tmux'
+alias tkill='tmux kill-server'
+
 alias j='joplin'
 alias ps='procs'
 alias ddg='ddgr -n 6'
@@ -107,7 +109,7 @@ alias go='git checkout'
 alias gob='git checkout -b'
 alias gom='git checkout main'
 alias gff='git merge --ff-only origin/master'
-alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
+alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 
 # --- docker {{{2
@@ -228,7 +230,7 @@ PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
 PS_USERLINE="$RESET\n↳ "
 export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
 
-# === Load  {{{1
+# === Load 3rd party config  {{{1
 
 # FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 
@@ -239,3 +241,9 @@ eval "$(zoxide init bash)"
 
 # Cargo
 . "$HOME/.cargo/env"
+
+# === Start tmux {{{1
+if command -v tmux &> /dev/null && [ -n "$PS1"  ] && [[ ! "$TERM" =~ screen  ]] && [[ ! "$TERM" =~ tmux  ]] && [ -z "$TMUX"  ]; then
+    tmux new-session -A -s main
+fi
+
