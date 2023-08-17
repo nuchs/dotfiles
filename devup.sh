@@ -131,6 +131,7 @@ function clone() {
 
 # === Main Script {{{1
 
+# Start up {{{2
 while getopts "hdv" option; do
   case $option in
     h) # display help
