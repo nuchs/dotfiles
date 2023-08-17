@@ -187,7 +187,7 @@ run sudo apt -y upgrade
 apt_install gpg
 apt_install git
 apt_install python3
-apt_install vim
+apt_install vim-gtk3
 apt_install sxiv
 apt_install httpie
 apt_install xsel
@@ -197,6 +197,8 @@ apt_install bat
 link_binary "/usr/bin/batcat" "bat"
 apt_install most
 apt_install duf
+apt_install chafa
+apt_install w3m
 
 # Snaps Packages {{{3
 run sudo snap refresh
@@ -215,8 +217,14 @@ fi
 link_binary "$HOME/.vim/plugged/fzf/bin/fzf" "fzf"
 
 # Setup TMUX plugins {{{3
-clone "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
-run ~/.tmux/plugins/tpm/bin/install_plugins
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  debug "Installing TMUX plugin manager"
+  clone "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
+  run ~/.tmux/plugins/tpm/bin/install_plugins
+else
+  debug "TMUX plugin manager already installed, updating plugins"
+  run ~/.tmux/plugins/tpm/bin/update_plugins all
+fi
 
 # Build from source {{{3
 if command -v rustc &> /dev/null; then
@@ -234,6 +242,7 @@ if [ ! -L "$BIN_DIR/nnn" ]; then
   run make
   run popd
   link_binary "$SOURCE_DIR/nnn/nnn" "nnn"
+  run "$SOURCE_DIR/nnn/plugins/getplugs"
 else
   debug "NNN is already installed, skipping"
 fi

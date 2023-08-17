@@ -26,6 +26,7 @@ fi
 alias viv='vim ~/.vimrc'
 alias vb='vim ~/.bashrc'
 alias vp='vim ~/.profile'
+alias vd='vim $MYETC/devup.sh'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.profile'
 
@@ -87,9 +88,28 @@ alias ex='explorer.exe .'
 export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
 
 # nnn
-alias n='nnn'
 export NNN_FIFO='/tmp/nnn.fifo'
-export NNN_PLUG='z:autojump;p:preview-tui;r:renamer;d:diffs;i:imgview'
+export NNN_BMS="e:$MYETC;b:$MYBIN;d:$HOME/downloads;w:$HOME/work"
+export NNN_PLUG='z:autojump;p:preview-tui;r:renamer;d:diffs;i:imgview;g:gitroot'
+export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+
+n ()
+{
+  # Block nesting of nnn in subshells
+  [ "${NNNLVL:-0}" -eq 0  ] || {
+    echo "nnn is already running"
+    return
+  }
+
+  # The command builtin allows one to alias nnn to n, if desired, without
+  # making an infinitely recursive alias
+  command nnn "$@"
+
+  [ ! -f "$NNN_TMPFILE" ] || {
+    . "$NNN_TMPFILE"
+    rm -f "$NNN_TMPFILE" > /dev/null
+  }
+}
 
 # === Dev {{{1
 
