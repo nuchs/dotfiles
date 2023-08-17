@@ -3,7 +3,7 @@
 # Script to setup my dev environment
 
 # === Config {{{1
-VERBOSE=0
+VERBOSITY=0
 DRY_RUN=0
 SOURCE_DIR="$HOME/sauce"
 BIN_DIR="$HOME/bin"
@@ -23,89 +23,108 @@ function help() {
   echo "v    Verbose mode, log extra message"
 }
 
+function write_log() {
+  LEVEL=$1; shift
+  PREFIX=$1; shift
+  MSG="$(date +'%Y-%m-%d %T.%3N') | $PREFIX | $@"
+
+  if [ $LEVEL -le $VERBOSITY ]; then
+    echo $MSG
+  fi
+
+  echo $MSG >> /tmp/devup.log
+}
+
+function debug() {
+  write_log 1 "DBG" $@
+}
+
+function log() {
+  write_log 0 "INF" $@
+}
+
+function error() {
+  write_log 0 "ERR" $@
+}
+
 function run() {
   CMD=$1
   shift
   if [ $DRY_RUN -eq 1 ]; then
-    echo "DRY RUN | $CMD $@"
+    debug "DRY RUN | $CMD $@"
   else
     $CMD $@
   fi
 }
 
-function log() {
-  if [[ $VERBOSE > 0 ]]; then
-    echo $@
-  fi
-}
 
 function snap_install() {
   if snap list | awk '{print $1}' | grep "\b$1\b" &> /dev/null; then
-    log "Snap $1 is already installed, skipping"
+    debug "Snap $1 is already installed, skipping"
   else
-    log "Installing snap $1"
+    debug "Installing snap $1"
     run sudo snap install $1
   fi
 }
 
 function apt_install() {
   if dpkg -s $1 &> /dev/null; then
-    log "Apt package $1 is already installed, skipping"
+    debug "Apt package $1 is already installed, skipping"
   else
-    log "Installing apt package $1"
+    debug "Installing apt package $1"
     run sudo apt -y install $1
   fi
 }
 
 function npm_install() {
   if  [ -e "$NPM_DIR/bin/$1" ]; then
-    log "NPM executable $1 already exists, skipping"
+    debug "NPM executable $1 already exists, skipping"
   else
-    log "NPM installing $1"
+    debug "NPM installing $1"
     run npm install -g $1
   fi
 }
 
 function link_binary() {
   if [ -L "$BIN_DIR/$2"  ]; then
-    log "Link $BIN_DIR/$2 already exists, skipping"
+    debug "Link $BIN_DIR/$2 already exists, skipping"
     return
   fi
 
-  log "Linking binary : $1"
+  debug "Linking binary : $1"
   run ln -s $1 $BIN_DIR/$2
 }
 
 function link_config() {
   if [ -L "$HOME/.$1"  ]; then
-    log "$HOME/.$1 already exists, skipping"
+    debug "$HOME/.$1 already exists, skipping"
     return
   fi
 
   if [ -f "$HOME/.$1" ]; then
-    log "$HOME/.$1 already exists, deleting"
+    debug "$HOME/.$1 already exists, deleting"
     run rm -f "$HOME/.$1"
   fi
 
-  log "Linking config file: $1"
+  debug "Linking config file: $1"
   run ln -s $HOME/etc/$1 $HOME/.$1
 }
 
 function make_directory() {
   if [ ! -d "$1" ]; then
-    log "Making directory $1"
+    debug "Making directory $1"
     run mkdir -p $1
   else
-    log "Directory $1 already exists, skipping"
+    debug "Directory $1 already exists, skipping"
   fi
 
 }
 
 function clone() {
  if [ -d "$SOURCE_DIR/$2" ]; then
-   log "Repo has already been cloned, skipping"
+   debug "Repo has already been cloned, skipping"
  else
-   log "Cloning $1 to $2"
+   debug "Cloning $1 to $2"
    run git clone $1 $2
  fi
 }
@@ -118,23 +137,25 @@ while getopts "hdv" option; do
       help
       exit;;
     v) # bump up the log level
-      VERBOSE=1
+      VERBOSITY=1
       ;;
     d) # dry run mode
       DRY_RUN=1
-      VERBOSE=1
+      VERBOSITY=1
       ;;
     \?) # Unrecognised option
-      echo "Error: invalid option"
+      error "Invalid option"
       help
-      exit;;
+      exit 1;;
   esac
 done
 
+log "Synchronising development environment"
+
 if [[ -f "$HOME/.ssh/id_rsa" && -f "$HOME/.ssh/id_rsa.pub" ]]; then
-  log "SSH keys found, good to go"
+  debug "SSH keys found, good to go"
 else 
-  echo "SSH keys are not installed, cannot proceed"
+  error "SSH keys are not installed, cannot proceed"
   exit 1
 fi
 
@@ -175,8 +196,6 @@ apt_install bat
 link_binary "/usr/bin/batcat" "bat"
 apt_install most
 apt_install duf
-apt_install joplin
-link_binary "$HOME/.joplin-bin/bin/joplin" "joplin"
 
 # Snaps Packages {{{3
 run sudo snap refresh
@@ -192,18 +211,18 @@ else
   run vim -c PlugInstall -c q -c q
 fi
 
-link_binary "$HOME/.vim/plugged/fzf/bin/fzf"
+link_binary "$HOME/.vim/plugged/fzf/bin/fzf" "fzf"
 
 # Setup TMUX plugins {{{3
 clone "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 
 # Build from source {{{3
-if which rustc; then
-  log "Rust $(rustc -V | awk '{print $2}') already installed, skipping"
+if which rustc &> /dev/null; then
+  debug "Rust $(rustc -V | awk '{print $2}') already installed, skipping"
 else
-  log "Installing rust"
+  debug "Installing rust"
   run curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  log "Rust $(rustc -V | awk '{print $2}') installed,"
+  debug "Rust $(rustc -V | awk '{print $2}') installed,"
 fi
 
 if [ ! -L "$BIN_DIR/nnn" ]; then
@@ -214,7 +233,7 @@ if [ ! -L "$BIN_DIR/nnn" ]; then
   run popd
   link_binary "$SOURCE_DIR/nnn/nnn" "nnn"
 else
-  log "NNN is already installed, skipping"
+  debug "NNN is already installed, skipping"
 fi
 
 if [ ! -L "$BIN_DIR/zoxide" ]; then
@@ -226,14 +245,14 @@ if [ ! -L "$BIN_DIR/zoxide" ]; then
   run popd
   link_binary "$HOME/.local/bin/zoxide" "zoxide"
 else
-  log "Zoxide is already installed, skipping"
+  debug "Zoxide is already installed, skipping"
 fi
 
 # Npm apps {{{3
 npm_install yarn
 npm_install livedown
-
+npm_install joplin
 
 # === Done {{{1
-log "Have you installed fonts & gpg keys?"
+debug "Have you installed fonts & gpg keys?"
 log "We're cocked, locked and ready to rock"
