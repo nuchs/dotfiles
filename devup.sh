@@ -195,7 +195,6 @@ apt_install ddgr
 apt_install ripgrep
 apt_install bat
 link_binary "/usr/bin/batcat" "bat"
-apt_install most
 apt_install duf
 apt_install chafa
 apt_install w3m

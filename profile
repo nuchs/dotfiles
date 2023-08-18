@@ -1,6 +1,6 @@
 export GPG_TTY=$(tty)
 export EDITOR='vim'
-export PAGER='most'
+export PAGER='less'
 
 export MYETC="$HOME/etc"
 export MYBIN="$HOME/bin"
