@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: match_result
-# key: mres
-# --
-match $1 {
-    Ok($2) => $2,
-    Err($3) => $4
-}

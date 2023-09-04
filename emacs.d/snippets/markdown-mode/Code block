@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: Code block
-# key: cb
-# --
-\`\`\`${1:rust}
-$0
-\`\`\`

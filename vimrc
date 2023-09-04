@@ -28,13 +28,13 @@ set smartcase
 set smartindent
 set smarttab
 set tabstop=2
-set termwinsize=15x0
+set term=kitty
+set termguicolors
 set textwidth=80
 set vb
 
 filetype plugin indent on
 syntax on
-colorscheme onedark
    
 " Change cursor shape based on mode
 let &t_SI .= "\<Esc>[6 q"
@@ -69,6 +69,10 @@ nnoremap <Leader>t :bo :terminal<CR>
 nnoremap <Leader>v :e $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 
+" Copy to Wayland clipboard
+nnoremap <C-c> :call system("wl-copy", @")<CR>
+xnoremap <silent> <C-c> :w !wl-copy<CR><CR>
+
 " Bad Ex mode. Bad!
 nnoremap Q <Nop>
 
@@ -76,17 +80,16 @@ nnoremap Q <Nop>
 call plug#begin()
 
 Plug 'AndrewRadev/tagalong.vim'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'nuchs/vim-hypr-nav'
 Plug 'mattn/emmet-vim'
 Plug 'mcchrish/nnn.vim'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'shime/vim-livedown'
+Plug 'theRealCarneiro/hyprland-vim-syntax'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -95,7 +98,15 @@ Plug 'vim-scripts/ZoomWin'
 call plug#end()
 
 " === Plugin Configuration === {{{1
+
+" Colorscheme {{{2
+" -----------------------------------
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+set background=dark
+
 " Vim Plug {{{2
+" -----------------------------------
 nnoremap <Leader>pi  :PlugInstall<CR>
 nnoremap <Leader>pu  :PlugUpdate<CR>
 nnoremap <Leader>pc  :PlugClean<CR>
@@ -125,17 +136,30 @@ nnoremap <Leader>k :Helptags<CR>
 set noshowmode
 set laststatus=2
 
-" Livedown {{{2
-" -----------------------------------
-let g:livedown_open=1
-let g:livedown_port=3000
-let g:livedown_browser="chrome"
-
 " NNN {{{2
 " -----------------------------------
-let g:nnn#layout = { 'window': { 'width': 0.3, 'height': 0.6, 'xoffset':0.8, 'highlight': 'Comment' } }
+let g:nnn#layout = { 'window': { 'width': 0.5, 'height': 0.6, 'xoffset':0.9, 'highlight': 'Comment' } }
 
 " CoC (Fuck knows what all this does) {{{2
+" -----------------------------------
+nnoremap <Leader>cc :CocConfig<CR>
+
+let g:coc_global_extensions = [
+  \'coc-css',
+  \'coc-dictionary',
+  \'coc-eslint',
+  \'coc-go',
+  \'coc-html',
+  \'coc-json',
+  \'coc-prettier',
+  \'coc-rust-analyzer',
+  \'coc-sh',
+  \'coc-syntax',
+  \'coc-tsserver',
+  \'coc-vimlsp',
+  \'coc-word',
+  \]
+
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ CheckBackspace() ? "\<TAB>" :
@@ -148,8 +172,8 @@ endfunction
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> g[ <Plug>(coc-diagnostic-prev)
-nmap <silent> g] <Plug>(coc-diagnostic-next)
+nmap <silent> <F7> <Plug>(coc-diagnostic-prev)
+nmap <silent> <F8> <Plug>(coc-diagnostic-next)
 nnoremap <Leader>d :CocDiagnostics<CR>
 
 " GoTo code navigation
@@ -178,7 +202,7 @@ function! CocCurrentFunction()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]

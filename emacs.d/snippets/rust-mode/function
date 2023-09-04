@@ -1,6 +1,0 @@
-# key: fn
-# name: function
-# --
-fn $1($2) ${3:-> $4 }{
-    `yas-selected-text`$0
-}

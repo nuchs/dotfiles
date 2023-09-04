@@ -22,16 +22,27 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export GPG_TTY=$(tty)
+
+# === Load 3rd party config  {{{1
+
+# FZF
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+# Zoxide
+eval "$(zoxide init bash)"
+
 # === Configuration {{{1
 alias viv='vim ~/.vimrc'
 alias vb='vim ~/.bashrc'
-alias vp='vim ~/.profile'
-alias vd='vim $MYETC/devup.sh'
+alias vp='vim ~/.bash_profile'
+alias vh='vim ~/.config/hypr/hyprland.conf'
 alias sb='source ~/.bashrc'
-alias sp='source ~/.profile'
+alias sp='source ~/.bash_profile'
 
 function rem() {
-  grep $@ ~/.bashrc ~/.profile
+  grep $@ ~/.bashrc ~/.bash_profile
 }
 
 # === Commands {{{1
@@ -45,7 +56,6 @@ alias lrt='exa -lus accessed'
 
 alias md='mkdir -p'
 alias rd='rmdir'
-alias rm='rm -i'
 alias rmd='rm -rf'
 
 alias lns='ln -s'
@@ -53,15 +63,23 @@ alias lns='ln -s'
 alias up="ping -c 2 www.google.com"
 alias x='exit'
 
-alias tt='tmux'
-alias tkill='tmux kill-server'
-
 alias j='joplin'
+alias cal="gcalcli"
 alias ps='procs'
 alias ddg='ddgr -n 6'
 alias df='duf -only local'
 alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
-alias mm='most'
+
+
+# === Management {{{1
+alias jc='journalctl'
+alias sc='systemctl'
+alias ssc='sudo systemctl'
+
+alias hc='hyprctl'
+
+alias pm='paru'
+alias orphans='pacman -Qtdq'
 
 # === History {{{1
 
@@ -83,15 +101,30 @@ alias p='pushd .'
 alias pp='popd'
 alias d='dirs -v'
 alias ex='explorer.exe .'
+alias zz='zi'
+alias cd='z'
 
 # FZF options for Zoxide
 export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
 
 # nnn
-export NNN_FIFO='/tmp/nnn.fifo'
-export NNN_BMS="e:$MYETC;b:$MYBIN;d:$HOME/downloads;w:$HOME/work"
-export NNN_PLUG='z:autojump;p:preview-tui;r:renamer;d:diffs;i:imgview;g:gitroot'
+HARDLINK="42"
+SYMLINK="6d"
+MISSING="7c"
+ORPHAN="a6"
+DIR="fa"
+REG="df"
+BLK="af"
+CHR="84"
+EXE="d6"
+FIFO="48"
+SOCK="6c"
+OTHER="d0"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
+export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_BMS="e:$MYETC;b:$HOME/docs;d:$HOME/downloads;w:$HOME/work"
+export NNN_PLUG='z:autojump;p:preview-tui;g:gitroot;r:renamer;d:diffs;'
 
 n ()
 {
@@ -250,20 +283,4 @@ PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
 PS_USERLINE="$RESET\n↳ "
 export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
 
-# === Load 3rd party config  {{{1
-
-# FZF
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-
-# Zoxide
-eval "$(zoxide init bash)"
-
-# Cargo
-. "$HOME/.cargo/env"
-
-# === Start tmux {{{1
-if command -v tmux &> /dev/null && [ -n "$PS1"  ] && [[ ! "$TERM" =~ screen  ]] && [[ ! "$TERM" =~ tmux  ]] && [ -z "$TMUX"  ]; then
-    tmux new-session -A -s main
-fi
 

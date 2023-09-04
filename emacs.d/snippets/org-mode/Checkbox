@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Checkbox
-# key: cbx
-# --
-  - [ ] $0

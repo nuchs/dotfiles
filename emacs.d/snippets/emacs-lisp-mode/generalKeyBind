@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Key bind
-# key: kb
-# --
-"${1:keybind}" '(${2:command} :which-key "${3:description}")

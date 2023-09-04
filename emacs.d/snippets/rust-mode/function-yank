@@ -1,6 +1,0 @@
-# key: fny
-# name: function-yank
-# --
-fn $1($2) ${3:-> $4 }{
-    `(evil-paste-after 0)`$0
-}

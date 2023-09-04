@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: impl-drop
-# key: impp
-# --
-impl Drop for ${1:MyType} {
-     fn drop(&mut self) {
-         $0
-    }
-}

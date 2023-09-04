@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: impl
-# key: impl
-# --
-impl${1:<$2>} ${3:MyType}$1 {
-    fn$0
-}

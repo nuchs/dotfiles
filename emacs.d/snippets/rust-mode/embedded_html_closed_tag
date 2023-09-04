@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: embedded_html_closed_tag
-# key: tc
-# --
-<${1:tag} />
-$0
