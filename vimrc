@@ -41,9 +41,12 @@ let &t_SI .= "\<Esc>[6 q"
 let &t_EI .= "\<Esc>[0 q"
 
 " === Commands & Functions === {{{1
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-endif
+augroup common_buffer
+    autocmd!
+    autocmd BufWinEnter * silent! loadview
+    autocmd BufWinLeave * mkview
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup end
 
 :source $MYETC/vimbreviations
 
@@ -52,10 +55,6 @@ let mapleader=" "
 
 nnoremap <Leader><Space> :b#<CR>
 nnoremap <Leader>o :ZoomWin<CR>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 nnoremap k gk
 nnoremap j gj
@@ -98,6 +97,11 @@ Plug 'vim-scripts/ZoomWin'
 call plug#end()
 
 " === Plugin Configuration === {{{1
+
+" Auto-pairs {{{2
+if !exists('g:AutoPairsShortcutJump')
+  let g:AutoPairsShortcutJump = '<C-e>'
+endif
 
 " Colorscheme {{{2
 " -----------------------------------
@@ -146,7 +150,6 @@ nnoremap <Leader>cc :CocConfig<CR>
 
 let g:coc_global_extensions = [
   \'coc-css',
-  \'coc-dictionary',
   \'coc-eslint',
   \'coc-go',
   \'coc-html',
@@ -154,6 +157,7 @@ let g:coc_global_extensions = [
   \'coc-prettier',
   \'coc-rust-analyzer',
   \'coc-sh',
+  \'coc-snippets',
   \'coc-syntax',
   \'coc-tsserver',
   \'coc-vimlsp',
@@ -162,16 +166,18 @@ let g:coc_global_extensions = [
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
+
+let g:coc_snippet_next = '<tab>'
 
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+" Cycle through errors and warnings
 nmap <silent> <F7> <Plug>(coc-diagnostic-prev)
 nmap <silent> <F8> <Plug>(coc-diagnostic-next)
 nnoremap <Leader>d :CocDiagnostics<CR>

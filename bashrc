@@ -62,13 +62,13 @@ alias lns='ln -s'
 
 alias up="ping -c 2 www.google.com"
 alias x='exit'
+alias sdn='sudo shutdown now'
 
 alias j='joplin'
-alias cal="gcalcli"
 alias ps='procs'
-alias ddg='ddgr -n 6'
 alias df='duf -only local'
 alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
+alias cat='bat'
 
 
 # === Management {{{1
@@ -136,7 +136,7 @@ n ()
 
   # The command builtin allows one to alias nnn to n, if desired, without
   # making an infinitely recursive alias
-  command nnn "$@"
+  command nnn -P p "$@"
 
   [ ! -f "$NNN_TMPFILE" ] || {
     . "$NNN_TMPFILE"
