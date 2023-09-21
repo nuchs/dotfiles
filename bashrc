@@ -47,12 +47,12 @@ function rem() {
 
 # === Commands {{{1
 
-alias l='exa'
-alias ls='exa'
-alias ll='exa -l'
-alias lla='exa -la'
-alias la='exa -lad .?*'
-alias lrt='exa -lus accessed'
+alias l='eza'
+alias ls='eza'
+alias ll='eza -l'
+alias lla='eza -la'
+alias la='eza -lad .?*'
+alias lrt='eza -lus accessed'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -147,6 +147,7 @@ n ()
 # === Dev {{{1
 
 alias v='vim'
+alias nv='nvim'
 
 # --- git {{{2
 alias ga='git add'
