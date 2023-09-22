@@ -21,14 +21,13 @@ init.load("user.plugins")
 -- configure completion 
 -- diagnostics (trouble nvim?)
 -- debug
--- project/session management
 -- Configure mason
 --  * linters
 --  * debuggers
 --  * language servers (including emmet)
 -- snippets - get it working
 -- testing
--- Configure status line
--- Configure noice
--- treesitter plugins
--- transparency
+--
+-- keybinds
+-- sessions
+-- telescope

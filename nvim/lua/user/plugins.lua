@@ -56,11 +56,6 @@ lazy.setup({
     lazy = true 
   },
   
-  -- Git signs: git info for the status line {{{2
-  {
-    'lewis6991/gitsigns.nvim',
-    lazy = true,
-  },
 
   -- Nui: nvim widgets {{{2
   { 
@@ -72,20 +67,29 @@ lazy.setup({
   { 
     'rcarriga/nvim-notify',
     lazy = true,
-    opts = {
-      background_color = "#1d2021"
-    },
+    config = function()
+      require("notify").setup({
+        background_colour = "#1d2021",
+      })
+    end
   },
 
-  -- Feline: status line -- {{{2
+  -- Lualine: status line -- {{{2
   { 
     'nvim-lualine/lualine.nvim',
-    lazy = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
+      'echasnovski/mini.sessions', 
     },
-    opts = {
-    },
+    config = function() 
+      local sessions = require("mini.sessions")
+
+      require('lualine').setup({
+        sections = {
+          lualine_c = {sessions.get_latest, "filename"}
+        }
+      })
+    end
   },
 
   -- Nvim surround: motions to add paired characters {{{2
@@ -100,7 +104,7 @@ lazy.setup({
     end
   },
 
-  -- Noice: command line in center and notifications
+  -- Noice: command line in center and notifications {{{2
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -121,6 +125,33 @@ lazy.setup({
       "rcarriga/nvim-notify",
       "nvim-treesitter/nvim-treesitter",
     }
+  },
+
+  -- mini.session: Session management {{{2
+  { 
+    'echasnovski/mini.sessions', 
+    version = false ,
+    config = function()
+      require('mini.sessions').setup()
+    end
+  },
+
+  -- mini.starter: Start screen {{{2
+  { 
+    'echasnovski/mini.starter', 
+    version = '*',
+    dependencies = { 'echasnovski/mini.sessions' },
+    config = function()
+      local starter = require('mini.starter')
+      starter.setup({
+        items = {
+          starter.sections.sessions(5, true),
+          starter.sections.recent_files(5, true),
+          starter.sections.recent_files(5, false),
+          starter.sections.builtin_actions(),
+        },
+      })
+    end
   },
 
   -- Tree sitter: better highlighting {{{2
@@ -210,6 +241,12 @@ lazy.setup({
     lazy = true,
   },
 
+  -- basic ui extension
+  {
+    'nvim-telescope/telescope-ui-select.nvim',
+    lazy = true,
+  },
+
   -- Telescope plugin
   {
     'nvim-telescope/telescope.nvim', 
@@ -222,8 +259,9 @@ lazy.setup({
     config = function ()
       local telescope = require('telescope')
       telescope.setup()
-      telescope.load_extension('zoxide');
-      telescope.load_extension('luasnip');
+      telescope.load_extension('zoxide')
+      telescope.load_extension('luasnip')
+      telescope.load_extension('ui-select')
     end,
   },
 
@@ -280,9 +318,17 @@ lazy.setup({
     end
   },
 
-  -- Mason : Manage the LSP addons
+  -- LSP
   {
     "williamboman/mason.nvim"
+  },
+
+  {
+    "williamboman/mason-lspconfig.nvim"
+  },
+
+  {
+    "neovim/nvim-lspconfig"
   },
 
   -- Nvim-cmp: auto complete {{{2
@@ -290,11 +336,11 @@ lazy.setup({
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
       "L3MON4D3/cmp-luasnip-choice",
       "L3MON4D3/LuaSnip",
     },
