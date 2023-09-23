@@ -1,3 +1,6 @@
+eval `ssh-agent`
+ssh-add
+
 export EDITOR='vim'
 export PAGER='less'
 

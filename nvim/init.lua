@@ -1,33 +1,22 @@
--- Utility function to safely load module {{{1
-local init = {}
-function init.load(module)
-  local ok, err = pcall(require, module)
+local init = require("nuchs.utils")
 
-  if not ok then
-    print("Failed to load " .. module)
-    print(err)
-    return
-  end
-end
-
--- My Lua configuration {{{1
-init.load("user.options")
-init.load("user.keymaps")
-init.load("user.autocommands")
-init.load("user.plugins")
-
+init.load("nuchs.options")
+init.load("nuchs.keymaps")
+init.load("nuchs.autocommands")
+init.load("nuchs.lazy")
 
 -- TODO {{{1
 -- configure completion 
--- diagnostics (trouble nvim?)
--- debug
 -- Configure mason
 --  * linters
 --  * debuggers
 --  * language servers (including emmet)
+--  * diagnostics (trouble?)
 -- snippets - get it working
 -- testing
 --
 -- keybinds
--- sessions
--- telescope
+-- * sessions
+-- * telescope
+-- * file explorer
+-- * commenting
