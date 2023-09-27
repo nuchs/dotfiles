@@ -34,15 +34,14 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 eval "$(zoxide init bash)"
 
 # === Configuration {{{1
-alias viv='vim ~/.vimrc'
-alias vb='vim ~/.bashrc'
-alias vp='vim ~/.bash_profile'
-alias vh='vim ~/.config/hypr/hyprland.conf'
+alias vb='nvim ~/.bashrc'
+alias vp='nvim ~/.bash_profile'
+alias vh='nvim ~/.config/hypr/hyprland.conf'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  grep $@ ~/.bashrc ~/.bash_profile
+  grep $@ ~/.bashrc ~/.bash_profile ~/.gitconfig ~/.inputrc
 }
 
 # === Commands {{{1
@@ -146,7 +145,6 @@ n ()
 
 # === Dev {{{1
 
-alias v='vim'
 alias nv='nvim'
 
 # --- git {{{2

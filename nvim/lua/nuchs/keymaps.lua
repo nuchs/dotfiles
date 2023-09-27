@@ -6,21 +6,19 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Clear search highlighting
+keymap("n", "<Leader>c", ":noh<CR>", { noremap = true, silent = true, desc = "Clear highlighting" })
+
 -- Quicker escaping from insert mode
 keymap("i", "jk", "<Esc>", opts)
 keymap("i", "kj", "<ESC>", opts)
 
 -- Manage buffers
-keymap("n", "<Leader>e", ":Lex 30<CR>", opts)
 keymap("n", "<A-h>", ":bnext<CR>", opts)
 keymap("n", "<A-l>", ":bprev<CR>", opts)
-keymap("n", "<Leader><Space>", ":b#<CR>", opts)
-keymap("n", "<Leader>q", ":q<CR>", opts)
-keymap("n", "<Leader>Q", ":wqa<CR>", opts)
-
--- Quick edits to nvim config
-keymap("n", "<Leader>v", ":e $MYVIMRC<CR>", opts)
-keymap("n", "<Leader>sv", ":source $MYVIMRC<CR>", opts)
+keymap("n", "<Leader><Space>", ":b#<CR>", { noremap = true, silent = true, desc = "Switch to last buffer" })
+keymap("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Kill buffer" })
+keymap("n", "<Leader>Q", ":wqa<CR>", { noremap = true, silent = true, desc = "Save and kill all buffers" })
 
 -- Move text about
 keymap("v", "<", "<gv^", opts)

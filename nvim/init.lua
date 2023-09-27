@@ -6,17 +6,9 @@ init.load("nuchs.autocommands")
 init.load("nuchs.lazy")
 
 -- TODO {{{1
--- configure completion 
 -- Configure mason
 --  * linters
+--  * formatters
 --  * debuggers
---  * language servers (including emmet)
 --  * diagnostics (trouble?)
--- snippets - get it working
 -- testing
---
--- keybinds
--- * sessions
--- * telescope
--- * file explorer
--- * commenting

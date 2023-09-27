@@ -1,4 +1,4 @@
-return { 
+return {
   'rcarriga/nvim-notify',
   lazy = true,
   config = function()

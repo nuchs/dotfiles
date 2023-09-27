@@ -1,5 +1,5 @@
-return { 
-  'echasnovski/mini.starter', 
+return {
+  'echasnovski/mini.starter',
   version = false,
   dependencies = { 'echasnovski/mini.sessions' },
   config = function()

@@ -9,8 +9,8 @@ return {
       view = "notify",
       filter = { event = "msg_showmode" },
     },
-    lsp = { 
-      progress = { enabled = true, } 
+    lsp = {
+      progress = { enabled = true, }
     }
   },
   dependencies = {

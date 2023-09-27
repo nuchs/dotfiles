@@ -1,7 +1,7 @@
 eval `ssh-agent`
 ssh-add
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export PAGER='less'
 
 export MANROFFOPT="-c"

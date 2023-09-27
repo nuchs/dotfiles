@@ -8,16 +8,16 @@ if not vim.loop.fs_stat(lazypath) then
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable', -- latest stable release
-    path,
+    lazypath,
   })
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('nuchs/plugins', { 
+require('lazy').setup('nuchs/plugins', {
   ui = { border = "rounded" },
   dev = { path = "~/.work" },
-  checker = { 
+  checker = {
     enabled = true,
     frequency = 7200,
   },
@@ -27,6 +27,10 @@ require('lazy').setup('nuchs/plugins', {
       "tarPlugin",
       "tutor",
       "zipPlugin",
+      "netrw",
     }
   }
 })
+
+local keymap = vim.keymap
+keymap.set("n", "<Leader>l", "<Cmd>Lazy<CR>", { desc = "Open plugin manager"})

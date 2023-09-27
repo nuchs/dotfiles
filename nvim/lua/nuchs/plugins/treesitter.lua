@@ -1,17 +1,18 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  dependencies = { 
+  dependencies = {
     "nvim-tree/nvim-web-devicons",
     "windwp/nvim-ts-autotag",
     "andymass/vim-matchup",
     "luckasRanarison/tree-sitter-hypr",
-  }, 
-  config = function () 
+  },
+  event = { "BufReadPre", "BufNewFile" },
+  config = function ()
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
-      ensure_installed = { 
+      ensure_installed = {
         "bash",
         "c",
         "c_sharp",
@@ -42,7 +43,7 @@ return {
       autotag = { enable = true },
       sync_install = false,
       highlight = { enable = true },
-      indent = { enable = true },  
+      indent = { enable = true },
     })
 
     local parser_config = require("nvim-treesitter.parsers").get_parser_configs()

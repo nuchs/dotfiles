@@ -1,10 +1,10 @@
-return { 
+return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
-    'echasnovski/mini.sessions', 
+    'echasnovski/mini.sessions',
   },
-  config = function() 
+  config = function()
     local sessions = require("mini.sessions")
 
     require('lualine').setup({

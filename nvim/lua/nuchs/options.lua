@@ -17,7 +17,7 @@ opt.iskeyword:append "-"
 opt.linebreak = true
 opt.mouse = "a"
 opt.number = true
-opt.numberwidth = 4   
+opt.numberwidth = 4
 opt.pumheight = 10
 opt.relativenumber = false
 opt.runtimepath:remove("/usr/share/vim/vimfiles")
@@ -27,7 +27,7 @@ opt.shortmess:append "c"
 opt.showmatch = true
 opt.showtabline = 0
 opt.sidescrolloff = 5
-opt.signcolumn = "yes" 
+opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
 opt.smarttab = true

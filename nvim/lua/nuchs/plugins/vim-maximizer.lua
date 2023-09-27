@@ -1,5 +1,6 @@
 return {
   'szw/vim-maximizer',
-  lazy = true,
-  cmd = { 'MaximizerToggle' },
+  keys = {
+    { "<Leader>o", "<Cmd>MaximizerToggle<CR>", desc = "Toggle fullscreen"},
+  }
 }
