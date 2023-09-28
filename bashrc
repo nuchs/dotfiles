@@ -63,10 +63,8 @@ alias up="ping -c 2 www.google.com"
 alias x='exit'
 alias sdn='sudo shutdown now'
 
-alias j='joplin'
 alias ps='procs'
 alias df='duf -only local'
-alias pv="fzf --preview='bat {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
 alias cat='bat'
 
 
