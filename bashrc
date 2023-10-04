@@ -46,12 +46,23 @@ function rem() {
 
 # === Commands {{{1
 
-alias l='eza'
-alias ls='eza'
-alias ll='eza -l'
-alias lla='eza -la'
-alias la='eza -lad .?*'
-alias lrt='eza -lus accessed'
+function eza_ls {
+  case $1 in
+    ''|*[!0-9]*) 
+      DEPTH=1
+      ;;
+    *) 
+      DEPTH=$1
+      shift
+      ;;
+  esac
+
+  eza --icons -luFTL $DEPTH $@
+}
+alias l=eza_ls
+alias ls=eza_ls
+alias sl=eza_ls
+alias ks=eza_ls
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -66,6 +77,7 @@ alias sdn='sudo shutdown now'
 alias ps='procs'
 alias df='duf -only local'
 alias cat='bat'
+alias yt='ytfzf'
 
 
 # === Management {{{1
@@ -97,7 +109,6 @@ alias rr='cd "$(git rev-parse --show-toplevel)"'
 alias p='pushd .'
 alias pp='popd'
 alias d='dirs -v'
-alias ex='explorer.exe .'
 alias zz='zi'
 alias cd='z'
 
@@ -161,6 +172,12 @@ alias gcom='git checkout main'
 alias gff='git merge --ff-only origin/master'
 alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
+
+function github_clone {
+  git clone git@github.com:${1}/${2}.git
+}
+
+alias ghc='github_clone'
 
 # --- docker {{{2
 alias dk='docker'

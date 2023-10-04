@@ -6,14 +6,14 @@ opt.colorcolumn = "+1,+2"
 opt.completeopt = { "menuone", "noselect" } -- do I actually want noselect?
 opt.conceallevel = 0
 opt.cursorline = true
-opt.diffopt:append "iwhite"
-opt.diffopt:append "vertical"
+opt.diffopt:append("iwhite")
+opt.diffopt:append("vertical")
 opt.expandtab = true
 opt.fileencoding = "utf-8"
 opt.foldmethod = "marker"
 opt.hlsearch = true
 opt.ignorecase = true
-opt.iskeyword:append "-"
+opt.iskeyword:append("-")
 opt.linebreak = true
 opt.mouse = "a"
 opt.number = true
@@ -23,7 +23,7 @@ opt.relativenumber = false
 opt.runtimepath:remove("/usr/share/vim/vimfiles")
 opt.scrolloff = 5
 opt.shiftwidth = 2
-opt.shortmess:append "c"
+opt.shortmess:append("c")
 opt.showmatch = true
 opt.showtabline = 0
 opt.sidescrolloff = 5
@@ -37,9 +37,8 @@ opt.swapfile = false
 opt.tabstop = 2
 opt.termguicolors = true
 opt.textwidth = 80
-opt.timeoutlen = 300
+opt.timeoutlen = 500
 opt.undofile = true
 opt.updatetime = 250
 opt.wrap = true
 opt.writebackup = false
-

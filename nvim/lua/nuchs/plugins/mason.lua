@@ -2,7 +2,6 @@ local required_language_servers = {
 	"bashls",
 	"cssls",
 	"cssmodules_ls",
-	"diagnosticls",
 	"docker_compose_language_service",
 	"dockerls",
 	"emmet_language_server",

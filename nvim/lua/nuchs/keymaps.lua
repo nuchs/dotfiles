@@ -1,5 +1,6 @@
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
+local utils = require("nuchs.utils")
 
 -- Space for leader
 keymap("", "<Space>", "<Nop>", opts)
@@ -29,3 +30,8 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 -- Don't yank deleted text, it's annoying
 keymap("v", "p", '"_dP', opts)
 
+-- Move out of paired delimiters e.g. brackets or quotes
+vim.keymap.set("i", "<C-l>", utils.escape_pair, { noremap = true, silent = true })
+
+-- Send file to firefox
+keymap("n", "<Leader>w", "!firefox %:p<CR>", { noremap = true, silent = true, desc = "Send to firefox" })

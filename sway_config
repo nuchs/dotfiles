@@ -1,0 +1,92 @@
+# Read `man 5 sway` for a complete reference.
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term kitty
+set $leftmon = DP-1
+set $rightmon = DP-3
+set $menu tofi-drun
+
+input type:keyboard xkb_layout "gb" 
+
+workspace 1 output $leftmon 
+workspace 2 output $leftmon 
+workspace 3 output $rightmon 
+workspace 4 output $rightmon 
+
+exec swayidle -w \
+       timeout 300 'swaylock' \
+       timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+       before-sleep 'swaylock'
+
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+
+bindsym $mod+c reload
+bindsym $mod+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'
+bindsym $mod+q kill
+
+floating_modifier $mod normal
+bindsym $mod+f fullscreen
+bindsym $mod+$left exec vim-sway-nav left
+bindsym $mod+$down exec vim-sway-nav down
+bindsym $mod+$up exec vim-sway-nav up
+bindsym $mod+$right exec vim-sway-nav right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+t layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+bindsym $mod+Shift+x move scratchpad
+bindsym $mod+x scratchpad show
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+  bindsym $left resize shrink width 10px
+  bindsym $down resize grow height 10px
+  bindsym $up resize shrink height 10px
+  bindsym $right resize grow width 10px
+  bindsym return mode "default"
+  bindsym escape mode "default"
+}
+
+bar {
+  position top
+  status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+  colors {
+    statusline #ffffff
+    background #323232
+    inactive_workspace #32323200 #32323200 #5c5c5c
+  }
+}
+
+default_border pixel 3
+client.focused #fabd2f #fabd2f #ffffff #fabd2f
+
+assign [class="Chromium"] workspace 3
+assign [class="Spotify"] workspace 4
+
+exec kitty
+exec chromium
+
+include /etc/sway/config.d/*

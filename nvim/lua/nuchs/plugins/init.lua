@@ -1,3 +1,3 @@
 return {
-   "nuchs/vim-hypr-nav" ,
+	"nuchs/vim-sway-nav",
 }
