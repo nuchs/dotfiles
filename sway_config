@@ -1,14 +1,10 @@
-# Read `man 5 sway` for a complete reference.
-
 set $mod Mod4
 set $left h
 set $down j
 set $up k
 set $right l
-set $term kitty
 set $leftmon = DP-1
 set $rightmon = DP-3
-set $menu tofi-drun
 
 input type:keyboard xkb_layout "gb" 
 
@@ -17,16 +13,34 @@ workspace 2 output $leftmon
 workspace 3 output $rightmon 
 workspace 4 output $rightmon 
 
+bar {
+  position top
+  status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+  colors {
+    statusline #ffffff
+    background #323232
+    inactive_workspace #32323200 #32323200 #5c5c5c
+  }
+}
+
+default_border pixel 3
+client.focused #fabd2f #fabd2f #ffffff #fabd2f
+font ttf-jetbrains-mono-nerd 12
+
+assign [class="Chromium"] workspace 3
+assign [class="Spotify"] workspace 4
+
+exec kitty
+exec chromium
 exec swayidle -w \
        timeout 300 'swaylock' \
        timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
        before-sleep 'swaylock'
 
-bindsym $mod+Return exec $term
-bindsym $mod+d exec $menu
+bindsym $mod+Return exec kitty
+bindsym $mod+d exec tofi-drun
 
 bindsym $mod+c reload
-bindsym $mod+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'
 bindsym $mod+q kill
 
 floating_modifier $mod normal
@@ -49,9 +63,8 @@ bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+t layout toggle split
+bindsym $mod+t layout tabbed
+bindsym $mod+s layout toggle split
 
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
@@ -69,24 +82,5 @@ mode "resize" {
   bindsym return mode "default"
   bindsym escape mode "default"
 }
-
-bar {
-  position top
-  status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-  colors {
-    statusline #ffffff
-    background #323232
-    inactive_workspace #32323200 #32323200 #5c5c5c
-  }
-}
-
-default_border pixel 3
-client.focused #fabd2f #fabd2f #ffffff #fabd2f
-
-assign [class="Chromium"] workspace 3
-assign [class="Spotify"] workspace 4
-
-exec kitty
-exec chromium
 
 include /etc/sway/config.d/*

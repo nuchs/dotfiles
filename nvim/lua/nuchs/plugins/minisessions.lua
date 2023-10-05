@@ -1,46 +1,48 @@
 return {
-  'echasnovski/mini.sessions',
-  dependencies = {
-    'stevearc/dressing.nvim',
-  },
-  version = false ,
-  config = function()
-    local mini = require('mini.sessions')
-    mini.setup()
+	"echasnovski/mini.sessions",
+	dependencies = {
+		"stevearc/dressing.nvim",
+	},
+	version = false,
+	config = function()
+		local mini = require("mini.sessions")
 
-    local newSession = function()
-      vim.ui.input(
-        { prompt = 'Enter new session name: '},
-        function(input)
-          if(input ~= nil) then
-            mini.write(input)
-          end
-        end
-        )
-    end
+		mini.setup()
 
-    local deleteSession = function()
-      local sessions = {}
-      for _, sess in pairs(mini.detected) do
-        table.insert(sessions, sess.name)
-      end
+		local newSession = function()
+			vim.ui.input({ prompt = "Enter new session name: " }, function(input)
+				if input ~= nil then
+					mini.write(input)
+				end
+			end)
+		end
 
-      vim.ui.select(
-        sessions,
-        {
-          prompt = "Delete Session:"
-        },
-        function(choice)
-          if(choice ~= nil) then
-            mini.delete(choice)
-          end
-        end
-      )
-    end
+		local deleteSession = function(prompt_bufnr)
+			local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+			picker:delete_selection(function(selection)
+				mini.delete(selection.value)
+			end)
+		end
 
-    local keymap = vim.keymap
-    keymap.set("n", "<Leader>ss", mini.select, { desc = "Choose session"})
-    keymap.set("n", "<Leader>sc", newSession, { desc = "Create new session"})
-    keymap.set("n", "<Leader>sd", deleteSession, { desc = "Delete session"})
-  end
+		require("dressing").setup({
+			select = {
+				get_config = function(opts)
+					if opts.prompt == "Select session to read" then
+						return {
+							telescope = {
+								attach_mappings = function(_, map)
+									map("i", "<C-d>", deleteSession)
+									return true
+								end,
+							},
+						}
+					end
+				end,
+			},
+		})
+
+		local keymap = vim.keymap
+		keymap.set("n", "<Leader>ss", mini.select, { desc = "Manage sessions" })
+		keymap.set("n", "<Leader>sc", newSession, { desc = "Create new session" })
+	end,
 }
