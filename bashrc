@@ -36,7 +36,7 @@ eval "$(zoxide init bash)"
 # === Configuration {{{1
 alias vb='nvim ~/.bashrc'
 alias vp='nvim ~/.bash_profile'
-alias vh='nvim ~/.config/hypr/hyprland.conf'
+alias vs='nvim ~/.config/sway/config'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
@@ -85,7 +85,7 @@ alias jc='journalctl'
 alias sc='systemctl'
 alias ssc='sudo systemctl'
 
-alias hc='hyprctl'
+alias sm='swaymsg'
 
 alias pm='paru'
 alias orphans='pacman -Qtdq'
@@ -114,43 +114,6 @@ alias cd='z'
 
 # FZF options for Zoxide
 export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
-
-# nnn
-HARDLINK="42"
-SYMLINK="6d"
-MISSING="7c"
-ORPHAN="a6"
-DIR="fa"
-REG="df"
-BLK="af"
-CHR="84"
-EXE="d6"
-FIFO="48"
-SOCK="6c"
-OTHER="d0"
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
-export NNN_FIFO='/tmp/nnn.fifo'
-export NNN_BMS="e:$MYETC;b:$HOME/docs;d:$HOME/downloads;w:$HOME/work"
-export NNN_PLUG='z:autojump;p:preview-tui;g:gitroot;r:renamer;d:diffs;'
-
-n ()
-{
-  # Block nesting of nnn in subshells
-  [ "${NNNLVL:-0}" -eq 0  ] || {
-    echo "nnn is already running"
-    return
-  }
-
-  # The command builtin allows one to alias nnn to n, if desired, without
-  # making an infinitely recursive alias
-  command nnn -P p "$@"
-
-  [ ! -f "$NNN_TMPFILE" ] || {
-    . "$NNN_TMPFILE"
-    rm -f "$NNN_TMPFILE" > /dev/null
-  }
-}
 
 # === Dev {{{1
 
