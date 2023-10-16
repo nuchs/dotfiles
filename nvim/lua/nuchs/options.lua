@@ -40,5 +40,6 @@ opt.textwidth = 80
 opt.timeoutlen = 500
 opt.undofile = true
 opt.updatetime = 250
+opt.viewoptions:remove("curdir")
 opt.wrap = true
 opt.writebackup = false

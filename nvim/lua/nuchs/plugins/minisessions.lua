@@ -26,6 +26,12 @@ return {
 
 		require("dressing").setup({
 			select = {
+				telescope = {
+					layout_config = {
+						width = 80,
+						height = 20,
+					},
+				},
 				get_config = function(opts)
 					if opts.prompt == "Select session to read" then
 						return {

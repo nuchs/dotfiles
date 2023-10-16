@@ -77,8 +77,7 @@ alias sdn='sudo shutdown now'
 alias ps='procs'
 alias df='duf -only local'
 alias cat='bat'
-alias yt='ytfzf'
-
+alias ec='exercism'
 
 # === Management {{{1
 alias jc='journalctl'
@@ -117,7 +116,7 @@ export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --k
 
 # === Dev {{{1
 
-alias nv='nvim'
+alias n='nvim'
 
 # --- git {{{2
 alias ga='git add'

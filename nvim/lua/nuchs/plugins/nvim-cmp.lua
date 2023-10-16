@@ -9,9 +9,11 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
+		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-path", -- source for file system paths
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
@@ -28,17 +30,22 @@ return {
 			completion = {
 				completeopt = "menu,menuone,preview,noselect",
 			},
-			snippet = { -- configure how nvim-cmp interacts with snippet engine
+			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
 				end,
 			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
+			},
+			preselect = cmp.PreselectMode.None,
 			mapping = cmp.mapping.preset.insert({
 				["<C-c>"] = cmp.mapping.abort(),
-				["<C-e>"] = cmp.mapping.confirm({ select = true }),
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
-						cmp.select_next_item()
+						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
 					elseif luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
 					elseif has_words_before() then
@@ -59,9 +66,9 @@ return {
 				end, { "i", "s" }),
 			}),
 
-			-- sources for autocompletion
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp_signature_help" },
 				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
@@ -74,6 +81,22 @@ return {
 					ellipsis_char = "...",
 				}),
 			},
+		})
+
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{ name = "cmdline" },
+			}),
 		})
 	end,
 }

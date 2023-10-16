@@ -5,7 +5,6 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"windwp/nvim-ts-autotag",
 		"andymass/vim-matchup",
-		"luckasRanarison/tree-sitter-hypr",
 	},
 	ft = {
 		"htm",
@@ -74,15 +73,5 @@ return {
 			highlight = { enable = true },
 			indent = { enable = true },
 		})
-
-		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-		parser_config.hypr = {
-			install_info = {
-				url = "https://github.com/luckasRanarison/tree-sitter-hypr",
-				files = { "src/parser.c" },
-				branch = "master",
-			},
-			filetype = "hypr",
-		}
 	end,
 }

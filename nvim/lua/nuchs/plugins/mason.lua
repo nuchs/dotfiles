@@ -7,12 +7,8 @@ local required_language_servers = {
 	"emmet_language_server",
 	"eslint",
 	"html",
-	"jqls",
 	"jsonls",
 	"lua_ls",
-	"omnisharp",
-	"pyright",
-	"rust_analyzer",
 	"sqlls",
 	"tsserver",
 	"vimls",
@@ -44,12 +40,6 @@ local function on_attach_standard(client, bufnr)
 
 	opts.desc = "Smart rename"
 	keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
-
-	opts.desc = "Show buffer diagnostics"
-	keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-
-	opts.desc = "Show line diagnostics"
-	keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 	opts.desc = "Go to previous diagnostic"
 	keymap.set("n", "<F7>", vim.diagnostic.goto_prev, opts)
@@ -97,6 +87,7 @@ end
 local function setHandlers()
 	local mason_lspconfig = require("mason-lspconfig")
 	local lspconfig = require("lspconfig")
+	local util = require("lspconfig/util")
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 	mason_lspconfig.setup_handlers({
@@ -139,7 +130,6 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 		"neovim/nvim-lspconfig",
-		"simrat39/rust-tools.nvim",
 	},
 	config = function()
 		setupMason()
