@@ -7,11 +7,6 @@ return {
 		},
 		routes = {
 			{
-				view = "notify",
-				filter = { event = "msg_showmode" },
-				opts = { skip = false },
-			},
-			{
 				filter = {
 					event = "msg_show",
 					kind = "",

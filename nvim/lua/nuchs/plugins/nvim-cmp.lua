@@ -43,6 +43,12 @@ return {
 			mapping = cmp.mapping.preset.insert({
 				["<C-c>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<C-e>"] = function()
+					luasnip.expand_or_jump()
+				end,
+				["<C-E>"] = function()
+					luasnip.jump(-1)
+				end,
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
