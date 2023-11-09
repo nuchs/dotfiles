@@ -33,4 +33,4 @@ require('lazy').setup('nuchs/plugins', {
 })
 
 local keymap = vim.keymap
-keymap.set("n", "<Leader>l", "<Cmd>Lazy<CR>", { desc = "Open plugin manager"})
+keymap.set("n", "<Leader>l", "<Cmd>Lazy<CR>", { desc = "Open plugin manager" })
