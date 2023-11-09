@@ -1,3 +1,4 @@
+# Variables
 set $mod Mod4
 set $left h
 set $down j
@@ -6,13 +7,16 @@ set $right l
 set $leftmon = DP-1
 set $rightmon = DP-3
 
+# Use uk keyboard
 input type:keyboard xkb_layout "gb" 
 
+# Assign workspaces to montors
 workspace 1 output $leftmon 
-workspace 2 output $leftmon 
-workspace 3 output $rightmon 
+workspace 2 output $rightmon 
+workspace 3 output $leftmon 
 workspace 4 output $rightmon 
 
+# Configure the topbar
 bar {
   position top
   status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
@@ -23,33 +27,18 @@ bar {
   }
 }
 
+# Look and feel settings
 default_border pixel 3
 client.focused #fabd2f #fabd2f #ffffff #fabd2f
 font ttf-jetbrains-mono-nerd 12
 
-assign [class="Chromium"] workspace 3
-assign [class="Spotify"] workspace 4
-
-exec kitty
-exec chromium
-exec swayidle -w \
-       timeout 300 'swaylock' \
-       timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-       before-sleep 'swaylock'
-
-bindsym $mod+Return exec kitty
-bindsym $mod+d exec tofi-drun
-
-bindsym $mod+c reload
-bindsym $mod+q kill
-
+# Navigation keys
 floating_modifier $mod normal
 bindsym $mod+f fullscreen
 bindsym $mod+$left exec vim-sway-nav left
 bindsym $mod+$down exec vim-sway-nav down
 bindsym $mod+$up exec vim-sway-nav up
 bindsym $mod+$right exec vim-sway-nav right
-
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
@@ -63,16 +52,14 @@ bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 
+# Layout keys
 bindsym $mod+t layout tabbed
 bindsym $mod+s layout toggle split
-
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
-
 bindsym $mod+Shift+x move scratchpad
 bindsym $mod+x scratchpad show
-
 bindsym $mod+r mode "resize"
 mode "resize" {
   bindsym $left resize shrink width 10px
@@ -83,4 +70,26 @@ mode "resize" {
   bindsym escape mode "default"
 }
 
+bindsym $mod+c reload
+
+# Lock screen
+exec swayidle -w \
+       timeout 300 'swaylock' \
+       timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+       before-sleep 'swaylock'
+
+# Managing applications
+assign [class="Chromium"] workspace 2
+for_window [class="Spotify"] move scratchpad, resize set width 1280 height 1024
+for_window [app_id="notes"] move scratchpad, resize set width 768 height 1024
+bindsym $mod+q kill
+bindsym $mod+Return exec foot
+bindsym $mod+d exec tofi-drun
+bindsym $mod+n exec foot nvim
+
+# Startup apps
+exec chromium
+exec foot
+
+# Setup standard system stuff
 include /etc/sway/config.d/*
