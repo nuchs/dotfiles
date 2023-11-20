@@ -34,9 +34,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 eval "$(zoxide init bash)"
 
 # === Configuration {{{1
-alias vb='nvim ~/.bashrc'
-alias vp='nvim ~/.bash_profile'
-alias vs='nvim ~/.config/sway/config'
+alias vb='nvim -S ~/.local/share/nvim/session/etc'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
@@ -71,13 +69,13 @@ alias rmd='rm -rf'
 alias lns='ln -s'
 
 alias up="ping -c 2 www.google.com"
+alias k9="kill -9"
 alias x='exit'
-alias sdn='sudo shutdown now'
 
 alias ps='procs'
 alias df='duf -only local'
 alias cat='bat'
-alias ec='exercism'
+alias b='bat'
 
 # === Management {{{1
 alias jc='journalctl'
