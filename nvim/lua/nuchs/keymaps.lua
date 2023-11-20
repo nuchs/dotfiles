@@ -14,10 +14,10 @@ keymap("n", "<Leader>cc", ":noh<CR>", { noremap = true, silent = true, desc = "C
 keymap("i", "jk", "<Esc>", opts)
 keymap("i", "kj", "<ESC>", opts)
 
--- Manage buffers
+-- Manage buffers and windows
 keymap("n", "<Leader><Space>", ":b#<CR>", { noremap = true, silent = true, desc = "Switch to last buffer" })
-keymap("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Kill buffer" })
-keymap("n", "<Leader>Q", ":qa!<CR>", { noremap = true, silent = true, desc = "Kill all buffers" })
+keymap("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Close Window" })
+keymap("n", "<Leader>Q", ":b#<BAR>bd #<CR>", { noremap = true, silent = true, desc = "Kill buffer" })
 keymap("n", "<Leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Save buffer" })
 keymap("n", "<Leader>W", ":wa<CR>", { noremap = true, silent = true, desc = "Save all buffers" })
 keymap("n", "<Tab>", ":bn<CR>", { noremap = true, silent = true, desc = "Next buffer" })
@@ -47,4 +47,4 @@ vim.keymap.set("i", "<C-l>", utils.escape_pair, { noremap = true, silent = true 
 vim.keymap.set("n", "<Leader>vm", ":messages<CR>", { noremap = true, silent = true })
 
 -- Change the cwd to the containing folder for the current buffer
-vim.keymap.set("n", "<Leader>cd", ":cd %:h")
+vim.keymap.set("n", "<Leader>cd", ":cd %:h<CR>")

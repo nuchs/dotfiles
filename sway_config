@@ -57,9 +57,6 @@ bindsym $mod+t layout tabbed
 bindsym $mod+s layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
-bindsym $mod+a focus parent
-bindsym $mod+Shift+x move scratchpad
-bindsym $mod+x scratchpad show
 bindsym $mod+r mode "resize"
 mode "resize" {
   bindsym $left resize shrink width 10px
@@ -81,15 +78,21 @@ exec swayidle -w \
 # Managing applications
 assign [class="Chromium"] workspace 2
 for_window [class="Spotify"] move scratchpad, resize set width 1280 height 1024
-for_window [app_id="notes"] move scratchpad, resize set width 768 height 1024
-bindsym $mod+q kill
+for_window [app_id="notes"] move scratchpad, resize set width 900 height 1024
+for_window [app_id="scratchy"] move scratchpad, resize set width 1024 height 768
+
 bindsym $mod+Return exec foot
 bindsym $mod+d exec tofi-drun
 bindsym $mod+n exec foot nvim
 
+bindsym $mod+m exec itchy -c Spotify -t 400 spotify
+bindsym $mod+x exec itchy -a notes foot -a notes nvim -S ~/.local/share/nvim/session/notes
+bindsym $mod+Shift+Return exec itchy -a scratchy foot -a scratchy
+
+bindsym $mod+q kill
+
 # Startup apps
 exec chromium
-exec foot
 
 # Setup standard system stuff
 include /etc/sway/config.d/*
