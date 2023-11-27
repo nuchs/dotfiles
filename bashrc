@@ -39,7 +39,7 @@ alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  grep $@ ~/.bashrc ~/.bash_profile ~/.gitconfig ~/.inputrc
+  rg -i --glob "!nvim/" $@ ~/etc/
 }
 
 # === Commands {{{1

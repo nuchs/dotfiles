@@ -53,7 +53,7 @@ bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 
 # Layout keys
-bindsym $mod+t layout tabbed
+bindsym $mod+t splitt
 bindsym $mod+s layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
