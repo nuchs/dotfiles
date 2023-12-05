@@ -1,16 +1,16 @@
 local required_language_servers = {
+  "bashls",
   "bufls",
   "cssls",
   "docker_compose_language_service",
   "dockerls",
   "emmet_language_server",
-  "eslint",
+  "gopls",
   "html",
   "jsonls",
   "lua_ls",
   "marksman",
   "sqlls",
-  "tsserver",
   "yamlls",
 }
 
@@ -70,10 +70,10 @@ local function setRequiredLsps()
   local mason_lspconfig = require("mason-lspconfig")
 
   mason_lspconfig.setup()
-  -- mason_lspconfig.setup({
-  --   ensure_installed = required_language_servers,
-  --   automatic_installation = true,
-  -- })
+  mason_lspconfig.setup({
+    ensure_installed = required_language_servers,
+    automatic_installation = true,
+  })
 end
 
 local function setDiagnosticSigns()
