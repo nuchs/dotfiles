@@ -98,7 +98,8 @@ HISTFILESIZE=3000
 shopt -s histappend
 
 alias h='history'
-alias hg='history | fzf'
+alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
+
 
 # === Navigation {{{1
 
@@ -117,6 +118,7 @@ export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --k
 alias n='nvim'
 
 # --- git {{{2
+alias gi='cp $MYDOC/templates/go.gitignore .gitignore'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
