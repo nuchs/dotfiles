@@ -135,6 +135,10 @@ function github_clone {
 
 alias ghc='github_clone'
 
+# --- go {{{2
+alias dlvs='dlv debug --headless --listen :8888 .'
+alias dlvc='dlv connect :8888'
+
 # --- docker {{{2
 alias dk='docker'
 alias dkc='docker container'
