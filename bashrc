@@ -34,7 +34,6 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 eval "$(zoxide init bash)"
 
 # === Configuration {{{1
-alias vb='nvim -S ~/.local/share/nvim/session/etc'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
@@ -59,8 +58,6 @@ function eza_ls {
 }
 alias l=eza_ls
 alias ls=eza_ls
-alias sl=eza_ls
-alias ks=eza_ls
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -68,7 +65,7 @@ alias rmd='rm -rf'
 
 alias lns='ln -s'
 
-alias up="ping -c 2 www.google.com"
+alias up="ping -c 1 www.google.com"
 alias k9="kill -9"
 alias x='exit'
 
@@ -104,9 +101,6 @@ alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 # === Navigation {{{1
 
 alias rr='cd "$(git rev-parse --show-toplevel)"'
-alias p='pushd .'
-alias pp='popd'
-alias d='dirs -v'
 alias zz='zi'
 alias cd='z'
 
