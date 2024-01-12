@@ -16,6 +16,7 @@ keymap("i", "kj", "<ESC>", opts)
 
 -- Manage buffers and windows
 keymap("n", "<Leader><Space>", ":b#<CR>", { noremap = true, silent = true, desc = "Switch to last buffer" })
+keymap("n", "<C-q>", ":qa!<CR>", { noremap = true, silent = true, desc = "Quit" })
 keymap("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Close Window" })
 keymap("n", "<Leader>Q", ":b#<BAR>bd #<CR>", { noremap = true, silent = true, desc = "Kill buffer" })
 keymap("n", "<Leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Save buffer" })
