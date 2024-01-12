@@ -23,6 +23,7 @@ return {
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
+    local utils = require("nuchs.utils")
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -44,10 +45,11 @@ return {
         ["<C-c>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<C-e>"] = function()
-          luasnip.expand_or_jump()
-        end,
-        ["<C-E>"] = function()
-          luasnip.jump(-1)
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            utils.escape_pair()
+          end
         end,
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
