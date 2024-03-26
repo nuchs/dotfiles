@@ -1,4 +1,4 @@
-# === Terminal Config {{{1
+# ========== Terminal Config {{{1
 case $- in
     *i*) ;;
       *) return;;
@@ -24,7 +24,7 @@ fi
 
 export GPG_TTY=$(tty)
 
-# === Load 3rd party config  {{{1
+# ========== Load 3rd party config  {{{1
 
 # FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 
@@ -33,7 +33,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 # Zoxide
 eval "$(zoxide init bash)"
 
-# === Configuration {{{1
+# ========== Configuration {{{1
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
@@ -41,7 +41,7 @@ function rem() {
   rg -i --glob "!nvim/" $@ ~/etc/
 }
 
-# === Commands {{{1
+# ========== Commands {{{1
 
 function eza_ls {
   case $1 in
@@ -54,7 +54,7 @@ function eza_ls {
       ;;
   esac
 
-  eza --icons -luFTL $DEPTH $@
+  eza --icons -luTL $DEPTH $@
 }
 alias l=eza_ls
 alias ls=eza_ls
@@ -74,7 +74,13 @@ alias df='duf -only local'
 alias cat='bat'
 alias b='bat'
 
-# === Management {{{1
+function wifey {
+  read mac ssid < <(nmcli -c no -f BSSID,SSID device wifi list | rg -i "$1")
+  echo "Connecting to $ssid ($mac)"
+  nmcli device wifi connect $mac
+}
+
+# ========== Management {{{1
 alias jc='journalctl'
 alias sc='systemctl'
 alias ssc='sudo systemctl'
@@ -84,7 +90,7 @@ alias sm='swaymsg'
 alias pm='paru'
 alias orphans='pacman -Qtdq'
 
-# === History {{{1
+# ========== History {{{1
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
@@ -98,7 +104,7 @@ alias h='history'
 alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 
 
-# === Navigation {{{1
+# ========== Navigation {{{1
 
 alias rr='cd "$(git rev-parse --show-toplevel)"'
 alias zz='zi'
@@ -107,7 +113,7 @@ alias cd='z'
 # FZF options for Zoxide
 export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
 
-# === Dev {{{1
+# ========== Dev {{{1
 
 alias n='nvim'
 
@@ -150,7 +156,10 @@ alias dkp='docker-compose'
 # --- k8s {{{2
 alias kc='kubectl'
 
-# === Prompt {{{1
+# --- Python {{{2
+alias py='python3'
+
+# ========== Prompt {{{1
 
 RESET="\e[0m"
 BOLD="\e[1m"
