@@ -16,6 +16,6 @@ augroup end
 vim.cmd([[
 augroup nuchs_formatting
   autocmd!
-  autocmd BufWritePre *.go\|*.lua\|*.js\|*.html\|*.css lua vim.lsp.buf.format()
+  autocmd BufWritePre *.go\|*.lua\|*.js\|*.html\|*.css\|*.h\|*.hpp\|*.cpp\|*.py\|*.ts\|Makfile lua vim.lsp.buf.format()
 augroup end
 ]])

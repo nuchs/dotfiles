@@ -3,8 +3,6 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "windwp/nvim-ts-autotag",
-    "andymass/vim-matchup",
   },
   ft = {
     "htm",
@@ -20,6 +18,7 @@ return {
     "json",
     "lua",
     "md",
+    "py",
     "sql",
     "toml",
     "nvim",
@@ -43,6 +42,7 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "python",
         "query",
         "regex",
         "rust",
@@ -51,10 +51,6 @@ return {
         "vimdoc",
         "yaml",
       },
-      matchup = {
-        enable = true,
-      },
-      autotag = { enable = true },
       sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },

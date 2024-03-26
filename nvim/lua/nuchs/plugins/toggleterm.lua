@@ -4,7 +4,7 @@ return {
   config = function()
     require("toggleterm").setup({
       direction = "vertical",
-      size = 50,
+      size = 80,
       start_in_insert = true,
     })
 

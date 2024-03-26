@@ -10,6 +10,7 @@ local required_language_servers = {
   "jsonls",
   "lua_ls",
   "marksman",
+  "pyright",
   "sqlls",
   "yamlls",
 }
@@ -41,10 +42,10 @@ local function on_attach_standard(client, bufnr)
   keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
 
   opts.desc = "Go to previous diagnostic"
-  keymap.set("n", "<F7>", vim.diagnostic.goto_prev, opts)
+  keymap.set("n", "[[", vim.diagnostic.goto_prev, opts)
 
   opts.desc = "Go to next diagnostic"
-  keymap.set("n", "<F8>", vim.diagnostic.goto_next, opts)
+  keymap.set("n", "]]", vim.diagnostic.goto_next, opts)
 
   opts.desc = "Show documentation for what is under cursor"
   keymap.set("n", "K", vim.lsp.buf.hover, opts)
