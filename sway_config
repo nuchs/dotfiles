@@ -4,8 +4,12 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $leftmon = DP-1
-set $rightmon = DP-3
+set $leftmon = DP-3
+set $rightmon = DP-1
+
+# Set up monitors
+output DP-3 position 0    0
+output DP-1 position 1920 0
 
 # Use uk keyboard
 input type:keyboard xkb_layout "gb" 
@@ -74,6 +78,9 @@ exec swayidle -w \
        timeout 300 'swaylock' \
        timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
        before-sleep 'swaylock'
+
+# Exit sway
+bindsym $mod+Shift+e exec swaymsg exit
 
 # Managing applications
 assign [class="Chromium"] workspace 2
