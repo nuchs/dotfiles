@@ -69,12 +69,16 @@ alias up="ping -c 1 www.google.com"
 alias k9="kill -9"
 alias x='exit'
 
-alias ps='procs'
-alias df='duf -only local'
 alias cat='bat'
 alias b='bat'
 
 function wifey {
+
+  if [ -z "$1" ]; then
+    nmcli device wifi list
+    return
+  fi
+
   read mac ssid < <(nmcli -c no -f BSSID,SSID device wifi list | rg -i "$1")
   echo "Connecting to $ssid ($mac)"
   nmcli device wifi connect $mac
@@ -117,6 +121,17 @@ export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --k
 
 alias n='nvim'
 
+function loc {
+  if [ -z "$1" ]; then
+    echo "usage: loc <pattern>"
+    return
+  fi
+
+  pattern=".*${1}\$"
+  shift
+  fd $pattern | xargs wc -l $@
+}
+
 # --- git {{{2
 alias gi='cp $MYDOC/templates/go.gitignore .gitignore'
 alias ga='git add'
@@ -158,6 +173,9 @@ alias kc='kubectl'
 
 # --- Python {{{2
 alias py='python3'
+
+# --- Dotnet {{{2
+alias dn='dotnet'
 
 # ========== Prompt {{{1
 
