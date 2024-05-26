@@ -6,6 +6,7 @@ return {
   "L3MON4D3/LuaSnip",
   version = "2.*",
   build = "make install_jsregexp",
+  lazy = true,
   event = "InsertEnter",
   dependencies = { "rafamadriz/friendly-snippets" },
   keys = {

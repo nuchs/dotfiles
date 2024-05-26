@@ -1,17 +1,20 @@
 local required_language_servers = {
   "bashls",
   "bufls",
+  "csharp_ls",
   "cssls",
   "docker_compose_language_service",
   "dockerls",
   "emmet_language_server",
   "gopls",
+  "helm_ls",
   "html",
   "jsonls",
   "lua_ls",
   "marksman",
   "pyright",
   "sqlls",
+  "tsserver",
   "yamlls",
 }
 
@@ -47,6 +50,7 @@ local function on_attach_standard(client, bufnr)
   opts.desc = "Go to next diagnostic"
   keymap.set("n", "]]", vim.diagnostic.goto_next, opts)
 
+
   opts.desc = "Show documentation for what is under cursor"
   keymap.set("n", "K", vim.lsp.buf.hover, opts)
 end
@@ -71,18 +75,20 @@ local function setRequiredLsps()
   local mason_lspconfig = require("mason-lspconfig")
 
   mason_lspconfig.setup()
-  mason_lspconfig.setup({
-    ensure_installed = required_language_servers,
-    automatic_installation = true,
-  })
+  -- mason_lspconfig.setup({
+  --   ensure_installed = required_language_servers,
+  --   automatic_installation = true,
+  -- })
 end
 
-local function setDiagnosticSigns()
+local function setCommonLspOptions()
   local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
   end
+
+  vim.diagnostic.setqflist()
 end
 
 local function setHandlers()
@@ -126,6 +132,8 @@ end
 
 return {
   "williamboman/mason.nvim",
+  event = { "BufReadPre", "BufNewFile" },
+  lazy = true,
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
@@ -134,7 +142,7 @@ return {
   config = function()
     setupMason()
     setRequiredLsps()
-    setDiagnosticSigns()
+    setCommonLspOptions()
     setHandlers()
   end,
 }

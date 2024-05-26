@@ -18,7 +18,7 @@ require('lazy').setup('nuchs/plugins', {
   ui = { border = "rounded" },
   dev = { path = "~/.work" },
   checker = {
-    enabled = true,
+    enabled = false,
     frequency = 7200,
   },
   performance = {

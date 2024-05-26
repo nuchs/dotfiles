@@ -1,12 +1,13 @@
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.3",
+  lazy = true,
   keys = {
     { "<Leader>t",  "<Cmd>Telescope<CR>",                           desc = "Open Telescope" },
     { "<Leader>ff", "<Cmd>Telescope fd<CR>",                        desc = "Find files in cwd" },
     { "<Leader>fr", "<Cmd>Telescope oldfiles<CR>",                  desc = "Mru files" },
-    { "<Leader>fg", "<Cmd>Telescope live_grep<CR>",                 desc = "Search in cwd" },
-    { "<Leader>fs", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search current buffer" },
+    { "<Leader>//", "<Cmd>Telescope live_grep<CR>",                 desc = "Search in cwd" },
+    { "<Leader>/",  "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search current buffer" },
     { "<Leader>fb", "<Cmd>Telescope buffers<CR>",                   desc = "Select buffer" },
     { "<Leader>h",  "<Cmd>Telescope help_tags<CR>",                 desc = "Search help" },
     { "<Leader>k",  "<Cmd>Telescope keymaps<CR>",                   desc = "List keymaps" },
