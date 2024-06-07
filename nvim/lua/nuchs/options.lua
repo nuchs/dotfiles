@@ -1,33 +1,33 @@
 local opt = vim.opt
 
 opt.backup = false
-opt.clipboard = "unnamedplus"
-opt.colorcolumn = "+1,+2"
-opt.completeopt = { "menuone", "noselect" } -- do I actually want noselect?
+opt.clipboard = 'unnamedplus'
+opt.colorcolumn = '+1,+2'
+opt.completeopt = { 'menuone', 'noselect' } -- do I actually want noselect?
 opt.conceallevel = 0
 opt.cursorline = true
-opt.diffopt:append("iwhite")
-opt.diffopt:append("vertical")
+opt.diffopt:append('iwhite')
+opt.diffopt:append('vertical')
 opt.expandtab = true
-opt.fileencoding = "utf-8"
-opt.foldmethod = "marker"
+opt.fileencoding = 'utf-8'
+opt.foldmethod = 'marker'
 opt.hlsearch = true
 opt.ignorecase = true
-opt.iskeyword:append("-")
+opt.iskeyword:append('-')
 opt.linebreak = true
-opt.mouse = "a"
+opt.mouse = 'a'
 opt.number = true
 opt.numberwidth = 4
 opt.pumheight = 10
 opt.relativenumber = false
-opt.runtimepath:remove("/usr/share/vim/vimfiles")
+opt.runtimepath:remove('/usr/share/vim/vimfiles')
 opt.scrolloff = 5
 opt.shiftwidth = 2
-opt.shortmess:append("c")
+opt.shortmess:append('c')
 opt.showmatch = true
 opt.showtabline = 0
 opt.sidescrolloff = 5
-opt.signcolumn = "yes"
+opt.signcolumn = 'yes'
 opt.smartcase = true
 opt.smartindent = true
 opt.smarttab = true
@@ -40,7 +40,7 @@ opt.textwidth = 80
 opt.timeoutlen = 500
 opt.undofile = true
 opt.updatetime = 250
-opt.viewoptions:remove("curdir")
+opt.viewoptions:remove('curdir')
 opt.wrap = true
 opt.writebackup = false
-opt.shada:append("f1")
+opt.shada:append('f1')

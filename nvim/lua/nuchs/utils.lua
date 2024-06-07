@@ -4,7 +4,7 @@ function utils.load(module)
   local ok, err = pcall(require, module)
 
   if not ok then
-    print("Failed to load " .. module)
+    print('Failed to load ' .. module)
     print(err)
     return
   end
@@ -12,7 +12,7 @@ end
 
 function utils.hasKey(haystack, needle)
   for _, v in ipairs(haystack) do
-    if (v == needle) then
+    if v == needle then
       return true
     end
   end
@@ -21,7 +21,7 @@ function utils.hasKey(haystack, needle)
 end
 
 function utils.escape_pair()
-  local closers = { ")", "]", "}", ">", "'", '"', "`", "," }
+  local closers = { ')', ']', '}', '>', "'", '"', '`', ',' }
   local line = vim.api.nvim_get_current_line()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   local after = line:sub(col + 1, -1)

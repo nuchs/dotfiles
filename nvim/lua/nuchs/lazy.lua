@@ -15,22 +15,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup('nuchs/plugins', {
-  ui = { border = "rounded" },
-  dev = { path = "~/.work" },
+  ui = { border = 'rounded' },
+  dev = { path = '~/.work' },
   checker = {
     enabled = false,
     frequency = 7200,
   },
   performance = {
     disabled_plugins = {
-      "gzip",
-      "tarPlugin",
-      "tutor",
-      "zipPlugin",
-      "netrw",
-    }
-  }
+      'gzip',
+      'tarPlugin',
+      'tutor',
+      'zipPlugin',
+      'netrw',
+    },
+  },
 })
 
 local keymap = vim.keymap
-keymap.set("n", "<Leader>l", "<Cmd>Lazy<CR>", { desc = "Open plugin manager" })
+keymap.set('n', '<Leader>l', '<Cmd>Lazy<CR>', { desc = 'Open plugin manager' })
