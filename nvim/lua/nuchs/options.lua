@@ -43,3 +43,4 @@ opt.updatetime = 250
 opt.viewoptions:remove("curdir")
 opt.wrap = true
 opt.writebackup = false
+opt.shada:append("f1")

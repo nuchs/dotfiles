@@ -1,7 +1,6 @@
 return {
-  "nuchs/neovim-session-manager",
+  "Shatur/neovim-session-manager",
   enabled = true,
-  branch = "f/current-then-last",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "stevearc/dressing.nvim",
@@ -12,7 +11,7 @@ return {
 
     sm.setup({
       autosave_ignore_dirs = { "/", "/home/nuchs" },
-      autoload_mode = config.AutoloadMode.CurrentThenLast,
+      autoload_mode = { config.AutoloadMode.CurrentDir, config.AutoloadMode.LastSession },
     })
 
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {

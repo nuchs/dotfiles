@@ -140,7 +140,7 @@ alias gd='git diff'
 alias gds='git diff --cached'
 alias gs='git status'
 alias gp='git push'
-alias gup='git push -u origin'
+alias gup='git push -u origin HEAD'
 alias gpl='git pull'
 alias gb='git branch'
 alias gco='git checkout'
@@ -283,5 +283,3 @@ function print_git_status {
 PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
 PS_USERLINE="$RESET\n↳ "
 export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
-
-
