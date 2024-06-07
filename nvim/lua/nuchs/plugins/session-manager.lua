@@ -8,15 +8,20 @@ return {
   config = function()
     local config = require('session_manager.config')
     local sm = require("session_manager")
+    local utils = require("nuchs.utils")
+    local ignore = { 'gitcommit', 'gitrebase' }
 
     sm.setup({
       autosave_ignore_dirs = { "/", "/home/nuchs" },
       autoload_mode = { config.AutoloadMode.CurrentDir, config.AutoloadMode.LastSession },
+      autosave_ignore_filetypes = ignore,
     })
 
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
       callback = function()
-        -- sm.save_current_session()
+        if (not utils.hasKey(ignore, vim.bo.filetype)) then
+          sm.save_current_session()
+        end
       end
     })
 
