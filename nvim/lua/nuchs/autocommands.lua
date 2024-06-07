@@ -12,10 +12,3 @@ augroup nuchs_save_cursor_position
  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup end
 ]])
-
-vim.cmd([[
-augroup nuchs_formatting
-  autocmd!
-  autocmd BufWritePre *.go\|*.lua\|*.js\|*.html\|*.css\|*.h\|*.hpp\|*.cpp\|*.py\|*.ts\|Makfile lua vim.lsp.buf.format()
-augroup end
-]])
