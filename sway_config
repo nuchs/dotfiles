@@ -84,17 +84,22 @@ bindsym $mod+Shift+e exec swaymsg exit
 
 # Managing applications
 assign [class="Chromium"] workspace 2
-for_window [class="Spotify"] move scratchpad, resize set width 1280 height 1024
-for_window [app_id="notes"] move scratchpad, resize set width 900 height 1280
-for_window [app_id="scratchy"] move scratchpad, resize set width 1024 height 768
+for_window {
+  [class="Spotify"]   floating enable; resize set width 1280 height 1024
+  [app_id="notes"]    floating enable; resize set width 900  height 1280
+  [app_id="etc"]      floating enable; resize set width 900  height 1280  
+  [app_id="nvimcfg"]  floating enable; resize set width 900  height 1280  
+  [app_id="scratchy"] floating enable; resize set width 1280 height 768
+}
 
-bindsym $mod+Return exec foot
-bindsym $mod+n exec foot nvim
 bindsym $mod+w exec chromium
-
 bindsym $mod+m exec itchy -c Spotify -t 400 spotify
-bindsym $mod+x exec itchy -a notes foot -a notes nvim -S ~/.local/share/nvim/sessions/__home__nuchs__docs__notes
+bindsym $mod+Return exec foot
 bindsym $mod+Shift+Return exec itchy -a scratchy foot -a scratchy
+bindsym $mod+v exec foot nvim
+bindsym $mod+x exec itchy -a notes   foot -a notes   nvim -S ~/.local/share/nvim/sessions/__home__nuchs__docs__notes
+bindsym $mod+b exec itchy -a etc     foot -a etc     nvim -S ~/.local/share/nvim/sessions/__home__nuchs__etc
+bindsym $mod+n exec itchy -a nvimcfg foot -a nvimcfg nvim -S ~/.local/share/nvim/sessions/__home__nuchs__etc__nvim
 
 bindsym $mod+q kill
 

@@ -72,6 +72,16 @@ alias x='exit'
 alias cat='bat'
 alias b='bat'
 
+# ========== Management {{{1
+alias jc='journalctl'
+alias sc='systemctl'
+alias ssc='sudo systemctl'
+
+alias sm='swaymsg'
+
+alias pm='paru'
+alias orphans='pacman -Qtdq'
+
 function wifey {
 
   if [ -z "$1" ]; then
@@ -84,15 +94,6 @@ function wifey {
   nmcli device wifi connect $mac
 }
 
-# ========== Management {{{1
-alias jc='journalctl'
-alias sc='systemctl'
-alias ssc='sudo systemctl'
-
-alias sm='swaymsg'
-
-alias pm='paru'
-alias orphans='pacman -Qtdq'
 
 # ========== History {{{1
 
@@ -176,6 +177,9 @@ alias py='python3'
 
 # --- Dotnet {{{2
 alias dn='dotnet'
+
+# --- Js {{{2
+alias p='pnpm'
 
 # ========== Prompt {{{1
 
