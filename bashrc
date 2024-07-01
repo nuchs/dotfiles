@@ -11,6 +11,11 @@ shopt -s checkwinsize
 # ** matches all directories
 shopt -s globstar
 
+# Turn on vi keybindings
+set -o vi
+# bind 'jk' to escape
+bind '"jk":vi-movement-mode'
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -27,8 +32,10 @@ export GPG_TTY=$(tty)
 # ========== Load 3rd party config  {{{1
 
 # FZF
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+eval "$(fzf --bash)"
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 # Zoxide
 eval "$(zoxide init bash)"
@@ -56,7 +63,8 @@ function eza_ls {
 
   eza --icons -luTL $DEPTH $@
 }
-alias l=eza_ls
+
+alias l='eza --icons --git-ignore -auT'
 alias ls=eza_ls
 
 alias md='mkdir -p'
@@ -113,6 +121,7 @@ alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 
 alias rr='cd "$(git rev-parse --show-toplevel)"'
 alias zz='zi'
+alias zx='zoxide query -l'
 alias cd='z'
 
 # FZF options for Zoxide
@@ -134,11 +143,25 @@ function loc {
 }
 
 # --- git {{{2
-alias gi='cp $MYDOC/templates/go.gitignore .gitignore'
+function git-ignore() {
+  if [ -z "$1" ]; then
+    echo "usage: git-ignore <language> | -l "
+    return
+  fi
+
+  if [ "$1" = "-l" ]; then
+    ls $MYDOC/templates
+    return
+  fi
+
+  cp $MYDOC/templates/$1.gitignore .gitignore
+}
+
+alias gi='git-ignore'
 alias ga='git add'
 alias gc='git commit'
-alias gd='git diff'
-alias gds='git diff --cached'
+alias gd='git diff --color-words'
+alias gds='git diff --cached --color-words'
 alias gs='git status'
 alias gp='git push'
 alias gup='git push -u origin HEAD'
@@ -152,7 +175,16 @@ alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - 
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 
 function github_clone {
-  git clone git@github.com:${1}/${2}.git
+  if [ -n "$2" ]; then
+    who="$1"
+    shift
+  else
+    who="nuchs"
+  fi
+
+  what="$1"
+
+  git clone -v git@github.com:${who}/${what}.git
 }
 
 alias ghc='github_clone'

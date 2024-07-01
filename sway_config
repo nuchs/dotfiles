@@ -58,7 +58,7 @@ bindsym $mod+Shift+4 move container to workspace number 4
 
 # Layout keys
 bindsym $mod+t splitt
-bindsym $mod+s layout toggle split
+bindsym $mod+s layout toggle all
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+r mode "resize"
@@ -88,7 +88,7 @@ for_window {
   [class="Spotify"]   floating enable; resize set width 1280 height 1024
   [app_id="notes"]    floating enable; resize set width 900  height 1280
   [app_id="etc"]      floating enable; resize set width 900  height 1280  
-  [app_id="nvimcfg"]  floating enable; resize set width 900  height 1280  
+  [app_id="nvimcfg"]  floating enable; resize set width 1200  height 1280  
   [app_id="scratchy"] floating enable; resize set width 1280 height 768
 }
 
