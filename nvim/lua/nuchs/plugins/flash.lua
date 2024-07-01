@@ -1,40 +1,32 @@
 return {
-  "folke/flash.nvim",
-  event = { "BufRead", "BufNewFile" },
+  'folke/flash.nvim',
+  event = { 'BufRead', 'BufNewFile' },
   lazy = true,
   opts = {},
   keys = {
     {
-      "s",
-      mode = { "n", "o", "x" },
+      's',
+      mode = { 'n', 'o', 'x' },
       function()
-        require("flash").jump()
+        require('flash').jump()
       end,
-      desc = "Flash",
+      desc = 'Flash',
     },
     {
-      "S",
-      mode = { "n", "o", "x" },
+      'C-s',
+      mode = 'o',
       function()
-        require("flash").treesitter()
+        require('flash').jump()
       end,
-      desc = "Flash Treesitter",
+      desc = 'Flash',
     },
     {
-      "r",
-      mode = "o",
+      'C-R',
+      mode = 'o',
       function()
-        require("flash").remote()
+        require('flash').remote()
       end,
-      desc = "Remote Flash",
-    },
-    {
-      "R",
-      mode = { "o", "x" },
-      function()
-        require("flash").treesitter_search()
-      end,
-      desc = "Treesitter Search",
+      desc = 'Remote Flash',
     },
   },
 }
