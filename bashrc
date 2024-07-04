@@ -119,13 +119,25 @@ alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 
 # ========== Navigation {{{1
 
+function record_and_move() {
+  z $@
+  echo "BASH_LAST_DIR=$PWD" > ~/.bash_lastdir
+}
+
 alias rr='cd "$(git rev-parse --show-toplevel)"'
 alias zz='zi'
 alias zx='zoxide query -l'
-alias cd='z'
+alias z='record_and_move'
+alias cd='record_and_move'
 
 # FZF options for Zoxide
 export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --delimiter="\t" --nth=2 --read0 --preview="command ls -Cp --color=always --group-directories-first {2..}" --preview-window=down,30%,sharp'
+
+# Start in the last used directory
+if [ "$PWD" == "$HOME" -a -f ~/.bash_lastdir ]; then
+    source ~/.bash_lastdir
+    cd $BASH_LAST_DIR
+fi
 
 # ========== Dev {{{1
 
@@ -162,6 +174,7 @@ alias ga='git add'
 alias gc='git commit'
 alias gd='git diff --color-words'
 alias gds='git diff --cached --color-words'
+alias gf='git fetch'
 alias gs='git status'
 alias gp='git push'
 alias gup='git push -u origin HEAD'
@@ -319,3 +332,4 @@ function print_git_status {
 PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
 PS_USERLINE="$RESET\n↳ "
 export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
+

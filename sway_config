@@ -105,6 +105,7 @@ bindsym $mod+q kill
 
 # Startup apps
 exec chromium
+exec /home/nuchs/bin/sway-start.sh
 
 # Setup standard system stuff
 include /etc/sway/config.d/*
