@@ -1,14 +1,52 @@
 #!/bin/bash
 
-if [ -n "$1" ]; then
-  DIR="$1"
+function usage {
+  echo "Usage: $0 [-n]  [-h] [-w WS] [DIR]"
+  echo "  DIR    Use DIR as session directory. Defaults to directory used for"
+  echo "         last nvim session if not specified."
+  echo "  -n     create new window for nvim defaults to using current terminal"
+  echo "  -h     show this help."
+  echo "  -w WS  which workspace to open the session in, defaults to current."
+  exit $1
+}
 
-  cd $DIR
-else
+DIR=""
+NEW_WIN=false
+WS=""
+
+while getopts "hnw:" opt; do
+  case $opt in
+    n)
+      NEW_WIN=true
+      ;;
+    h)
+      usage 0
+      ;;
+    w)
+      WS=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      usage 1
+      ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [ -z "$1" ]; then
   LAST_SESSION=$(/bin/ls -1rt /home/nuchs/.local/share/nvim/sessions | tail -1)
   DIR=${LAST_SESSION//__/\/}
+else
+  DIR=$1
+fi
 
-  swaymsg workspace 1
+if [ -n "$WS" ]; then
+  swaymsg move to workspace $WS
+  swaymsg workspace $WS
+fi
+
+if [ "$NEW_WIN" == true ]; then
   swaymsg exec "foot -D $DIR nvim" 
 fi
 
@@ -26,6 +64,7 @@ swaymsg exec "foot -D $DIR"
 sleep 0.1s
 swaymsg focus right
 
-if [ -n "$1" ]; then
+if [ "$NEW_WIN" != true ]; then
+  cd $DIR
   nvim
 fi

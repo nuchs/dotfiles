@@ -45,7 +45,7 @@ alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  rg -i --glob "!nvim/" $@ ~/etc/
+  rg -i --glob "!nvim/" $@ $MYETC
 }
 
 # ========== Commands {{{1
@@ -142,7 +142,7 @@ fi
 # ========== Dev {{{1
 
 alias n='nvim'
-alias ws='sway-workspace'
+alias ws='sway-workspace.sh'
 
 function loc {
   if [ -z "$1" ]; then

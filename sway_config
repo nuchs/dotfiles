@@ -92,20 +92,23 @@ for_window {
   [app_id="scratchy"] floating enable; resize set width 1280 height 768
 }
 
+# Start programs
 bindsym $mod+w exec chromium
 bindsym $mod+m exec itchy -c Spotify -t 400 spotify
 bindsym $mod+Return exec foot
 bindsym $mod+Shift+Return exec itchy -a scratchy foot -a scratchy
-bindsym $mod+v exec foot nvim
 bindsym $mod+x exec itchy -a notes   foot -a notes   nvim -S ~/.local/share/nvim/sessions/__home__nuchs__docs__notes
 bindsym $mod+b exec itchy -a etc     foot -a etc     nvim -S ~/.local/share/nvim/sessions/__home__nuchs__etc
 bindsym $mod+n exec itchy -a nvimcfg foot -a nvimcfg nvim -S ~/.local/share/nvim/sessions/__home__nuchs__etc__nvim
+bindsym $mod+p exec sway-workspace.sh -n 
 
+# Kill windows
 bindsym $mod+q kill
+bindsym $mod+shift+q [workspace=__focused__] kill
 
 # Startup apps
 exec chromium
-exec /home/nuchs/bin/sway-start.sh
+exec /home/nuchs/bin/sway-workspace.sh -n -w 1
 
 # Setup standard system stuff
 include /etc/sway/config.d/*
