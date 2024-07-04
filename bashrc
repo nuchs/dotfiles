@@ -142,6 +142,7 @@ fi
 # ========== Dev {{{1
 
 alias n='nvim'
+alias ws='sway-workspace'
 
 function loc {
   if [ -z "$1" ]; then
