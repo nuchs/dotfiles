@@ -7,7 +7,7 @@ set $right l
 set $leftmon = DP-3
 set $rightmon = DP-1
 
-# Set up monitors
+# # Set up monitors
 output DP-3 position 0    0
 output DP-1 position 1920 0
 
@@ -108,7 +108,6 @@ bindsym $mod+shift+q [workspace=__focused__] kill
 
 # Startup apps
 exec chromium
-exec /home/nuchs/bin/sway-workspace.sh -n -w 1
 
 # Setup standard system stuff
 include /etc/sway/config.d/*

@@ -11,7 +11,6 @@ return {
     { '<Leader>fb', '<Cmd>Telescope buffers<CR>', desc = 'Select buffer' },
     { '<Leader>h', '<Cmd>Telescope help_tags<CR>', desc = 'Search help' },
     { '<Leader>k', '<Cmd>Telescope keymaps<CR>', desc = 'List keymaps' },
-    { '<Leader>p', '<Cmd>Telescope luasnip<CR>', desc = 'Search snippets' },
   },
   cmd = { 'Telescope' },
   dependencies = {
@@ -35,7 +34,6 @@ return {
         },
       },
     })
-    telescope.load_extension('luasnip')
     telescope.load_extension('fzf')
   end,
 }

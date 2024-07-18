@@ -33,84 +33,12 @@ local function on_attach_standard(_, bufnr)
   keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 end
 
-local function setupMason()
-  local mason = require('mason')
-
-  mason.setup({
-    ui = {
-      icons = {
-        package_installed = '✓',
-        package_pending = '➜',
-        package_uninstalled = '✗',
-      },
-    },
-  })
-
-  vim.keymap.set('n', '<Leader>m', '<Cmd>Mason<CR>', { desc = 'Open Mason' })
-end
-
-local function setRequiredLsps()
-  local mason_lspconfig = require('mason-lspconfig')
-
-  mason_lspconfig.setup()
-  -- mason_lspconfig.setup({
-  --   ensure_installed = required_language_servers,
-  --   automatic_installation = true,
-  -- })
-end
-
-local function setCommonLspOptions()
-  local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
-  for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-  end
-
-  vim.diagnostic.setqflist()
-end
-
-local function setHandlers()
-  local mason_lspconfig = require('mason-lspconfig')
-  local lspconfig = require('lspconfig')
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-  mason_lspconfig.setup_handlers({
-    -- Default handler to automatically setup a new language server
-    function(server_name)
-      lspconfig[server_name].setup({
-        capabilities = capabilities,
-        on_attach = on_attach_standard,
-      })
-    end,
-
-    -- Config for specific language servers
-    ['lua_ls'] = function()
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        on_attach = on_attach_standard,
-        settings = {
-          Lua = {
-            -- make the language server recognize "vim" global
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            workspace = {
-              -- make language server aware of runtime files
-              library = {
-                [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                [vim.fn.stdpath('config') .. '/lua'] = true,
-              },
-            },
-          },
-        },
-      })
-    end,
-  })
-end
-
 return {
   'williamboman/mason.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
+  keys = {
+    { '<Leader>m', '<Cmd>Mason<CR>', desc = 'Open Mason' },
+  },
   lazy = true,
   dependencies = {
     'williamboman/mason-lspconfig.nvim',
@@ -118,9 +46,60 @@ return {
     'neovim/nvim-lspconfig',
   },
   config = function()
-    setupMason()
-    setRequiredLsps()
-    setCommonLspOptions()
-    setHandlers()
+    require('mason').setup({
+      ui = {
+        icons = {
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
+        },
+      },
+    })
+
+    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
+    for type, icon in pairs(signs) do
+      local hl = 'DiagnosticSign' .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    end
+
+    vim.diagnostic.setqflist()
+
+    local lspconfig = require('lspconfig')
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local mason_lspconfig = require('mason-lspconfig')
+
+    mason_lspconfig.setup()
+    mason_lspconfig.setup_handlers({
+      -- Default handler to automatically setup a new language server
+      function(server_name)
+        lspconfig[server_name].setup({
+          capabilities = capabilities,
+          on_attach = on_attach_standard,
+        })
+      end,
+
+      -- Config for specific language servers
+      ['lua_ls'] = function()
+        lspconfig.lua_ls.setup({
+          capabilities = capabilities,
+          on_attach = on_attach_standard,
+          settings = {
+            Lua = {
+              -- make the language server recognize "vim" global
+              diagnostics = {
+                globals = { 'vim' },
+              },
+              workspace = {
+                -- make language server aware of runtime files
+                library = {
+                  [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                  [vim.fn.stdpath('config') .. '/lua'] = true,
+                },
+              },
+            },
+          },
+        })
+      end,
+    })
   end,
 }

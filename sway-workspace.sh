@@ -47,7 +47,7 @@ if [ -n "$WS" ]; then
 fi
 
 if [ "$NEW_WIN" == true ]; then
-  swaymsg exec "foot -D $DIR nvim" 
+  swaymsg exec "foot -D $DIR" 
 fi
 
 swaymsg split horizontal
@@ -64,7 +64,10 @@ swaymsg exec "foot -D $DIR"
 sleep 0.1s
 swaymsg focus right
 
-if [ "$NEW_WIN" != true ]; then
+if [ "$NEW_WIN" == true ]; then
+  wtype cd $DIR -k return
+  wtype nvim -k return
+else
   cd $DIR
   nvim
 fi

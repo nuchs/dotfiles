@@ -112,7 +112,6 @@ HISTFILESIZE=3000
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-
 alias h='history'
 alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 
@@ -143,6 +142,7 @@ fi
 
 alias n='nvim'
 alias ws='sway-workspace.sh'
+alias wsh='sway-workspace.sh .'
 
 function loc {
   if [ -z "$1" ]; then
