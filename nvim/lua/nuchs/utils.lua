@@ -20,6 +20,13 @@ function utils.hasKey(haystack, needle)
   return false
 end
 
+function utils.set_filetype(pattern, filetype)
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = pattern,
+        command = "set filetype=" .. filetype,
+    })
+end
+
 function utils.escape_pair()
   local closers = { ')', ']', '}', '>', "'", '"', '`', ',' }
   local line = vim.api.nvim_get_current_line()

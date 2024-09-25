@@ -21,21 +21,19 @@ return {
   config = function()
     local cmp = require('cmp')
     local lspkind = require('lspkind')
-    local utils = require('nuchs.utils')
 
     cmp.setup({
       completion = {
-        completeopt = 'menuone,preview,noinsert',
+        completeopt = 'menuone,preview,insert',
       },
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-      preselect = cmp.PreselectMode.Item,
+      preselect = cmp.PreselectMode.None,
       mapping = cmp.mapping.preset.insert({
         ['<C-c>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-e>'] = utils.escape_pair(),
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })

@@ -64,6 +64,10 @@ return {
 
     vim.diagnostic.setqflist()
 
+    local utils = require('nuchs.utils')
+    utils.set_filetype({ 'docker-compose.yml' }, 'yaml.docker-compose')
+    utils.set_filetype({ '*.cql' }, 'cql')
+
     local lspconfig = require('lspconfig')
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local mason_lspconfig = require('mason-lspconfig')
@@ -72,6 +76,9 @@ return {
     mason_lspconfig.setup_handlers({
       -- Default handler to automatically setup a new language server
       function(server_name)
+        if server_name == 'tsserver' then
+          server_name = 'ts_ls'
+        end
         lspconfig[server_name].setup({
           capabilities = capabilities,
           on_attach = on_attach_standard,

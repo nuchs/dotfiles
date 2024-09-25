@@ -37,9 +37,13 @@ shift $((OPTIND - 1))
 if [ -z "$1" ]; then
   LAST_SESSION=$(/bin/ls -1rt /home/nuchs/.local/share/nvim/sessions | tail -1)
   DIR=${LAST_SESSION//__/\/}
+elif [ "$1" == "." ]; then
+  DIR="$PWD"
 else
   DIR=$1
 fi
+
+echo "Starting workspace in $DIR in workspace '$WS' (new window? $NEW_WIN)"
 
 if [ -n "$WS" ]; then
   swaymsg move to workspace $WS

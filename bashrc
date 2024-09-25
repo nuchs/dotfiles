@@ -93,7 +93,7 @@ alias orphans='pacman -Qtdq'
 function wifey {
 
   if [ -z "$1" ]; then
-    nmcli device wifi list
+    nmcli device wifi list -rescan yes
     return
   fi
 
@@ -122,6 +122,7 @@ function record_and_move() {
   z $@
   echo "BASH_LAST_DIR=$PWD" > ~/.bash_lastdir
 }
+alias lastd='bat ~/.bash_lastdir'
 
 alias rr='cd "$(git rev-parse --show-toplevel)"'
 alias zz='zi'
@@ -185,6 +186,7 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcom='git checkout main'
 alias gff='git merge --ff-only origin/master'
+alias gunlock='rm .git/index.lock'
 alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 
@@ -226,6 +228,7 @@ alias dn='dotnet'
 
 # --- Js {{{2
 alias p='pnpm'
+alias px='pnpm dlx'
 
 # ========== Prompt {{{1
 
