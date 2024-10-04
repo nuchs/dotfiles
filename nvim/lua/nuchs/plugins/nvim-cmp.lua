@@ -16,15 +16,25 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-nvim-lsp-signature-help',
+    'L3MON4D3/LuaSnip', -- snippet engine
+    'saadparwaiz1/cmp_luasnip', -- for autocompletion
     'onsails/lspkind.nvim', -- vs-code like pictograms
   },
   config = function()
     local cmp = require('cmp')
     local lspkind = require('lspkind')
+    local utils = require('nuchs.utils')
+    local luasnip = require('luasnip')
+    require('luasnip.loaders.from_vscode').lazy_load()
 
     cmp.setup({
       completion = {
         completeopt = 'menuone,preview,insert',
+      },
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
       },
       window = {
         completion = cmp.config.window.bordered(),
@@ -33,6 +43,13 @@ return {
       preselect = cmp.PreselectMode.None,
       mapping = cmp.mapping.preset.insert({
         ['<C-c>'] = cmp.mapping.abort(),
+        ['<C-e>'] = function()
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            utils.escape_pair()
+          end
+        end,
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -56,6 +73,7 @@ return {
         { name = 'codeium' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
+        { name = 'luasnip' },
         {
           name = 'buffer',
           option = {

@@ -56,9 +56,6 @@ keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', opts)
 -- Don't yank deleted text, it's annoying
 keymap('v', 'p', '"_dP', opts)
 
--- Move out of paired delimiters e.g. brackets or quotes
-vim.keymap.set('i', '<C-e>', utils.escape_pair, { noremap = true, silent = true })
-
 -- Show the messages buffer
 vim.keymap.set('n', '<Leader>vm', ':messages<CR>', { noremap = true, silent = true })
 
