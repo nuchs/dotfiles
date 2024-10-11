@@ -21,13 +21,13 @@ function utils.hasKey(haystack, needle)
 end
 
 function utils.set_filetype(pattern, filetype)
-    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-        pattern = pattern,
-        command = "set filetype=" .. filetype,
-    })
+  vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = pattern,
+    command = 'set filetype=' .. filetype,
+  })
 end
 
-function utils.escape_pair()
+function utils.escape_pair(fallback)
   local closers = { ')', ']', '}', '>', "'", '"', '`', ',' }
   local line = vim.api.nvim_get_current_line()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -43,6 +43,8 @@ function utils.escape_pair()
   end
   if closer_i then
     vim.api.nvim_win_set_cursor(0, { row, col + closer_col })
+  elseif fallback ~= nil then
+    fallback()
   else
     vim.api.nvim_win_set_cursor(0, { row, col + 1 })
   end

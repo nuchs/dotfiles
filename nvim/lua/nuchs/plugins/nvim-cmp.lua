@@ -44,20 +44,18 @@ return {
       mapping = cmp.mapping.preset.insert({
         ['<C-c>'] = cmp.mapping.abort(),
         ['<C-e>'] = function()
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            utils.escape_pair()
+          if has_words_before() then
+            cmp.complete()
           end
         end,
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          elseif has_words_before() then
-            cmp.complete()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
-            fallback()
+            utils.escape_pair(fallback)
           end
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
