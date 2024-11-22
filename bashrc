@@ -40,6 +40,9 @@ export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-ra
 # Zoxide
 eval "$(zoxide init bash)"
 
+# OCaml
+eval $(opam env --switch=default)
+
 # ========== Configuration {{{1
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
@@ -61,11 +64,12 @@ function eza_ls {
       ;;
   esac
 
-  eza --icons -luTL $DEPTH $@
+  eza --icons --group-directories-first -TL $DEPTH $@
 }
 
-alias l='eza --icons --git-ignore -auT'
-alias ls=eza_ls
+alias ls="eza_ls"
+alias la="eza_ls -a"
+alias ll="eza_ls -la --no-user --no-permissions --git --git-repos --total-size"
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -171,6 +175,25 @@ function git-ignore() {
   cp $MYDOC/templates/$1.gitignore .gitignore
 }
 
+function git-changed-files {
+  git show --name-only --pretty="format:" $@ | sort | uniq | sed '/^$/d'
+}
+
+function github-clone {
+  if [ -n "$2" ]; then
+    who="$1"
+    shift
+  else
+    who="nuchs"
+  fi
+
+  what="$1"
+
+  git clone -v git@github.com:${who}/${what}.git
+}
+
+alias ghc='github-clone'
+alias gcf="git-changed-files"
 alias gi='git-ignore'
 alias ga='git add'
 alias gc='git commit'
@@ -190,20 +213,6 @@ alias gunlock='rm .git/index.lock'
 alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 
-function github_clone {
-  if [ -n "$2" ]; then
-    who="$1"
-    shift
-  else
-    who="nuchs"
-  fi
-
-  what="$1"
-
-  git clone -v git@github.com:${who}/${what}.git
-}
-
-alias ghc='github_clone'
 
 # --- go {{{2
 alias dlvs='dlv debug --headless --listen :8888 .'

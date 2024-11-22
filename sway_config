@@ -14,7 +14,7 @@ output DP-1 position 1920 0
 # Use uk keyboard
 input type:keyboard xkb_layout "gb" 
 
-# Assign workspaces to montors
+# Assign workspaces to monitors
 workspace 1 output $leftmon 
 workspace 2 output $rightmon 
 workspace 3 output $leftmon 
@@ -34,7 +34,10 @@ bar {
 # Look and feel settings
 default_border pixel 3
 client.focused #fabd2f #fabd2f #ffffff #fabd2f
+client.unfocused #111111 #111111 #111111 #111111
 font ttf-jetbrains-mono-nerd 12
+output DP-1 bg #110909 solid_color
+output DP-3 bg #110909 solid_color
 
 # Navigation keys
 floating_modifier $mod normal
