@@ -46,6 +46,7 @@ eval $(opam env --switch=default)
 # ========== Configuration {{{1
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
+alias sa='cp $MYETC/alacritty.toml $MYAPPDATA/alacritty/alacritty.toml'
 
 function rem() {
   rg -i --glob "!nvim/" $@ $MYETC
