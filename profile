@@ -1,6 +1,3 @@
-eval `ssh-agent`
-ssh-add
-
 export EDITOR='nvim'
 export PAGER='less'
 

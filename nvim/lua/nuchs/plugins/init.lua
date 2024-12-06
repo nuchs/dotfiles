@@ -1,4 +1,4 @@
 return {
-  { 'nuchs/vim-sway-nav' },
+  -- { 'nuchs/vim-sway-nav' },
   { 'vim-scripts/MultipleSearch' },
 }

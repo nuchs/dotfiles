@@ -29,13 +29,15 @@ fi
 
 export GPG_TTY=$(tty)
 
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
+
 # ========== Load 3rd party config  {{{1
 
 # FZF
 eval "$(fzf --bash)"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 # Zoxide
 eval "$(zoxide init bash)"
@@ -143,6 +145,12 @@ if [ "$PWD" == "$HOME" -a -f ~/.bash_lastdir ]; then
     source ~/.bash_lastdir
     cd $BASH_LAST_DIR
 fi
+
+# ========== Tmux {{{1
+alias t='tmux'
+alias tl='tmux ls'
+alias tk='tmux kill-session'
+alias ta='tmux attach-session'
 
 # ========== Dev {{{1
 
