@@ -261,7 +261,7 @@ RED="\e[91m"
 function print_battery {
   if [ ! -f /sys/class/power_supply/BAT1/capacity ]
   then
-    return 0
+    return
   fi
 
   LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
@@ -287,21 +287,20 @@ function print_git_status {
   if [[ $? -ne 0 ]]; then printf ""; return; fi
 
   SPACER=""
-  printf " $RESET$BOLD|$RESET $PURPLE"
   if echo $STATUS | grep -c "branch is ahead" &> /dev/null
   then
-    printf "$RESET$GREEN<"
+    printf "$GREEN<"
     SPACER=" "
   fi
   if echo $STATUS | grep -c "branch is behind" &> /dev/null
   then
-    printf "$RESET$RED>"
+    printf "$RED>"
     SPACER=" "
   fi
-  printf "$SPACER"
+  printf "$SPACER$RESET"
 
   REF=$(git symbolic-ref HEAD 2> /dev/null)
-  printf "$RESET$PURPLE${REF#refs/heads}"
+  printf "$PURPLE${REF#refs/heads} "
 
   GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
   STATE=""
@@ -338,18 +337,19 @@ function print_git_status {
   fi
 
   if [[ -n "$STEP" ]] && [[ -n "$TOTAL" ]]; then
-    printf "$INVERT$STATE $STEP/$TOTAL$RESET"
+    printf "$INVERT$STATE $STEP/$TOTAL$RESET "
   fi
 
   CHANGES=""
-  if [[ $STATUS =~ "fix conflicts"   ]]; then CHANGES="$RED${INVERT}X";           fi
-  if [[ $STATUS =~ "Untracked files" ]]; then CHANGES="$CHANGES$RESET${RED}?";    fi
-  if [[ $STATUS =~ "not staged"      ]]; then CHANGES="$CHANGES$RESET${YELLOW}+"; fi
-  if [[ $STATUS =~ "to be committed" ]]; then CHANGES="$CHANGES$RESET${GREEN}*";  fi
-  if [[ ! -z $CHANGES ]]; then printf "$RESET$PURPLE [$CHANGES$PURPLE]"; fi
+  if [[ $STATUS =~ "fix conflicts"   ]]; then CHANGES="$RED${INVERT}X$RESET";   fi
+  if [[ $STATUS =~ "Untracked files" ]]; then CHANGES="$CHANGES$RED?$RESET";    fi
+  if [[ $STATUS =~ "not staged"      ]]; then CHANGES="$CHANGES$YELLOW+$RESET"; fi
+  if [[ $STATUS =~ "to be committed" ]]; then CHANGES="$CHANGES$GREEN*$RESET";  fi
+  if [[ ! -z $CHANGES ]]; then printf "$PURPLE[$CHANGES$PURPLE]$RESET";        fi
 }
 
-PS_INFO="$DIM\t $(print_battery)${BOLD}|${RESET} $TURQ\w"
-PS_USERLINE="$RESET\n↳ "
-export PS1="$PS_INFO\$(print_git_status)$PS_USERLINE"
+SEP="$BOLD|$RESET "
+TIME="$DIM\t$RESET "
+DIR="$TURQ\w$RESET "
+export PS1="$RESET$TIME\$(print_battery)$SEP$DIR$SEP\$(print_git_status)\n↳ "
 
