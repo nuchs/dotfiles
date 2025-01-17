@@ -1,6 +1,6 @@
 [window]
 decorations = "None"
-opacity = 0.8
+opacity = 0.9
 startup_mode = "Fullscreen"
 
 [font] 
@@ -17,6 +17,9 @@ save_to_clipboard = true
 bindings = [
   { mouse = "Right", action = "Paste" }
 ]
+
+[env]
+TERM = "xterm-256color"
 
 # Colors (Gruvbox dark - from alacritty-theme on github) 
 [colors.primary]

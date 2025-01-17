@@ -72,7 +72,23 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local mason_lspconfig = require('mason-lspconfig')
 
-    mason_lspconfig.setup()
+    mason_lspconfig.setup({
+      ensure_installed = {
+        'bashls',
+        'cssls',
+        'dockerls',
+        'docker_compose_language_service',
+        'emmet_ls',
+        'gopls',
+        'html',
+        'htmx',
+        'jsonls',
+        'lua_ls',
+        'marksman',
+        'taplo',
+        'yamlls',
+      },
+    })
     mason_lspconfig.setup_handlers({
       -- Default handler to automatically setup a new language server
       function(server_name)

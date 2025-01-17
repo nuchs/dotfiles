@@ -1,6 +1,5 @@
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-local utils = require('nuchs.utils')
 
 -- Space for leader
 keymap('', '<Space>', '<Nop>', opts)
@@ -61,3 +60,7 @@ vim.keymap.set('n', '<Leader>vm', ':messages<CR>', { noremap = true, silent = tr
 
 -- Change the cwd to the containing folder for the current buffer
 vim.keymap.set('n', '<Leader>cd', ':cd %:h<CR>')
+
+-- Easier navigation of quickfix list
+keymap('n', '<C-n>', ':cnext<CR>', { noremap = true, silent = true, desc = 'Next quickfix item' })
+keymap('n', '<C-p>', ':cprev<CR>', { noremap = true, silent = true, desc = 'Prev quickfix item' })

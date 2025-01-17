@@ -27,10 +27,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GPG_TTY=$(tty)
-
-export LANG=en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8
 
 # ========== Load 3rd party config  {{{1
 
@@ -41,9 +37,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Zoxide
 eval "$(zoxide init bash)"
-
-# OCaml
-eval $(opam env --switch=default)
 
 # ========== Configuration {{{1
 alias sb='source ~/.bashrc'
@@ -86,6 +79,11 @@ alias x='exit'
 
 alias cat='bat'
 alias b='bat'
+
+function archive {
+  cp -r $@ $MYARCH
+}
+alias aa='archive'
 
 # ========== Management {{{1
 alias jc='journalctl'
@@ -149,7 +147,7 @@ fi
 # ========== Tmux {{{1
 alias t='tmux'
 alias tl='tmux ls'
-alias tk='tmux kill-session'
+alias tk='tmux kill-session -t'
 alias ta='tmux attach-session'
 
 # ========== Dev {{{1
