@@ -16,7 +16,12 @@ keymap(
 
 -- Quicker escaping from insert mode
 keymap('i', 'jk', '<Esc>', opts)
-keymap('i', 'kj', '<ESC>', opts)
+
+-- Easier navigation across long lines
+keymap('n', 'j', 'gj', opts)
+keymap('n', 'gj', 'j', opts)
+keymap('n', 'k', 'gk', opts)
+keymap('n', 'gk', 'k', opts)
 
 -- Manage buffers and windows
 keymap(
@@ -52,7 +57,7 @@ keymap('n', '<A-k>', ':m .-2<CR>==', opts)
 keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi', opts)
 keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi', opts)
 
--- Don't yank deleted text, it's annoying
+-- Don't yank text when you paste over it, it's annoying
 keymap('v', 'p', '"_dP', opts)
 
 -- Show the messages buffer
