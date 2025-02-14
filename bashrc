@@ -86,27 +86,8 @@ function archive {
 alias aa='archive'
 
 # ========== Management {{{1
-alias jc='journalctl'
-alias sc='systemctl'
-alias ssc='sudo systemctl'
-
-alias sm='swaymsg'
-
 alias pm='paru'
 alias orphans='pacman -Qtdq'
-
-function wifey {
-
-  if [ -z "$1" ]; then
-    nmcli device wifi list -rescan yes
-    return
-  fi
-
-  read mac ssid < <(nmcli -c no -f BSSID,SSID device wifi list | rg -i "$1")
-  echo "Connecting to $ssid ($mac)"
-  nmcli device wifi connect $mac
-}
-
 
 # ========== History {{{1
 
@@ -119,7 +100,6 @@ HISTFILESIZE=3000
 shopt -s histappend
 alias h='history'
 alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
-
 
 # ========== Navigation {{{1
 
@@ -153,8 +133,6 @@ alias ta='tmux attach-session'
 # ========== Dev {{{1
 
 alias n='nvim'
-alias ws='sway-workspace.sh'
-alias wsh='sway-workspace.sh .'
 
 function loc {
   if [ -z "$1" ]; then
@@ -182,10 +160,6 @@ function git-ignore() {
   cp $MYDOC/templates/$1.gitignore .gitignore
 }
 
-function git-changed-files {
-  git show --name-only --pretty="format:" $@ | sort | uniq | sed '/^$/d'
-}
-
 function github-clone {
   if [ -n "$2" ]; then
     who="$1"
@@ -200,7 +174,7 @@ function github-clone {
 }
 
 alias ghc='github-clone'
-alias gcf="git-changed-files"
+alias gcf="git diff --name-only"
 alias gi='git-ignore'
 alias ga='git add'
 alias gc='git commit'
@@ -242,10 +216,6 @@ alias py='python3'
 # --- Dotnet {{{2
 alias dn='dotnet'
 
-# --- Js {{{2
-alias p='pnpm'
-alias px='pnpm dlx'
-
 # ========== Prompt {{{1
 
 RESET="\e[0m"
@@ -286,21 +256,17 @@ function print_git_status {
   STATUS="$(git status 2> /dev/null)"
   if [[ $? -ne 0 ]]; then printf ""; return; fi
 
-  SPACER=""
   if echo $STATUS | grep -c "branch is ahead" &> /dev/null
   then
-    printf "$GREEN<"
-    SPACER=" "
+    printf "$GREEN< $RESET"
   fi
   if echo $STATUS | grep -c "branch is behind" &> /dev/null
   then
-    printf "$RED>"
-    SPACER=" "
+    printf "$RED> $RESET"
   fi
-  printf "$SPACER$RESET"
 
   REF=$(git symbolic-ref HEAD 2> /dev/null)
-  printf "$PURPLE${REF#refs/heads} "
+  printf "$PURPLE${REF#refs/heads}$RESET "
 
   GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
   STATE=""
@@ -345,7 +311,7 @@ function print_git_status {
   if [[ $STATUS =~ "Untracked files" ]]; then CHANGES="$CHANGES$RED?$RESET";    fi
   if [[ $STATUS =~ "not staged"      ]]; then CHANGES="$CHANGES$YELLOW+$RESET"; fi
   if [[ $STATUS =~ "to be committed" ]]; then CHANGES="$CHANGES$GREEN*$RESET";  fi
-  if [[ ! -z $CHANGES ]]; then printf "$PURPLE[$CHANGES$PURPLE]$RESET";        fi
+  if [[ ! -z $CHANGES ]]; then printf "$PURPLE[$CHANGES$PURPLE]$RESET ";        fi
 }
 
 SEP="$BOLD|$RESET "
