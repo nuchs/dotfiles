@@ -4,7 +4,6 @@ export PAGER='less'
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export GPG_TTY=$(tty)
 
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
@@ -19,3 +18,4 @@ export GOPATH="$HOME/go"
 export PATH="$MYBIN:$GOPATH/bin:$PATH"
 
 . "$HOME/.bashrc"
+. "$HOME/.cargo/env"

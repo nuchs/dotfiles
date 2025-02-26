@@ -16,3 +16,5 @@
 	defaultBranch = main
 [protocol "file"]
 	allow = always
+[credential]
+	helper = store

@@ -80,8 +80,17 @@ alias x='exit'
 alias cat='bat'
 alias b='bat'
 
+alias n='noted'
+alias nn='noted --new'
+alias ns='noted --search'
+
 function archive {
-  cp -r $@ $MYARCH
+  if [ -z "$1" ]; then
+    echo "archive location: $MYARCH"
+    return
+  fi
+
+  mv $@ $MYARCH
 }
 alias aa='archive'
 
@@ -132,7 +141,7 @@ alias ta='tmux attach-session'
 
 # ========== Dev {{{1
 
-alias n='nvim'
+alias v='nvim'
 
 function loc {
   if [ -z "$1" ]; then
@@ -319,3 +328,5 @@ TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
 export PS1="$RESET$TIME\$(print_battery)$SEP$DIR$SEP\$(print_git_status)\n↳ "
 
+. "$HOME/.cargo/env"
+export GPG_TTY=$(tty)
