@@ -1,0 +1,98 @@
+{
+    // Display settings
+    "editor.tabSize": 2,
+    "editor.fontSize": 16,
+    "window.customTitleBarVisibility": "windowed",
+    "workbench.colorTheme": "Moondust: Far Side of the Moon",
+    "editor.tokenColorCustomizations": {
+        "[Moondust: Far Side of the Moon]": {
+            "functions": "#BBC8BB",
+            "numbers": "#FFFFFF",
+            "types": "#777777",
+            "variables": "#BBBBBB",
+        }
+    },
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideStatusBar": false,
+    "zenMode.showTabs": "none",
+
+    // Terminal settings
+    "terminal.integrated.allowChords": false,
+    "workbench.panel.opensMaximized": "always",
+    "terminal.integrated.env.windows": {
+        "EDITOR": "windsurf"
+    },
+
+    // Extension settings
+    "go.toolsManagement.autoUpdate": true,
+    "redhat.telemetry.enabled": false,
+    "windsurf.autocompleteSpeed": "default",
+    "windsurf.autoExecutionPolicy": "off",
+    "windsurf.chatFontSize": "default",
+    "windsurf.explainAndFixInCurrentConversation": true,
+    "windsurf.openRecentConversation": true,
+    "windsurf.rememberLastModelSelection": true,
+
+    // Vim settings
+    "vim.easymotion": true,
+    "vim.highlightedyank.color": "#a9dc7660",
+    "vim.highlightedyank.duration": 200,
+    "vim.highlightedyank.enable": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.showMarksInGutter": true,
+    "vim.timeout": 200,
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [ "j", "k" ],
+            "after": [ "<Esc>" ]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [ "g", "d" ],
+            "commands": [ "editor.action.revealDefinition" ]
+        },
+        {
+            "before": [ "g", "t" ],
+            "commands": [ "editor.action.goToTypeDefinition" ]
+        },
+        {
+            "before": [ "g", "i" ],
+            "commands": [ "editor.action.goToImplementation" ]
+        },
+        {
+            "before": [ "g", "r" ],
+            "commands": [ "editor.action.referenceSearch.trigger" ]
+        },
+        {
+            "before": [ "shift", "k" ],
+            "commands": [ "editor.action.showDefinitionPreviewHover" ]
+        },
+        {
+            "before": ["<leader>", "q"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        {
+            "before": ["<leader>", "w"],
+            "commands": ["workbench.action.files.save"]
+        },
+        {
+             "before": ["<leader>", "b"],
+             "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        {
+             "before": ["<leader>", "z"],
+             "commands": ["workbench.action.toggleZenMode"]
+        },
+        {
+             "before": ["[", "["],
+             "commands": ["editor.action.marker.prevInFiles"]
+        },
+        {
+             "before": ["]", "]"],
+             "commands": ["editor.action.marker.nextInFiles"]
+        },
+    ],
+}

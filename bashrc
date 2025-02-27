@@ -27,7 +27,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 # ========== Load 3rd party config  {{{1
 
 # FZF
@@ -39,9 +38,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 eval "$(zoxide init bash)"
 
 # ========== Configuration {{{1
+alias vb='vs ~/.bashrc'
+alias vp='vs ~/.profile'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
-alias sa='cp $MYETC/alacritty.toml $MYAPPDATA/alacritty/alacritty.toml'
 
 function rem() {
   rg -i --glob "!nvim/" $@ $MYETC
@@ -49,23 +49,9 @@ function rem() {
 
 # ========== Commands {{{1
 
-function eza_ls {
-  case $1 in
-    ''|*[!0-9]*) 
-      DEPTH=1
-      ;;
-    *) 
-      DEPTH=$1
-      shift
-      ;;
-  esac
-
-  eza --icons --group-directories-first -TL $DEPTH $@
-}
-
-alias ls="eza_ls"
-alias la="eza_ls -a"
-alias ll="eza_ls -la --no-user --no-permissions --git --git-repos --total-size"
+alias ls="ls -p --group-directories-first --color=always"
+alias ll="ls -hlp --group-directories-first --color=always"
+alias la="ls -halp --group-directories-first --color=always"
 
 alias md='mkdir -p'
 alias rd='rmdir'
