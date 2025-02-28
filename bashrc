@@ -50,6 +50,11 @@ function rem() {
   rg -i $@ $MYETC
 }
 
+function sync() {
+  cp /mnt/c/Users/sjbro/AppData/Roaming/Windsurf/User/*.json $MYETC
+  git add $MYETC/*.json
+}
+
 # ========== Commands {{{1
 alias ls="ls -p --group-directories-first --color=always"
 alias ll="ls -hlp --group-directories-first --color=always"
