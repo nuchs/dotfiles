@@ -5,7 +5,7 @@
 [magit]
 	hideCampaign = true
 [core]
-	editor = nvim
+	editor = "windsurf -r --wait"
 	autocrlf = false
 [commit]
 	gpgsign = true
