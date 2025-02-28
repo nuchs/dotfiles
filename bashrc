@@ -37,6 +37,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Zoxide
 eval "$(zoxide init bash)"
 
+# Rust
+. "$HOME/.cargo/env"
+
 # ========== Configuration {{{1
 alias vb='vs ~/.bashrc'
 alias vp='vs ~/.profile'
@@ -44,11 +47,10 @@ alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  rg -i --glob "!nvim/" $@ $MYETC
+  rg -i $@ $MYETC
 }
 
 # ========== Commands {{{1
-
 alias ls="ls -p --group-directories-first --color=always"
 alias ll="ls -hlp --group-directories-first --color=always"
 alias la="ls -halp --group-directories-first --color=always"
@@ -97,7 +99,6 @@ alias h='history'
 alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 
 # ========== Navigation {{{1
-
 function record_and_move() {
   z $@
   echo "BASH_LAST_DIR=$PWD" > ~/.bash_lastdir
@@ -126,9 +127,6 @@ alias tk='tmux kill-session -t'
 alias ta='tmux attach-session'
 
 # ========== Dev {{{1
-
-alias v='nvim'
-
 function loc {
   if [ -z "$1" ]; then
     echo "usage: loc <pattern>"
@@ -189,7 +187,6 @@ alias gunlock='rm .git/index.lock'
 alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 
-
 # --- go {{{2
 alias dlvs='dlv debug --headless --listen :8888 .'
 alias dlvc='dlv connect :8888'
@@ -212,7 +209,6 @@ alias py='python3'
 alias dn='dotnet'
 
 # ========== Prompt {{{1
-
 RESET="\e[0m"
 BOLD="\e[1m"
 DIM="\e[2m"
@@ -314,5 +310,4 @@ TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
 export PS1="$RESET$TIME\$(print_battery)$SEP$DIR$SEP\$(print_git_status)\n↳ "
 
-. "$HOME/.cargo/env"
 export GPG_TTY=$(tty)
