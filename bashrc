@@ -27,19 +27,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# ========== Load 3rd party config  {{{1
-
-# FZF
-eval "$(fzf --bash)"
-export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# Zoxide
-eval "$(zoxide init bash)"
-
-# Rust
-. "$HOME/.cargo/env"
-
 # ========== Configuration {{{1
 alias vb='vs ~/.bashrc'
 alias vp='vs ~/.profile'
@@ -56,9 +43,9 @@ function sync() {
 }
 
 # ========== Commands {{{1
-alias ls="ls -p --group-directories-first --color=always"
-alias ll="ls -hlp --group-directories-first --color=always"
-alias la="ls -halp --group-directories-first --color=always"
+alias ls="ls --classify=always --group-directories-first --color=always"
+alias ll="ls -hl --classify=always --group-directories-first --color=always"
+alias la="ls -hAl --classify=always --group-directories-first --color=always"
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -140,7 +127,7 @@ function loc {
 
   pattern=".*${1}\$"
   shift
-  fd $pattern | xargs wc -l $@
+  find . -name "$pattern" | xargs wc -l $@
 }
 
 # --- git {{{2
@@ -250,8 +237,9 @@ function git_prompt_read {
 
 function print_git_status {
   STATUS="$(git status 2> /dev/null)"
-  if [[ $? -ne 0 ]]; then printf ""; return; fi
+  if [[ $? -ne 0 ]]; then return; fi
 
+  printf "$SEP"
   if echo $STATUS | grep -c "branch is ahead" &> /dev/null
   then
     printf "$GREEN< $RESET"
@@ -313,6 +301,16 @@ function print_git_status {
 SEP="$BOLD|$RESET "
 TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
-export PS1="$RESET$TIME\$(print_battery)$SEP$DIR$SEP\$(print_git_status)\n↳ "
+export PS1="$RESET$TIME\$(print_battery)$SEP$DIR\$(print_git_status)\n↳ "
 
+# ========== Load 3rd party config  {{{1
 export GPG_TTY=$(tty)
+
+# Rust
+. "$HOME/.cargo/env"
+
+# FZF
+eval "$(fzf --bash)"
+
+# Zoxide
+eval "$(zoxide init bash)"
