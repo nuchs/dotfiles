@@ -27,6 +27,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# ========== Load 3rd party config  {{{1
+export GPG_TTY=$(tty)
+
+# Rust
+. "$HOME/.cargo/env"
+
+# FZF
+eval "$(fzf --bash)"
+
+# Zoxide
+eval "$(zoxide init bash)"
+
 # ========== Configuration {{{1
 alias vb='vs ~/.bashrc'
 alias vp='vs ~/.profile'
@@ -35,11 +47,6 @@ alias sp='source ~/.bash_profile'
 
 function rem() {
   rg -i $@ $MYETC
-}
-
-function sync() {
-  cp /mnt/c/Users/sjbro/AppData/Roaming/Windsurf/User/*.json $MYETC
-  git add $MYETC/*.json
 }
 
 # ========== Commands {{{1
@@ -109,7 +116,7 @@ export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --k
 # Start in the last used directory
 if [ "$PWD" == "$HOME" -a -f ~/.bash_lastdir ]; then
     source ~/.bash_lastdir
-    cd $BASH_LAST_DIR
+    record_and_move $BASH_LAST_DIR
 fi
 
 # ========== Tmux {{{1
@@ -178,6 +185,7 @@ alias gff='git merge --ff-only origin/master'
 alias gunlock='rm .git/index.lock'
 alias gl='git log -n 10 --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%aD%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
 alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bold cyan)%a%D%C(auto)%d%n    %s%n    %C(dim white)- %an <%ae> %C(auto)%G?"'
+alias gls='git log --oneline --name-status --'
 
 # --- go {{{2
 alias dlvs='dlv debug --headless --listen :8888 .'
@@ -199,6 +207,9 @@ alias py='python3'
 
 # --- Dotnet {{{2
 alias dn='dotnet'
+
+# --- Ollama {{{2
+alias ol='ollama'
 
 # ========== Prompt {{{1
 RESET="\e[0m"
@@ -303,14 +314,3 @@ TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
 export PS1="$RESET$TIME\$(print_battery)$SEP$DIR\$(print_git_status)\n↳ "
 
-# ========== Load 3rd party config  {{{1
-export GPG_TTY=$(tty)
-
-# Rust
-. "$HOME/.cargo/env"
-
-# FZF
-eval "$(fzf --bash)"
-
-# Zoxide
-eval "$(zoxide init bash)"

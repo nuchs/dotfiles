@@ -1,29 +1,29 @@
 {
+    // General settings
+    "security.workspace.trust.untrustedFiles": "open",
+
     // Display settings
     "editor.tabSize": 2,
-    "editor.fontSize": 16,
+    "editor.fontSize": 14,
+    "editor.stickyScroll.enabled": false,
     "window.customTitleBarVisibility": "windowed",
-    "workbench.colorTheme": "Moondust: Far Side of the Moon",
-    "editor.tokenColorCustomizations": {
-        "[Moondust: Far Side of the Moon]": {
-            "functions": "#BBC8BB",
-            "numbers": "#FFFFFF",
-            "types": "#777777",
-            "variables": "#BBBBBB",
-        }
-    },
+    "window.menuBarVisibility": "compact",
+    "workbench.colorTheme": "Solarized Light",
     "zenMode.hideLineNumbers": false,
     "zenMode.hideStatusBar": false,
     "zenMode.showTabs": "none",
 
     // Terminal settings
     "terminal.integrated.allowChords": false,
-    "workbench.panel.opensMaximized": "always",
+    "terminal.integrated.shellIntegration.enabled": false,
+    "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.env.windows": {
         "EDITOR": "windsurf"
     },
+    "workbench.panel.opensMaximized": "always",
 
     // Extension settings
+    "find-it-faster.general.restoreFocusTerminal": true,
     "go.toolsManagement.autoUpdate": true,
     "redhat.telemetry.enabled": false,
     "windsurf.autocompleteSpeed": "default",
@@ -35,6 +35,7 @@
 
     // Vim settings
     "vim.easymotion": true,
+    "vim.gdefault": true,
     "vim.highlightedyank.color": "#a9dc7660",
     "vim.highlightedyank.duration": 200,
     "vim.highlightedyank.enable": true,
@@ -67,8 +68,8 @@
             "commands": [ "editor.action.referenceSearch.trigger" ]
         },
         {
-            "before": [ "shift", "k" ],
-            "commands": [ "editor.action.showDefinitionPreviewHover" ]
+            "before": [ "K" ],
+            "commands": [ "editor.action.showHover" ]
         },
         {
             "before": ["<leader>", "q"],
@@ -85,6 +86,10 @@
         {
              "before": ["<leader>", "z"],
              "commands": ["workbench.action.toggleZenMode"]
+        },
+        {
+            "before": ["<leader>", "k"],
+            "commands": ["workbench.action.openGlobalKeybindings"]
         },
         {
              "before": ["[", "["],
