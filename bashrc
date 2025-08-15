@@ -73,7 +73,7 @@ alias ns='noted --search'
 
 function archive {
   if [ -z "$1" ]; then
-    echo "archive location: $MYARCH"
+    cd $MYARCH
     return
   fi
 

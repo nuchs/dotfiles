@@ -1,37 +1,35 @@
 {
     // General settings
     "security.workspace.trust.untrustedFiles": "open",
+    "remote.autoForwardPortsSource": "hybrid",
 
     // Display settings
     "editor.tabSize": 2,
     "editor.fontSize": 14,
     "editor.stickyScroll.enabled": false,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "JetBrainsMono Nerd Font Regular",
     "window.customTitleBarVisibility": "windowed",
     "window.menuBarVisibility": "compact",
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.panel.opensMaximized": "always",
+    "workbench.colorTheme": "Default Light Modern",
+    "workbench.editor.editorActionsLocation": "hidden",
     "zenMode.hideLineNumbers": false,
     "zenMode.hideStatusBar": false,
     "zenMode.showTabs": "none",
+    "zenMode.centerLayout":false,
 
     // Terminal settings
     "terminal.integrated.allowChords": false,
     "terminal.integrated.shellIntegration.enabled": false,
-    "terminal.integrated.tabs.enabled": false,
+    "terminal.integrated.defaultProfile.linux": "tmux",
     "terminal.integrated.env.windows": {
         "EDITOR": "windsurf"
     },
-    "workbench.panel.opensMaximized": "always",
 
     // Extension settings
-    "find-it-faster.general.restoreFocusTerminal": true,
     "go.toolsManagement.autoUpdate": true,
     "redhat.telemetry.enabled": false,
-    "windsurf.autocompleteSpeed": "default",
-    "windsurf.autoExecutionPolicy": "off",
-    "windsurf.chatFontSize": "default",
-    "windsurf.explainAndFixInCurrentConversation": true,
-    "windsurf.openRecentConversation": true,
-    "windsurf.rememberLastModelSelection": true,
 
     // Vim settings
     "vim.easymotion": true,
@@ -52,6 +50,22 @@
     ],
     "vim.normalModeKeyBindings": [
         {
+            "before": [ "<leader>", "c" ],
+            "commands": [ "workbench.action.openGlobalKeybindingsFile" ]
+        },
+        {
+            "before": ["<leader>", "k"],
+            "commands": ["workbench.action.openGlobalKeybindings"]
+        },
+        {
+            "before": ["<leader>", "s"],
+            "commands": ["workbench.action.openSettingsJson"]
+        },
+        {
+            "before": [ "K" ],
+            "commands": [ "editor.action.showHover" ]
+        },
+        {
             "before": [ "g", "d" ],
             "commands": [ "editor.action.revealDefinition" ]
         },
@@ -68,8 +82,20 @@
             "commands": [ "editor.action.referenceSearch.trigger" ]
         },
         {
-            "before": [ "K" ],
-            "commands": [ "editor.action.showHover" ]
+            "before": ["[", "["],
+            "commands": ["editor.action.marker.prevInFiles"]
+        },
+        {
+            "before": ["]", "]"],
+            "commands": ["editor.action.marker.nextInFiles"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["workbench.action.files.openFolder"]
+        },
+        {
+            "before": ["<leader>", "o"],
+            "commands": ["workbench.action.closeEditorsInOtherGroups"]
         },
         {
             "before": ["<leader>", "q"],
@@ -86,18 +112,6 @@
         {
              "before": ["<leader>", "z"],
              "commands": ["workbench.action.toggleZenMode"]
-        },
-        {
-            "before": ["<leader>", "k"],
-            "commands": ["workbench.action.openGlobalKeybindings"]
-        },
-        {
-             "before": ["[", "["],
-             "commands": ["editor.action.marker.prevInFiles"]
-        },
-        {
-             "before": ["]", "]"],
-             "commands": ["editor.action.marker.nextInFiles"]
         },
     ],
 }

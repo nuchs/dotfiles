@@ -1,4 +1,5 @@
 [
+  // Unset default keybindings
   {
     "key": "ctrl+j",
     "command": "-workbench.action.togglePanel"
@@ -17,9 +18,46 @@
     "command": "-workbench.action.quickOpen"
   },
   {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpenView"
+  },
+
+  // Manage utility panels
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.quickOpen"
+  },
+  {
     "key": "ctrl+oem_1",
     "command": "windsurf.prioritized.chat.open",
   },
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+shift+q",
+    "command": "workbench.action.closeAllEditors"
+  },
+
+  // Search
+
+  {
+    "key": "ctrl+g",
+    "command": "search.action.focusNextSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "search.action.focusPreviousSearchResult",
+    "when": "hasSearchResult || inSearchEditor"
+  },
+
+  // Vim style navigation
   {
     "key": "ctrl+h",
     "command": "workbench.action.navigateLeft",
