@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ========== Terminal Config {{{1
 case $- in
     *i*) ;;
@@ -13,19 +15,7 @@ shopt -s globstar
 
 # Turn on vi keybindings
 set -o vi
-# bind 'jk' to escape
 bind '"jk":vi-movement-mode'
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
 
 # ========== Load 3rd party config  {{{1
 export GPG_TTY=$(tty)
@@ -40,19 +30,24 @@ eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
 
 # ========== Configuration {{{1
-alias vb='vs ~/.bashrc'
-alias vp='vs ~/.profile'
+alias vb='helix ~/.bashrc'
+alias vp='helix ~/.profile'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
+alias sa='cp $MYETC/alacritty.toml $MYAPPDATA/alacritty/alacritty.toml'
 
 function rem() {
   rg -i $@ $MYETC
 }
 
 # ========== Commands {{{1
+alias h='helix'
+alias hx='helix'
+
 alias ls="ls --classify=always --group-directories-first --color=always"
 alias ll="ls -hl --classify=always --group-directories-first --color=always"
 alias la="ls -hAl --classify=always --group-directories-first --color=always"
+alias tt='tree -FC --filesfirst'
 
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -126,16 +121,6 @@ alias tk='tmux kill-session -t'
 alias ta='tmux attach-session'
 
 # ========== Dev {{{1
-function loc {
-  if [ -z "$1" ]; then
-    echo "usage: loc <pattern>"
-    return
-  fi
-
-  pattern=".*${1}\$"
-  shift
-  find . -name "$pattern" | xargs wc -l $@
-}
 
 # --- git {{{2
 function git-ignore() {
