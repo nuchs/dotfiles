@@ -2,6 +2,7 @@ theme = "tokyonight"
 
 [editor]
 cursorline = true
+true-color=true
 
 [editor.cursor-shape]
 insert = "bar"   

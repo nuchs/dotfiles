@@ -17,6 +17,15 @@ shopt -s globstar
 set -o vi
 bind '"jk":vi-movement-mode'
 
+# Adding wsl-open as a browser for WSL
+if [[ $(uname -r) =~ (m|M)icrosoft ]]; then
+  if [[ -z $BROWSER ]]; then
+    export BROWSER=wsl-open
+  else
+    export BROWSER=$BROWSER:wsl-open
+  fi
+fi
+
 # ========== Load 3rd party config  {{{1
 export GPG_TTY=$(tty)
 
@@ -68,11 +77,10 @@ alias ns='noted --search'
 
 function archive {
   if [ -z "$1" ]; then
-    cd $MYARCH
-    return
+    cd "$MYARCH" || return
   fi
 
-  mv $@ $MYARCH
+  mv $@ "$MYARCH"
 }
 alias aa='archive'
 
@@ -89,7 +97,7 @@ HISTFILESIZE=3000
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-alias h='history'
+alias hh='history'
 alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 
 # ========== Navigation {{{1
@@ -299,3 +307,5 @@ TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
 export PS1="$RESET$TIME\$(print_battery)$SEP$DIR\$(print_git_status)\n↳ "
 
+
+          
