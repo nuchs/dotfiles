@@ -6,6 +6,17 @@ case $- in
       *) return;;
 esac
 
+# auto-attach/new a tmux session on interactive shells
+if [[ -z $NO_TMUX_AUTO && -z $TMUX && $- == *i* ]] && command -v tmux >/dev/null; then
+  if tmux has-session 2>/dev/null; then
+    exec tmux attach
+  else
+    tmux start-server
+    ~/.tmux/plugins/tmux-continuum/scripts/continuum_restore.sh 
+    exec tmux
+  fi
+fi
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
