@@ -70,22 +70,3 @@ vim.keymap.set('n', '<Leader>cd', ':cd %:h<CR>')
 keymap('n', '<C-n>', ':cnext<CR>', { noremap = true, silent = true, desc = 'Next quickfix item' })
 keymap('n', '<C-p>', ':cprev<CR>', { noremap = true, silent = true, desc = 'Prev quickfix item' })
 
--- Default lsp keybinds
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('my.lsp.attach', {}),
-  callback = function(args)
-    local bufnr = args.buf
-    local keymap, opts = vim.keymap, { noremap = true, silent = true, buffer = bufnr }
-
-    opts.desc = 'Show LSP references'; keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-    opts.desc = 'Go to declaration'; keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    opts.desc = 'Show LSP definitions'; keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-    opts.desc = 'Show LSP implementations'; keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-    opts.desc = 'Show LSP type definitions'; keymap.set('n', 'gt', '<cmd:Telescope lsp_type_definitions<CR>', opts)
-    opts.desc = 'See available code actions'; keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, opts)
-    opts.desc = 'Smart rename'; keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
-    opts.desc = 'Prev diagnostic'; keymap.set('n', '[[', vim.diagnostic.goto_prev, opts)
-    opts.desc = 'Next diagnostic'; keymap.set('n', ']]', vim.diagnostic.goto_next, opts)
-    opts.desc = 'Hover docs'; keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  end,
-})

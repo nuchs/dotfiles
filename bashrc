@@ -2,8 +2,8 @@
 
 # ========== Terminal Config {{{1
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # auto-attach/new a tmux session on interactive shells
@@ -12,7 +12,7 @@ if [[ -z $NO_TMUX_AUTO && -z $TMUX && $- == *i* ]] && command -v tmux >/dev/null
     exec tmux attach
   else
     tmux start-server
-    ~/.tmux/plugins/tmux-continuum/scripts/continuum_restore.sh 
+    ~/.tmux/plugins/tmux-continuum/scripts/continuum_restore.sh
     exec tmux
   fi
 fi
@@ -50,19 +50,15 @@ eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
 
 # ========== Configuration {{{1
-alias vb='helix ~/.bashrc'
-alias vp='helix ~/.profile'
 alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
-alias sa='cp $MYETC/alacritty.toml $MYAPPDATA/alacritty/alacritty.toml'
 
 function rem() {
   rg -i $@ $MYETC
 }
 
 # ========== Commands {{{1
-alias h='helix'
-alias hx='helix'
+alias n='nvim'
 
 alias ls="ls --classify=always --group-directories-first --color=always"
 alias ll="ls -hl --classify=always --group-directories-first --color=always"
@@ -82,9 +78,9 @@ alias x='exit'
 alias cat='bat'
 alias b='bat'
 
-alias n='noted'
-alias nn='noted --new'
-alias ns='noted --search'
+alias no='noted'
+alias non='noted --new'
+alias nos='noted --search'
 
 function archive {
   if [ -z "$1" ]; then
@@ -114,7 +110,7 @@ alias hg='$(history | fzf | awk '"'"'{$1=""}1'"'"')'
 # ========== Navigation {{{1
 function record_and_move() {
   z $@
-  echo "BASH_LAST_DIR=$PWD" > ~/.bash_lastdir
+  echo "BASH_LAST_DIR=$PWD" >~/.bash_lastdir
 }
 alias lastd='bat ~/.bash_lastdir'
 
@@ -129,8 +125,8 @@ export _ZO_FZF_OPTS='--no-sort --bind=ctrl-z:ignore,btab:up,tab:down --cycle --k
 
 # Start in the last used directory
 if [ "$PWD" == "$HOME" -a -f ~/.bash_lastdir ]; then
-    source ~/.bash_lastdir
-    record_and_move $BASH_LAST_DIR
+  source ~/.bash_lastdir
+  record_and_move $BASH_LAST_DIR
 fi
 
 # ========== Tmux {{{1
@@ -227,8 +223,7 @@ YELLOW="\e[33m"
 RED="\e[91m"
 
 function print_battery {
-  if [ ! -f /sys/class/power_supply/BAT1/capacity ]
-  then
+  if [ ! -f /sys/class/power_supply/BAT1/capacity ]; then
     return
   fi
 
@@ -236,9 +231,12 @@ function print_battery {
   CHARGING=$(cat /sys/class/power_supply/BAT1/status)
   BCOL=""
 
-  if   [[ $CHARGING == "Charging" ]]; then BCOL="$BOLD${GREEN}"
-  elif [[ $LEVEL -lt 15 ]];           then BCOL="$BOLD${RED}"
-  elif [[ $LEVEL -lt 30 ]];           then BCOL="$BOLD${YELLOW}"
+  if [[ $CHARGING == "Charging" ]]; then
+    BCOL="$BOLD${GREEN}"
+  elif [[ $LEVEL -lt 15 ]]; then
+    BCOL="$BOLD${RED}"
+  elif [[ $LEVEL -lt 30 ]]; then
+    BCOL="$BOLD${YELLOW}"
   fi
 
   printf "$BCOL$LEVEL%%${RESET} "
@@ -251,20 +249,18 @@ function git_prompt_read {
 }
 
 function print_git_status {
-  STATUS="$(git status 2> /dev/null)"
+  STATUS="$(git status 2>/dev/null)"
   if [[ $? -ne 0 ]]; then return; fi
 
   printf "$SEP"
-  if echo $STATUS | grep -c "branch is ahead" &> /dev/null
-  then
+  if echo $STATUS | grep -c "branch is ahead" &>/dev/null; then
     printf "$GREEN< $RESET"
   fi
-  if echo $STATUS | grep -c "branch is behind" &> /dev/null
-  then
+  if echo $STATUS | grep -c "branch is behind" &>/dev/null; then
     printf "$RED> $RESET"
   fi
 
-  REF=$(git symbolic-ref HEAD 2> /dev/null)
+  REF=$(git symbolic-ref HEAD 2>/dev/null)
   printf "$PURPLE${REF#refs/heads}$RESET "
 
   GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
@@ -306,17 +302,14 @@ function print_git_status {
   fi
 
   CHANGES=""
-  if [[ $STATUS =~ "fix conflicts"   ]]; then CHANGES="$RED${INVERT}X$RESET";   fi
-  if [[ $STATUS =~ "Untracked files" ]]; then CHANGES="$CHANGES$RED?$RESET";    fi
-  if [[ $STATUS =~ "not staged"      ]]; then CHANGES="$CHANGES$YELLOW+$RESET"; fi
-  if [[ $STATUS =~ "to be committed" ]]; then CHANGES="$CHANGES$GREEN*$RESET";  fi
-  if [[ ! -z $CHANGES ]]; then printf "$PURPLE[$CHANGES$PURPLE]$RESET ";        fi
+  if [[ $STATUS =~ "fix conflicts" ]]; then CHANGES="$RED${INVERT}X$RESET"; fi
+  if [[ $STATUS =~ "Untracked files" ]]; then CHANGES="$CHANGES$RED?$RESET"; fi
+  if [[ $STATUS =~ "not staged" ]]; then CHANGES="$CHANGES$YELLOW+$RESET"; fi
+  if [[ $STATUS =~ "to be committed" ]]; then CHANGES="$CHANGES$GREEN*$RESET"; fi
+  if [[ ! -z $CHANGES ]]; then printf "$PURPLE[$CHANGES$PURPLE]$RESET "; fi
 }
 
 SEP="$BOLD|$RESET "
 TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
 export PS1="$RESET$TIME\$(print_battery)$SEP$DIR\$(print_git_status)\n↳ "
-
-
-          

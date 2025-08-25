@@ -1,5 +1,5 @@
 #!/bin/bash
-export EDITOR='helix'
+export EDITOR='nvim'
 export PAGER='less'
 
 export MANROFFOPT="-c"
