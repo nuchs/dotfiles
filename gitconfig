@@ -3,7 +3,7 @@
 	name = nuchs
 	signingkey = C4BD552FFB43C9AE9E1B4D85B956BAEE057B2090
 [core]
-	editor = "helix"
+	editor = "nvim"
 	autocrlf = false
 [commit]
 	gpgsign = true

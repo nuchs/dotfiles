@@ -54,7 +54,7 @@ alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  rg -i $@ $MYETC
+  rg -i -g '!nvim' $@ $MYETC
 }
 
 # ========== Commands {{{1
@@ -72,7 +72,7 @@ alias rmd='rm -rf'
 alias lns='ln -s'
 
 alias up="ping -c 1 www.google.com"
-alias k9="kill -9"
+alias k9="ps -ef | fzf | awk '{print $2}' | xargs kill -9"
 alias x='exit'
 
 alias cat='bat'
@@ -188,7 +188,7 @@ alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bo
 alias gls='git log --oneline --name-status --'
 
 # --- go {{{2
-alias dlvs='dlv debug --headless --listen :8888 .'
+alias dlvs='dlv debug --headless --listen :8888 --api-version 2'
 alias dlvc='dlv connect :8888'
 
 # --- docker {{{2
