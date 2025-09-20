@@ -27,7 +27,7 @@ return {
     'sh',
     'sql',
     'sum',
-    'rust',
+    'rs',
     'tf',
     'toml',
     'ts',

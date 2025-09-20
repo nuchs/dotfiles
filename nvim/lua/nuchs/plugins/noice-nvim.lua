@@ -1,6 +1,13 @@
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',
+  enabled = true,
+  dependencies = {
+    'MunifTanjim/nui.nvim',
+    'rcarriga/nvim-notify',
+    'nvim-treesitter/nvim-treesitter',
+    'hrsh7th/nvim-cmp',
+  },
   opts = {
     presets = {
       command_palette = true,
@@ -25,10 +32,5 @@ return {
     lsp = {
       progress = { enabled = true },
     },
-  },
-  dependencies = {
-    'MunifTanjim/nui.nvim',
-    'rcarriga/nvim-notify',
-    'nvim-treesitter/nvim-treesitter',
   },
 }

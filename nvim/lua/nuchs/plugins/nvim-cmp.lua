@@ -5,11 +5,9 @@ local has_words_before = function()
       vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
-
 return {
   'hrsh7th/nvim-cmp',
-  lazy = true,
-  event = { 'InsertEnter', 'CmdLineEnter' },
+  lazy = false,
   dependencies = {
     'hrsh7th/cmp-buffer', -- source for text in buffer
     'hrsh7th/cmp-cmdline',
@@ -94,18 +92,17 @@ return {
 
     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        { name = 'buffer' },
-      },
+      sources = { { name = 'buffer' } },
     })
 
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        { name = 'path' },
-      }, {
-        { name = 'cmdline' },
+      mapping = cmp.mapping.preset.cmdline({
+        ['<C-Space>'] = { c = function() cmp.complete() end },
       }),
+      sources = cmp.config.sources(
+        { { name = 'path' } },
+        { { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } } }
+      ),
     })
-  end,
+  end
 }

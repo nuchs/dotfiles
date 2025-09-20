@@ -16,6 +16,7 @@ utils.set_filetype({ 'docker-compose.yml' }, 'yaml.docker-compose')
 
 -- General Options
 local opt = vim.opt
+opt.autoread = true
 opt.backup = false
 opt.clipboard = 'unnamedplus'
 opt.colorcolumn = '+1,+2'

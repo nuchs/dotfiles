@@ -13,3 +13,15 @@ augroup nuchs_save_cursor_position
 augroup end
 ]])
 
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  command = "checktime",
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  callback = function(args)
+    vim.notify(
+      ("File changed on disk. Reloaded: %s"):format(vim.api.nvim_buf_get_name(args.buf)),
+      vim.log.levels.INFO
+    )
+  end,
+})
