@@ -72,7 +72,7 @@ alias rmd='rm -rf'
 alias lns='ln -s'
 
 alias up="ping -c 1 www.google.com"
-alias k9="ps -ef | fzf | awk '{print $2}' | xargs kill -9"
+alias k9="ps -ef | fzf | awk '{print \$2}' | xargs kill -9"
 alias x='exit'
 
 alias cat='bat'
