@@ -191,6 +191,19 @@ alias gls='git log --oneline --name-status --'
 alias dlvs='dlv debug --headless --listen :8888 --api-version 2'
 alias dlvc='dlv connect :8888'
 
+function my-go-mod() {
+  if [ -z "$1" ]; then
+    echo "usage: my-go-mod <name>"
+    return
+  fi
+  go mod init "github.com/nuchs/$1"
+}
+
+alias gomi='my-go-mod'
+alias gomt='go mod tidy'
+alias got='swatch go test ./... | colourise -p gotest'
+alias clogs='colourise -p slog'
+
 # --- docker {{{2
 alias dk='docker'
 alias dkc='docker container'
