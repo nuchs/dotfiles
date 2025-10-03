@@ -72,7 +72,6 @@ alias rmd='rm -rf'
 alias lns='ln -s'
 
 alias up="ping -c 1 www.google.com"
-alias k9="ps -ef | fzf | awk '{print \$2}' | xargs kill -9"
 alias x='exit'
 
 alias cat='bat'
@@ -134,6 +133,27 @@ alias t='tmux'
 alias tl='tmux ls'
 alias tk='tmux kill-session -t'
 alias ta='tmux attach-session'
+
+function open-popup {
+  if [ -z "$1" ]; then
+    echo "usage: open-popup <command> [args...]"
+    return
+  fi
+  CMD=$1
+  shift
+
+  if [[ -z "$TMUX" ]]; then
+    command -v $CMD >/dev/null || { echo "$CMD not found"; return 127; }
+    exec $CMD $@
+  fi
+
+  tmux display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "$CMD $@"
+}
+
+alias lgp='open-popup lazygit'
+function k9 {
+  open-popup "ps -ef | fzf | awk '{print \$2}' | xargs kill -9"
+}
 
 # ========== Dev {{{1
 

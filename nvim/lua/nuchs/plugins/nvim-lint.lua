@@ -6,6 +6,7 @@ return {
 
     lint.linters_by_ft = {
       makefile = { 'checkmake' },
+      go = { 'golangcilint' },
     }
 
     vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
