@@ -1,8 +1,8 @@
 local has_words_before = function()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and
-      vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+  return col ~= 0
+    and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
 return {
@@ -11,13 +11,13 @@ return {
   dependencies = {
     'hrsh7th/cmp-buffer', -- source for text in buffer
     'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-path',   -- source for file system paths
+    'hrsh7th/cmp-path', -- source for file system paths
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-nvim-lsp-signature-help',
-    'L3MON4D3/LuaSnip',         -- snippet engine
+    'L3MON4D3/LuaSnip', -- snippet engine
     'saadparwaiz1/cmp_luasnip', -- for autocompletion
-    'onsails/lspkind.nvim',     -- vs-code like pictograms
+    'onsails/lspkind.nvim', -- vs-code like pictograms
   },
   config = function()
     local cmp = require('cmp')
@@ -51,7 +51,7 @@ return {
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          elseif luasnip.expand_or_jumpable() then
+          elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           else
             utils.escape_pair(fallback)
@@ -97,12 +97,16 @@ return {
 
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline({
-        ['<C-Space>'] = { c = function() cmp.complete() end },
+        ['<C-Space>'] = {
+          c = function()
+            cmp.complete()
+          end,
+        },
       }),
       sources = cmp.config.sources(
         { { name = 'path' } },
         { { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } } }
       ),
     })
-  end
+  end,
 }

@@ -54,7 +54,7 @@ alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  rg -i -g '!nvim' $@ $MYETC
+  rg -i -g '!nvim' $@ $MYETC | fzf
 }
 
 # ========== Commands {{{1
@@ -89,6 +89,13 @@ function archive {
   mv $@ "$MYARCH"
 }
 alias aa='archive'
+
+function dlcp() {
+  local D=/mnt/c/Users/sjbro/Downloads
+  find "$D" -mindepth 1 -maxdepth 1 -printf '%f\0' \
+  | fzf --read0 --print0 --multi --height=40% --reverse \
+  | xargs -0 -I{} cp -iv -- "$D/{}" .
+}
 
 # ========== Management {{{1
 alias pm='paru'
@@ -147,10 +154,10 @@ function open-popup {
     exec $CMD $@
   fi
 
-  tmux display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "$CMD $@"
+ tmux display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "bash -lc '$CMD $@'"
 }
 
-alias lgp='open-popup lazygit'
+alias lg='open-popup lazygit'
 function k9 {
   open-popup "ps -ef | fzf | awk '{print \$2}' | xargs kill -9"
 }
@@ -208,7 +215,8 @@ alias gla='git log --all --graph --format=format:"%C(bold blue)%h%Creset - %C(bo
 alias gls='git log --oneline --name-status --'
 
 # --- go {{{2
-alias dlvs='dlv debug --headless --listen :8888 --api-version 2'
+alias dlvd='dlv debug --headless --listen :8888 --api-version 2'
+alias dlvt='dlv test --headless --listen :8888 --api-version 2'
 alias dlvc='dlv connect :8888'
 
 function my-go-mod() {
@@ -221,7 +229,7 @@ function my-go-mod() {
 
 alias gomi='my-go-mod'
 alias gomt='go mod tidy'
-alias got='swatch go test ./... | colourise -p gotest'
+alias got='swatch go test -count=1 ./...| colourise -p gotest'
 alias clogs='colourise -p slog'
 
 # --- docker {{{2
