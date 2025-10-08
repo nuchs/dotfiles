@@ -38,10 +38,6 @@ if [[ $(uname -r) =~ (m|M)icrosoft ]]; then
 fi
 
 # ========== Load 3rd party config  {{{1
-export GPG_TTY=$(tty)
-
-# Rust
-. "$HOME/.cargo/env"
 
 # FZF
 eval "$(fzf --bash)"
@@ -154,7 +150,7 @@ function open-popup {
     exec $CMD $@
   fi
 
- tmux display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "bash -lc '$CMD $@'"
+  tmux display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "bash -lc '$CMD $@'"
 }
 
 alias lg='open-popup lazygit'
