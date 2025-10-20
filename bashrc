@@ -153,7 +153,6 @@ function open-popup {
   tmux display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "bash -lc '$CMD $@'"
 }
 
-alias lg='open-popup lazygit'
 function k9 {
   open-popup "ps -ef | fzf | awk '{print \$2}' | xargs kill -9"
 }
