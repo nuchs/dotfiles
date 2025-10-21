@@ -158,36 +158,6 @@ function k9 {
 }
 
 # ========== Dev {{{1
-
-# --- git {{{2
-function git-ignore() {
-  if [ -z "$1" ]; then
-    echo "usage: git-ignore <language> | -l "
-    return
-  fi
-
-  if [ "$1" = "-l" ]; then
-    ls $MYDOC/templates
-    return
-  fi
-
-  cp $MYDOC/templates/$1.gitignore .gitignore
-}
-
-function github-clone {
-  if [ -n "$2" ]; then
-    who="$1"
-    shift
-  else
-    who="nuchs"
-  fi
-
-  what="$1"
-
-  git clone -v git@github.com:${who}/${what}.git
-}
-
-alias ghc='github-clone'
 alias gcf="git diff --name-only"
 alias gi='git-ignore'
 alias ga='git add'

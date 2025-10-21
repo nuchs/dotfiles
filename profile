@@ -1,5 +1,6 @@
 #!/bin/bash
 export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export EDITOR='nvim'
 export PAGER='less'
 export MANROFFOPT="-c"
@@ -12,6 +13,7 @@ export COLORTERM=truecolor
 
 export MYBIN="$HOME/.local/bin"
 export MYETC="$HOME/etc"
+export MYTEMPLATES="$HOME/etc"
 export MYDOC="$HOME/docs"
 export MYMEMORIES="$MYDOC/memories"
 export MYARCH="$HOME/archive"
