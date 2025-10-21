@@ -1,7 +1,5 @@
-[user]
-	email = sjbrown@live.co.uk
-	name = nuchs
-	signingkey = C4BD552FFB43C9AE9E1B4D85B956BAEE057B2090
+[include]
+  path = ~/.gitconfig.local
 [core]
 	editor = "nvim"
 	autocrlf = false
@@ -12,7 +10,5 @@
 	program = gpg
 [init]
 	defaultBranch = main
-[protocol "file"]
-	allow = always
 [credential]
-	helper = store
+	helper = manager-core

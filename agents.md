@@ -1,4 +1,4 @@
-# sn-agents.md
+# agents.md
 
 ## Purpose
 This repository manages personal **dotfiles** and configuration for the developer environment.
