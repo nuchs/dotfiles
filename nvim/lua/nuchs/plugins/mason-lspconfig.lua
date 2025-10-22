@@ -1,8 +1,8 @@
 return {
-  "mason-org/mason-lspconfig.nvim",
+  'mason-org/mason-lspconfig.nvim',
   dependencies = {
-    "mason-org/mason.nvim",
-    "neovim/nvim-lspconfig",
+    'mason-org/mason.nvim',
+    'neovim/nvim-lspconfig',
   },
   opts = {
     ensure_installed = {
@@ -17,9 +17,10 @@ return {
       'jsonls',
       'lua_ls',
       'marksman',
+      'protols',
       'rust_analyzer',
       'taplo',
       'yamlls',
     },
-  }
+  },
 }

@@ -2,3 +2,4 @@
 *.swo
 *.pyc
 *.elc
+nvim/lazy-lock.json
