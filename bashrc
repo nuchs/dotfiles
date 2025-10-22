@@ -159,7 +159,6 @@ function k9 {
 
 # ========== Dev {{{1
 alias gcf="git diff --name-only"
-alias gi='git-ignore'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff --color-words'

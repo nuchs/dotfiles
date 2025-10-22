@@ -79,7 +79,7 @@ main() {
         echo "git-ignore: no .gitignore templates found in $templates_dir" >&2
         exit 1
       fi
-      template_path=$(printf '%s\\n' "${candidates[@]}" | fzf)
+      template_path="$templates_dir/$(ls -1 $templates_dir | fzf)"
       if [[ -z "$template_path" ]]; then
         echo "git-ignore: template selection cancelled" >&2
         exit 1

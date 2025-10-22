@@ -13,7 +13,7 @@ export COLORTERM=truecolor
 
 export MYBIN="$HOME/.local/bin"
 export MYETC="$HOME/etc"
-export MYTEMPLATES="$HOME/etc"
+export MYTEMPLATES="$HOME/etc/templates"
 export MYDOC="$HOME/docs"
 export MYMEMORIES="$MYDOC/memories"
 export MYARCH="$HOME/archive"
