@@ -191,7 +191,20 @@ function my-go-mod() {
   go mod init "github.com/nuchs/$1"
 }
 
+function go-fuzz-all() {
+  local t="$1"
+  if [ -z "$t" ]; then
+    t="30s"
+  fi
+
+  go test -list Fuzz | rg Fuzz | while read -r f; do
+    echo "Running fuzz test - $f"
+    go test -fuzz $f -fuzztime $t -v
+  done
+} 
+
 alias gomi='my-go-mod'
+alias gofa='go-fuzz-all'
 alias gomt='go mod tidy'
 alias got='swatch go test -count=1 ./...| colourise -p gotest'
 alias clogs='colourise -p slog'
@@ -318,3 +331,9 @@ SEP="$BOLD|$RESET "
 TIME="$DIM\t$RESET "
 DIR="$TURQ\w$RESET "
 export PS1="$RESET$TIME\$(print_battery)$SEP$DIR\$(print_git_status)\n↳ "
+
+# ========== Remotes {{{1
+# There's some sort of race condition going on. Try doing this as late as
+# possible during the shell startup
+gpg-connect-agent updatestartuptty /bye
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
