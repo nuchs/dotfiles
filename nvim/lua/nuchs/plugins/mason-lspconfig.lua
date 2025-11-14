@@ -18,7 +18,6 @@ return {
       'lua_ls',
       'marksman',
       'protols',
-      'rust_analyzer',
       'taplo',
       'yamlls',
     },

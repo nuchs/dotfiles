@@ -94,8 +94,28 @@ function dlcp() {
 }
 
 # ========== Management {{{1
+function pms() {
+  local line pkg
+
+  line=$(
+    paru -Sl "$@" |
+      awk '{print $1,  $2, ($3=="[installed]"?$3:"")}' |
+      fzf \
+        --nth=2 \
+        --with-nth=1,2,3 \
+        --prompt='pkg> ' \
+        --preview 'paru -Si {2}; echo; echo "Files (if installed):"; paru -Ql {2} 2>/dev/null | sed "s/^/  /"' \
+        --preview-window='down,60%,wrap' |
+        awk '{print $2}'
+  ) || return
+
+  READLINE_LINE="paru -S -- ${line}"
+  READLINE_POINT=${#READLINE_LINE}
+}
+
+bind -x '"\C-p": pms'
 alias pm='paru'
-alias orphans='pacman -Qtdq'
+alias orphans='paru -Qtdq'
 
 # ========== History {{{1
 
