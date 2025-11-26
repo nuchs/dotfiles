@@ -50,7 +50,11 @@ alias sb='source ~/.bashrc'
 alias sp='source ~/.bash_profile'
 
 function rem() {
-  rg -i -g '!nvim' $@ $MYETC | fzf
+  rg -i -g '!nvim' -n $1 $MYETC | fzf \
+    --tmux 80%,80%\
+    --delimiter=: \
+    --preview='bat --color=always {1} -H {2}' \
+    --preview-window='top,50%,+{2},~3'
 }
 
 # ========== Commands {{{1
@@ -59,7 +63,6 @@ alias n='nvim'
 alias ls="ls --classify=always --group-directories-first --color=always"
 alias ll="ls -hl --classify=always --group-directories-first --color=always"
 alias la="ls -hAl --classify=always --group-directories-first --color=always"
-alias tt='tree -FC --filesfirst'
 
 alias md='mkdir -p'
 alias rd='rmdir'

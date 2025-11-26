@@ -5,10 +5,8 @@ return {
     local lint = require('lint')
 
     lint.linters_by_ft = {
-      makefile = { 'checkmake' },
       go = { 'golangcilint' },
-      markdown = { 'vale' },
-      text = { 'vale' },
+      sh = { 'shellcheck' },
     }
 
     vim.api.nvim_create_autocmd({ 'BufWritePost' }, {

@@ -6,8 +6,8 @@ return {
     require('conform').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
-        rust = { 'rustfmt' },
         go = { 'golangci-lint' },
+        sh = { 'shfmt' },
       },
       format_on_save = {
         timeout_ms = 2000,
